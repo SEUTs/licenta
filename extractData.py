@@ -89,12 +89,13 @@ def getChampionInMatch(index, champions):
     return champions[index]
 
 
-def didPuuidWin(puuid, match):
-    index = getPuuids(match)[puuid]
+def didIndexWin(index, match):
     winningTeam = getWinningTeam(match)
-    return index < 6 and winningTeam == 100 or \
-           index > 5 and winningTeam == 200
-
+    return index < 5 and winningTeam == 100 or \
+           index > 4 and winningTeam == 200
+def didPuuidWin(puuid, match):
+    index = getPuuids(match)[puuid] - 1
+    didIndexWin(index, match)
 
  
 api_key = "RGAPI-f10a772f-6eb3-4447-b771-9eae485c9092"
@@ -112,7 +113,23 @@ def getMatchHistoryUrl(puuid: str, start: int = 0, count: int = 20):
 def getMatchTimelineUrl(matchId: int):
     return f'https://europe.api.riotgames.com/lol/match/v5/matches/{matchId}/timeline?api_key={api_key}'
 
-def extractUsefulMatchData(match, playerPuuid):
+def extractUsefulMatchData(match):
+    frames = match.get("info").get("frames")
+    championNamesAndKda = getChampionNamesAndKda(frames)
+    matchTimestamp = getTimeOfMatch(match)
+    result = []
+    for index in range(10):
+        if championNamesAndKda[0][index] is not "":
+            result.append([
+                championNamesAndKda[0][index], 
+                didIndexWin(index, match), 
+                matchTimestamp.get("hour"), 
+                matchTimestamp.get("dayOfWeek")
+            ])
+    print(result)
+    return result
+
+def extractUsefulPlayerMatchData(match, playerPuuid):
     frames = match.get("info").get("frames")
     championNamesAndKda = getChampionNamesAndKda(frames)
 
@@ -157,20 +174,14 @@ def tryToGetTimeline(matchId):
         timeline = getMatchTimeline(matchId)
     return timeline
 
-def insertMatchesIntoJson(puuid, start, count):
-    print("Getting match ids")
-    matchIds = tryToGetMatchIds(puuid, start, count)
-    print("Match ids obtained")
-    if len(matchIds) == 0:
-        print("[SYSTEM]: REACHED END OF ACCESSIBLE MATCH HISTORY")
-        return False
-
+def insertMatchesIntoJson(matchIds, jsonFile):
+    print(matchIds)
     print("\n"
     "---------------------------\n"
     " WRITING MATCHES INTO JSON\n"
     "---------------------------\n"
     )
-    outputFile = open (f'{inputFile}', 'w')
+    outputFile = open (f'{jsonFile}', 'w')
     outputFile.write('[')
 
     for matchIdIndex in range(len(matchIds)):
@@ -188,8 +199,7 @@ def insertMatchesIntoJson(puuid, start, count):
     " WRITING COMPLETE\n"
     "------------------\n"
     )
-    return True
-def extractDataFromJsonToCSV(i, writerObject, puuid):
+def extractDataFromJsonToCSV(i, writerObject):
     print(i)
     print("\n"
     "--------------------------\n"
@@ -198,38 +208,75 @@ def extractDataFromJsonToCSV(i, writerObject, puuid):
     )
     data = json.load(i)
     for matchIndex in range(len(data)):
-        usefulData = extractUsefulMatchData(data[matchIndex], puuid)
+        usefulData = extractUsefulMatchData(data[matchIndex])
 
-        if usefulData.get("champion") is not "":
-            writerObject.writerow(usefulData.values())
-            print(f"Data extracted from match {matchIndex + 1}/{len(data)}")
+        # extracting for every player
+        if True is True:
+            for entry in usefulData:
+                writerObject.writerow(entry)
+            print(f"Data extracter for all champions from match {matchIndex + 1}/{len(data)}")
         else:
-            reason = " (INSUFFICIENT DATA)"
-            if data[matchIndex].get("info").get("frames")[-1].get("timestamp") < 240000:
-                reason = " (REMAKE)"
-            print(f"Data ignored for match {matchIndex + 1}/{len(data)}{reason}")
+            if usefulData.get("champion") is not "":
+                writerObject.writerow(usefulData.values())
+                print(f"Data extracted from match {matchIndex + 1}/{len(data)}")
+            else:
+                reason = " (INSUFFICIENT DATA)"
+                if data[matchIndex].get("info").get("frames")[-1].get("timestamp") < 240000:
+                    reason = " (REMAKE)"
+                print(f"Data ignored for match {matchIndex + 1}/{len(data)}{reason}")
     print("\n"
     "------------------\n"
     " WRITING COMPLETE\n"
     "------------------\n"
     )
 
+def matches_to_API_to_JSON_to_CSV(matchIds: list, jsonFileName: str, csvFileName:str):
+    with open(jsonFileName, 'r') as jsonFile, open(csvFileName, 'a') as csvFile:
+        writerObject = writer(csvFile)
+        print("Writer created")
+        # if newFile:
+        #     writerObject.writerow(["champion", "win", "hour", "dayOfWeek"])
+        #     print("First row written")
 
-with open(jsonFileName, 'r') as jsonFile, open(csvFileName, 'a') as csvFile:
-    writerObject = writer(csvFile)
-    print("Writer created")
-    if newFile:
-        writerObject.writerow(["champion", "win", "hour", "dayOfWeek"])
-        print("First row written")
+        matchCounter = 0
+        for matchId in matchIds:
+            matchCounter += 1
+            # resetting the reader pointer or else England explodes
+            jsonFile.seek(0)
 
-    offset = 0
-    for index in range(offset, hundredsOfMatches + offset):
-        # resetting the reader pointer or else England explodes
-        jsonFile.seek(0)
+            # getting the data is done automatically in insertMatchesIntoJson
+            print(f"[SYSTEM]: Getting match {matchCounter} / {len(matchIds)}")
+            insertMatchesIntoJson((matchId,), jsonFileName)
+            extractDataFromJsonToCSV(jsonFile, writerObject)
+        csvFile.close()
 
-        # getting the data is done automatically in insertMatchesIntoJson
-        print(f"[SYSTEM]: Getting matches {index * matchesPerApiCall} to {(index + 1) * matchesPerApiCall}")
-        if insertMatchesIntoJson(puuid, index * matchesPerApiCall, matchesPerApiCall) == False:
-            break
-        extractDataFromJsonToCSV(jsonFile, writerObject, puuid)
-    csvFile.close()
+
+def puuid_to_API_to_JSON_to_CSV(jsonFileName: str, csvFileName: str, puuid: str):
+    with open(jsonFileName, 'r') as jsonFile, open(csvFileName, 'a') as csvFile:
+        writerObject = writer(csvFile)
+        print("Writer created")
+        if newFile:
+            writerObject.writerow(["champion", "win", "hour", "dayOfWeek"])
+            print("First row written")
+
+        offset = 0
+        for index in range(offset, hundredsOfMatches + offset):
+            # resetting the reader pointer or else England explodes
+            jsonFile.seek(0)
+
+            # getting the data is done automatically in insertMatchesIntoJson
+            print(f"[SYSTEM]: Getting matches {index * matchesPerApiCall} to {(index + 1) * matchesPerApiCall}")
+            
+            print("Getting match ids")
+            matchIds = tryToGetMatchIds(puuid, index * matchesPerApiCall, matchesPerApiCall)
+            if len(matchIds) == 0:
+                print("[SYSTEM]: REACHED END OF ACCESSIBLE MATCH HISTORY")
+                break
+            print("Match ids obtained")
+            
+            insertMatchesIntoJson(matchIds, jsonFileName)
+            extractDataFromJsonToCSV(jsonFile, writerObject)
+        csvFile.close()
+
+if __name__ == "__main__":
+    puuid_to_API_to_JSON_to_CSV(jsonFileName, csvFileName, puuid)

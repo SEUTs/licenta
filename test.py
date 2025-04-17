@@ -1,5 +1,7 @@
 import licenta
 import ast
+import extractData
+
 # print(licenta.getPuuid("SasEUnTicnit", "SEUTs"))
 # players = licenta.getSummonersWithRank("DIAMOND", 4, licenta.rankQueue, 1, 100)
 players = [
@@ -119,8 +121,5 @@ with open("matchIds.txt", 'r') as matchIdsFile:
     print(len(l))
     myset = set(l)
     print(len(myset))
-
-    for index in range(len(l)):
-        item = l.pop()
-        if item in l:
-            print(item)
+    i = 1
+    extractData.matches_to_API_to_JSON_to_CSV(myset, "output/test.json", "output/test.csv")
