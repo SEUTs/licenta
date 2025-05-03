@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import subprocess  # Used to run the Python scripts
+import getMatchData
 
 app = Flask(__name__)
 
@@ -7,6 +8,16 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/match')
+def displayMatch():
+    data = getMatchData.getChampionsKDAsBuilds()
+    champions = data[0]
+    kdas = data[1]
+    builds = data[2]
+    itemNames = data[3]
+    matchId = data[4]
+    return render_template('matchDetails.html', champions=champions, kdas=kdas, builds=builds, itemNames=itemNames, matchId=matchId)
 
 # Route to run script1
 @app.route('/run_script1')

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Scripts</title>
+    <style>
+        #header {
+            position: sticky;
+            background-color: #202020;
+            width: 100vw;
+            height: 100px;
+            display: flex;
+        }
+        #header div {
+            position: absolute;
+            height: 20px;
+            font-size: 20px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #home {
+            left: 2.5vw;
+        }
+        #username {
+            left: 87vw;
+        }
+        #logout {
+            left: 95vw;
+        }
+        #logo {
+            left: 50vw;
+        }
+
+        body {
+            margin: 0px;
+            font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: rgb(18, 18, 18);
+            color: rgb(200, 200, 200);
+        }
+        
+        img, .emptyItemSlot {
+            width: 40px;
+            border-radius: 25%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3); /*0.2 0.19*/
+            height: 40px;
+            background-color: rgb(18, 18, 18);
+            position: relative;
+            display: inline-block;
+        }
+        .blueTeam {
+            background-color: rgba(91, 96, 255, 0.5);
+        }
+        .redTeam{
+            background-color: rgba(255, 91, 96, 0.5);
+        }
+        th.blueTeam {
+            background-color: rgba(48, 48, 192, 0.5);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            height: 40px;
+        }
+        th.redTeam{
+            background-color: rgba(192, 48, 48, 0.5);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            height: 40px;
+        }
+
+        .championName, .championKDA {
+            width: 70px;
+            text-align: center;
+            vertical-align: top;
+            padding-top: 13px;
+            font-weight: bold;
+        }
+        .championItems {
+            width: 182px;
+            height: 87px;
+            padding: 5px;
+            padding-left: 15px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+        #title {
+            margin-top: 50px;
+            width: fit-content;
+        }
+        table, #title {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        tr:nth-child(2) td {
+            padding-top: 10px;
+        }
+        tr:last-child td {
+            padding-bottom: 10px;
+        }
+        tr:last-child .blueTeam.championName {
+            border-bottom-left-radius: 50px;
+        }
+        tr:last-child .redTeam.championItems {
+            border-bottom-right-radius: 50px;
+        }
+
+        .overlayText {
+            position: fixed;
+            z-index: 2;
+            background-color: rgb(30, 30, 30);
+            display: none;
+            transform: translateX(-50%);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div id="home">H</div>
+        <div id="logo">PCaGS</div>
+        <div id="username">Username</div>
+        <div id="logout">Log out</div>
+    </div>
+    <div id="title">Match {{matchId}}</div>
+    <table>
+        <tr>
+            <th class="blueTeam" colspan="3">Team Blue</th>
+            <th class="redTeam" colspan="3">Team Red</th>
+        </tr>
+        {% for i in range(5) %}
+            <tr>
+                <td class="blueTeam championName">{{ champions[i] }}</td>
+                <td class="blueTeam championKDA">{{ kdas[0][i] }}/{{ kdas[1][i] }}/{{ kdas[2][i] }}</td>
+                <td class="blueTeam championItems">
+                    {% for j in range(4) %}
+                        {% if builds[i][j] %}
+                            <img src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ builds[i][j] ~ '.png.webp' }}" id="[{{i}}][{{j}}]">
+                            <div class="overlayText" id="text_[{{i}}][{{j}}]">{{itemNames[i][j]}}</div>
+                        {% else %}
+                            <div class="emptyItemSlot"></div>
+                        {% endif %}
+                    {% endfor %}
+                    <br>
+                    {% for j in range(3) %}
+                        {% if builds[i][j+4] %}
+                            <img src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ builds[i][j+4] ~ '.png.webp' }}" id="[{{i}}][{{j+4}}]">
+                            <div class="overlayText" id="text_[{{i}}][{{j+4}}]">{{itemNames[i][j+4]}}</div>
+                        {% else %}
+                            <div class="emptyItemSlot"></div>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td class="redTeam championName">{{ champions[i + 5] }}</td>
+                <td class="redTeam championKDA">{{ kdas[0][i + 5] }}/{{ kdas[1][i + 5] }}/{{ kdas[2][i + 5] }}</td>
+                <td class="redTeam championItems">
+                    {% for j in range(4) %}
+                        {% if builds[i+5][j] %}
+                            <img src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ builds[i+5][j] ~ '.png.webp' }}" id="[{{i+5}}][{{j}}]">
+                            <div class="overlayText" id="text_[{{i+5}}][{{j}}]">{{itemNames[i+5][j]}}</div>
+                        {% else %}
+                            <div class="emptyItemSlot"></div>
+                        {% endif %}
+                    {% endfor %}
+                    <br>
+                    {% for j in range(3) %}
+                        {% if builds[i+5][j+4] %}
+                            <img src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ builds[i+5][j+4] ~ '.png.webp' }}" id="[{{i+5}}][{{j+4}}]">
+                            <div class="overlayText" id="text_[{{i+5}}][{{j+4}}]">{{itemNames[i+5][j+4]}}</div>
+                        {% else %}
+                            <div class="emptyItemSlot"></div>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+<script>
+    const imgs = document.getElementsByTagName("img");
+    const overlays = document.getElementsByClassName("overlayText");
+    for (let overlay of overlays) {
+        overlay.style.left = (43 * (overlay.id[9] - 4 * Math.floor(overlay.id[9] / 4)) + 182 + 348 * Math.floor(overlay.id[6] / 5)) + "px";
+        console.log(overlay.style.left)
+    }
+    for (let img of imgs)
+        img.addEventListener("mouseover", () => {
+            let id = "text_" + img.id
+            document.getElementById(id).style.display = "block";
+    })
+    for (let img of imgs)
+        img.addEventListener("mouseleave", () => {
+            let id = "text_" + img.id
+            document.getElementById(id).style.display = "none";
+    })
+</script>
+</html>
