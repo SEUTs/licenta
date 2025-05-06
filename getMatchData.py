@@ -1,7 +1,20 @@
 import json
 import extractData
+import licenta
+import os
 
-def getChampionsKDAsBuilds():
+def saveMatchToFile(matchId):
+    matchFile = "Match_" + matchId + ".json"
+    isFile = os.path.isfile(matchFile)
+    if not (isFile):
+        print("NOT FOUND!\n\n\n\n\n\n")
+        data = licenta.getMatchTimeline(matchId)
+        with open(matchFile, "x") as f:
+            f.write(json.dumps(data))
+        f.close()
+    return matchFile
+
+def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
     builds = [[] for _ in range(10)]
     
     items = {}
@@ -29,10 +42,10 @@ def getChampionsKDAsBuilds():
 
     wards = [3330, 3340, 3348, 3363, 3364] #fiddle stealth arena farsight oracle
     runeItems = [2010, 2150, 2151, 2152, 2422] #cookies, rune elixirs and magical boots
-    otherItems = [3866, 3867, 3513] #support items 2,3 and eye of herald
+    otherItems = [3865, 3866, 3867, 3513] #support items 1,2,3 and eye of herald
     elixirs = [2138, 2139, 2140] # elixirs
     matchId = ""
-    with open("singleMatch.json", 'r') as f:
+    with open(matchFile, 'r') as f:
         data = json.load(f)
         matchId = data["metadata"]["matchId"]
         frames = data["info"]["frames"]
@@ -66,6 +79,7 @@ def getChampionsKDAsBuilds():
                         elif event["itemId"] not in wards and event["itemId"] not in runeItems and event["itemId"] not in otherItems and event["itemId"] not in elixirs:
                         # elif event["itemId"] in builds[event["participantId"] - 1]:
                             # print(event["itemId"], builds[event["participantId"] - 1], event["timestamp"])
+                            print(event["timestamp"], event["itemId"])
                             builds[event["participantId"] - 1].remove(event["itemId"])
                             destroyedFor.append([event["itemId"], event["timestamp"], event['participantId']])
 
@@ -75,6 +89,10 @@ def getChampionsKDAsBuilds():
                         builds[event["participantId"] - 1].remove(event["itemId"])
 
                     elif type[5] == "U": #ITEM_UNDO
+                        if event["afterId"] in wards:
+                            for item in builds[event["participantId"] - 1]:
+                                if item in wards:
+                                    builds[event["participantId"] - 1].remove(item)
                         if event["beforeId"] != 0:
                             builds[event["participantId"] - 1].remove(event["beforeId"])
                             reAdd = undoForComponents(event)

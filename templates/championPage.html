@@ -1,0 +1,122 @@
+<style>
+    #bigTable {
+        background-color: #181864;
+        position: relative;
+        left: 50%;
+        top: 50px;
+        transform: translateX(-50%);
+    }
+    td img {
+        transform: translateX(-50%);
+        position: relative;
+        left: 50%;
+    }
+    #bigTable tr td {
+        height: 140px;
+        padding: 20px;
+    }
+    p, h2 {
+        text-align: center;
+    }
+    h2 {
+        margin-bottom: 0px;
+    }
+
+    #skillLevelUpTable tr td {
+        height: 24px;
+        width: 24px;
+        padding: 0px;
+        text-align: center;
+    }
+    .selected {
+        background-color: #8030C8;
+    }
+    .notSelected {
+        background-color: #0C0C42;
+    }
+</style>
+
+{% include 'header.html' %}
+<table id="bigTable">
+    <tr>
+        <td>
+            <h2>{{ championName }}</h2>
+            <img src="{{'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ championName ~ '_OriginalSquare.png/70px- ~ championName ~_OriginalSquare.png?54659.png.webp' }}">
+        </td>
+        <td>
+            <p>Winrate<br>00:00 - 06:00</p>
+            <p>N/A</p>
+        </td>
+        <td>
+            <p>Winrate<br>06:00 - 12:00</p>
+            <p>N/A</p>
+        </td>
+        <td>
+            <p>Winrate<br>12:00 - 18:00</p>
+            <p>N/A</p>
+        </td>
+        <td>
+            <p>Winrate<br>18:00 - 00:00</p>
+            <p>N/A</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2>Max Order</h2>
+            <p>Q>W>E</p>
+        </td>
+        <td colspan="4">
+            <table id="skillLevelUpTable">
+                {% for i in range(4) %}
+                    <tr>
+                        {% if i == 0 %}
+                            <td>Q</td>
+                            {% for j in range(championSkillLevels|length // 3)%}
+                                {% if i+1 == (championSkillLevels[j*3+1])|int %}
+                                    <td class="selected"></td>
+                                {% else %}
+                                    <td class="notSelected"></td>
+                                {% endif %}
+                            {% endfor %}
+                        {% elif i == 1 %}
+                            <td>W</td>
+                            {% for j in range(championSkillLevels|length // 3)%}
+                                {% if i+1 == (championSkillLevels[j*3+1])|int %}
+                                    <td class="selected"></td>
+                                {% else %}
+                                    <td class="notSelected"></td>
+                                {% endif %}
+                            {% endfor %}
+                        {% elif i == 2 %}
+                            <td>E</td>
+                            {% for j in range(championSkillLevels|length // 3)%}
+                                {% if i+1 == (championSkillLevels[j*3+1])|int %}
+                                    <td class="selected"></td>
+                                {% else %}
+                                    <td class="notSelected"></td>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <td>R</td>
+                            {% for j in range(championSkillLevels|length // 3)%}
+                                {% if i+1 == (championSkillLevels[j*3+1])|int %}
+                                    <td class="selected"></td>
+                                {% else %}
+                                    <td class="notSelected"></td>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    {% for j in range(1, championSkillLevels|length // 3 + 1)%}
+                        <td>
+                            {{ j }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

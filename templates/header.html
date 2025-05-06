@@ -1,0 +1,48 @@
+<style>
+    body {
+        margin: 0px;
+        font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        background-color: rgb(18, 18, 18);
+        color: rgb(200, 200, 200);
+    }
+    #header {
+        color: white;
+        font-weight: bolder;
+        font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        position: sticky;
+        background-color: #202020;
+        width: 100vw;
+        height: 100px;
+        display: flex;
+    }
+    #header div {
+        position: absolute;
+        height: 20px;
+        font-size: 20px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #home {
+        left: 2.5vw;
+    }
+    #username {
+        left: 87vw;
+    }
+    #logout, #login {
+        left: 95vw;
+    }
+    #logo {
+        left: 50vw;
+    }
+</style>
+
+<div id="header">
+    <div id="home"><a href="{{ url_for('index') }}">Home</a></div>
+    <div id="logo">PCaGS</div>
+    {% if username is defined %}
+        <div id="username"> {{username}} </div>
+        <div id="logout"><a href="{{ url_for('logout') }}">Log Out</a></div>
+    {% else %}
+        <div id="login"><a href="{{ url_for('login') }}">Log In</a></div>
+    {% endif %}
+</div>

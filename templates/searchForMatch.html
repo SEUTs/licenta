@@ -1,0 +1,6 @@
+{% include 'header.html' %}
+<h2>SearchForMatch</h2>
+<form action="{{ url_for('myMatch') }}" method="GET">
+    MatchId: <input name="matchId"><br>
+    <input type="submit" value="Search">
+</form>

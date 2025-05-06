@@ -4,7 +4,8 @@ import time
 import requests
 
 def getChampionNamesAndKda(frames): 
-    championNames = ["" for _ in range(11)]
+    #I HATE PICKING THE NAMES SO MUCH
+    championNames = [[] for _ in range(11)]
     championKills = [0 for _ in range(11)]
     championDeaths = [0 for _ in range(11)]
     championAssists = [0 for _ in range(11)]
@@ -27,7 +28,7 @@ def getChampionNamesAndKda(frames):
                 victimDamageDealt = event.get("victimDamageDealt")
                 if victimDamageDealt is not None:
                     victimName = victimDamageDealt[0].get("name")
-                    championNames[victimId] = victimName
+                    championNames[victimId].append(victimName)
 
                 victimDamageReceived = event.get("victimDamageReceived")
                 if victimDamageReceived is not None:
@@ -36,11 +37,49 @@ def getChampionNamesAndKda(frames):
                         if type != "MINION" and type != "TOWER" and type != "MONSTER":
                             takedownerId = damage.get("participantId")
                             takedownerName = damage.get("name")
-                            championNames[takedownerId] = takedownerName
+                            championNames[takedownerId].append(takedownerName)
     
     championNames = championNames[1:]
+    # Thank you, RIOT GAMES, for having me create a nameProbabilityVector. Appreciated!
+    for i in range(10):
+        championNames[i] = max(set(championNames[i]), key=championNames[i].count)
+        if championNames[i] == "MonkeyKing":
+            championNames[i] = "Wukong" # I can't with this anymore
+        elif championNames[i] == "JarvanIV":
+            championNames[i] = "Jarvan_IV" # I can't with this anymore
+        
     championKdas = (championKills[1:], championDeaths[1:], championAssists[1:])
     return (championNames, championKdas)
+
+def writeSkillLevelUps(matchFile):
+    with open(matchFile, 'r') as f:
+        data = json.load(f)
+        with open("skillLevelUps.txt", 'w') as g:
+            result = [[] for _ in range(10)]
+            frames = data["info"]["frames"]
+            for frame in frames:
+                events = frame["events"]
+                for event in events:
+                    if event["type"] == "SKILL_LEVEL_UP":
+                        result[event["participantId"] - 1].append(event["skillSlot"])
+            championNames = getChampionNamesAndKda(frames)[0]
+            for index in range(10):
+                g.write(championNames[index] + ": " + str(result[index]) + '\n')
+            g.close()
+        f.close()
+
+def getSkillLevelUps(matchFile):
+    with open(matchFile, 'r') as f:
+        data = json.load(f)
+        result = [[] for _ in range(10)]
+        frames = data["info"]["frames"]
+        for frame in frames:
+            events = frame["events"]
+            for event in events:
+                if event["type"] == "SKILL_LEVEL_UP":
+                    result[event["participantId"] - 1].append(event["skillSlot"])
+        f.close()
+        return result        
 
 def getTimeOfMatch(match):
     daysOfTheWeek = [
