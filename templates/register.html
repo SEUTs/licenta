@@ -2,7 +2,10 @@
 <h2>Register</h2>
 <form method="POST">
     Username: <input name="username"><br>
+    Tag: <input name="riotTag"><br>
     Password: <input type="password" name="password"><br>
+    (The password doesn't have to be<br>
+     the one used for your League account)<br>
     <input type="submit" value="Login">
 </form>
 <p>{{ get_flashed_messages()[0] if get_flashed_messages() else '' }}</p>

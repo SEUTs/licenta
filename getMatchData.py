@@ -2,12 +2,13 @@ import json
 import extractData
 import licenta
 import os
+import time
 
 def saveMatchToFile(matchId):
     matchFile = "Match_" + matchId + ".json"
     isFile = os.path.isfile(matchFile)
     if not (isFile):
-        print("NOT FOUND!\n\n\n\n\n\n")
+        print(f"FILE {matchFile} ADDED!\n")
         data = licenta.getMatchTimeline(matchId)
         with open(matchFile, "x") as f:
             f.write(json.dumps(data))
@@ -17,7 +18,6 @@ def saveMatchToFile(matchId):
 def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
     builds = [[] for _ in range(10)]
     
-    items = {}
     destroyedFor = []
     components = []
     def undoForComponents(event):
@@ -36,9 +36,13 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
                 result.append(entry[0])
         return result
 
+    items = {}
     with open("items.json", 'r') as f:
         items = json.load(f)
         f.close()
+
+    jungleItems = [1101, 1102, 1103]
+    healthPotAndControl = [2003, 2055]
 
     wards = [3330, 3340, 3348, 3363, 3364] #fiddle stealth arena farsight oracle
     runeItems = [2010, 2150, 2151, 2152, 2422] #cookies, rune elixirs and magical boots
@@ -46,14 +50,25 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
     elixirs = [2138, 2139, 2140] # elixirs
     matchId = ""
     with open(matchFile, 'r') as f:
+        timestampsOfPurchases = set()
         data = json.load(f)
         matchId = data["metadata"]["matchId"]
         frames = data["info"]["frames"]
         for frame in frames:
             events = frame["events"]
             for event in events:
-                if event["type"][0:4] == "ITEM":
+                if event["type"][0:6] == "ITEM_P":
+                    # print(event["type"], event["timestamp"])
+                    timestampsOfPurchases.add(event["timestamp"])
+        # print(timestampsOfPurchases)
+
+        for frame in frames:
+            events = frame["events"]
+            for event in events:
+                if event["type"][0:4] == "ITEM" and event["participantId"] != 0:
                     type = event["type"]
+                    # if event["type"][0:4] == "ITEM" and event["type"][5] != "U":
+                    #     print(event["timestamp"], event["type"], items[str(event["itemId"])], [items[str(x)] for x in builds[event["participantId"] - 1]])
                     # print(event["timestamp"], builds[6])
                     if type[5] == "P": #ITEM_PURCHASED
                         if event["itemId"] in wards:
@@ -67,21 +82,31 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
                         # print({event["itemId"]: getDestroyedComponents(event)})
 
                     elif type[5] == "D": #ITEM_DESTROYED
-                        if event["itemId"] == 3003: #Archangel's Staff
+                        if event["itemId"] in jungleItems and event["itemId"] in builds[event["participantId"] - 1]:
+                            builds[event["participantId"] - 1].remove(event["itemId"])
+                        if event["itemId"] in healthPotAndControl:
+                            builds[event["participantId"] - 1].remove(event["itemId"])
+                        elif event["itemId"] == 3003: #Archangel's Staff
                             builds[event["participantId"] - 1].remove(event["itemId"])
                             builds[event["participantId"] - 1].append(3040) #Seraph's Embrace
+                            timestampsOfPurchases.add(event["timestamp"])
                         elif event["itemId"] == 3119: #Winter's approach
                             builds[event["participantId"] - 1].remove(event["itemId"])
                             builds[event["participantId"] - 1].append(3121) #Fimbulwinter
+                            timestampsOfPurchases.add(event["timestamp"])
                         elif event["itemId"] == 3042: #Manamune
                             builds[event["participantId"] - 1].remove(event["itemId"])
                             builds[event["participantId"] - 1].append(3004) #Muramana
-                        elif event["itemId"] not in wards and event["itemId"] not in runeItems and event["itemId"] not in otherItems and event["itemId"] not in elixirs:
-                        # elif event["itemId"] in builds[event["participantId"] - 1]:
-                            # print(event["itemId"], builds[event["participantId"] - 1], event["timestamp"])
-                            print(event["timestamp"], event["itemId"])
+                            timestampsOfPurchases.add(event["timestamp"])
+                        elif event["itemId"] == 2420 and event["timestamp"] not in timestampsOfPurchases: #Seeker's Armguard
                             builds[event["participantId"] - 1].remove(event["itemId"])
-                            destroyedFor.append([event["itemId"], event["timestamp"], event['participantId']])
+                            builds[event["participantId"] - 1].append(2421) #Shattered Armguard
+                        elif event["itemId"] not in wards and event["itemId"] not in runeItems and event["itemId"] not in otherItems and event["itemId"] not in elixirs:
+                            if event["timestamp"] in timestampsOfPurchases:
+                        # elif event["itemId"] in builds[event["participantId"] - 1]:
+                                # print(event["itemId"], builds[event["participantId"] - 1], event["timestamp"])
+                                builds[event["participantId"] - 1].remove(event["itemId"])
+                                destroyedFor.append([event["itemId"], event["timestamp"], event['participantId']])
 
                     elif type[5] == "S": #ITEM_SOLD
                         pass
@@ -118,7 +143,7 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
 
     result.append([[items[str(x)] for x in build] for build in builds])
     result.append(matchId)
-    print(result)
+    # print(result)
     return result
     # def itemIdToNames(builds: list):
     #     for build in builds:
@@ -131,3 +156,42 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
     #     print(build)
 
     # print(components)
+def getConvenientTimeFormat(timeInSeconds):
+    timeUnits = timeInSeconds
+    if timeUnits < 60:
+        return f"{timeUnits} seconds ago"
+    timeUnits = timeUnits // 60
+    if timeUnits < 60:
+        return f"{timeUnits} minutes ago"
+    timeUnits = timeUnits // 60
+    if timeUnits < 60:
+        return f"{timeUnits} hours ago"
+    timeUnits = timeUnits // 24
+    return f"{timeUnits} days ago"
+
+def getMatchPreview(puuid, matchFile):
+    with open(matchFile, 'r') as f:
+        data = json.load(f)
+        f.close()
+        userParticipantId = licenta.getParticipantIdInMatch(puuid, data)
+        processed = getChampionsKDAsBuilds(matchFile)
+
+        champion = processed[0][userParticipantId]
+
+        kda = (processed[1][0][userParticipantId], processed[1][1][userParticipantId], processed[1][2][userParticipantId])
+
+        build = processed[2][userParticipantId]
+
+        win = "Victory" if extractData.didPuuidWin(puuid, data) else "Defeat"
+        currentTimestamp = time.time()
+        timeFromMatch = int(currentTimestamp) - data["info"]["frames"][0]["events"][0]["realTimestamp"] // 1000
+        timeFromMatch = getConvenientTimeFormat(timeFromMatch)
+        matchDuration = data["info"]["frames"][-1]["events"][-1]["timestamp"] // 1000
+        matchDuration = f"{matchDuration // 60} min {matchDuration % 60} sec"
+        details = (win, timeFromMatch, matchDuration)
+
+        matchId = processed[4]
+
+        result = (champion, details, kda, build, matchId)
+        print(result)
+        return result

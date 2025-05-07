@@ -3,15 +3,16 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import subprocess  # Used to run the Python scripts
 import getMatchData
 import extractData
+import licenta
+import json
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Change this!
 
 # Simulated user database
 users = {
-    "testuser": generate_password_hash("testpass")
+    "saseunticnit#seuts": generate_password_hash("gelatina2002")
 }
-
 
 # Route for the main page with buttons
 @app.route('/')
@@ -34,7 +35,7 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
+        username = (request.form['username'] + "#" + request.form['riotTag']).lower()
         password = request.form['password']
         
         user_password_hash = users.get(username)
@@ -52,7 +53,7 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        username = (request.form['username'] + "#" + request.form['riotTag']).lower()
         password = request.form['password']
         
         user_password_hash = users.get(username)
@@ -80,17 +81,22 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/getMatch', methods=['GET'])
-def search():
-    query = request.args.get('query', '')  # get query string
-    results = []
 
-    if query:
-        # Replace this with your real search logic
-        data = ['apple', 'banana', 'grape', 'orange', 'pineapple']
-        results = [item for item in data if query.lower() in item.lower()]
-
-    return render_template('search.html', results=results)
+@app.route('/lastGames')
+def lastGames():
+    with open("puuids.json", 'r') as f:
+        puuids = json.load(f)
+        credentials = session['username']
+        puuid = puuids.get(credentials)
+        print(puuid)
+        if puuid is None:
+            return render_template('index.html')
+        ids = licenta.GetMatchIds(puuid, 0, 20)
+        previews = []
+        for id in ids:
+            matchFile = getMatchData.saveMatchToFile(id)
+            previews.append(getMatchData.getMatchPreview(puuid, matchFile))
+        return render_template('matchHistory.html', previews=previews)
 
 @app.route('/searchForMatch', methods=['GET'])
 def searchForMatch():

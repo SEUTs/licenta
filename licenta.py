@@ -45,8 +45,8 @@ def getMatchStatsUrl(matchId: int):
     return f'https://europe.api.riotgames.com/lol/match/v5/matches/{matchId}?api_key={api_key}'
 def getMatchTimelineUrl(matchId: int):
     return f'https://europe.api.riotgames.com/lol/match/v5/matches/{matchId}/timeline?api_key={api_key}'
-def GetMatchIds(puuid, start, count):
-    def aux(puuid: str, start: int = 0, count: int = 20):
+def GetMatchIds(puuid, start: int = 0, count: int = 20):
+    def aux(puuid: str, start, count):
         api_url = getMatchHistoryUrl(puuid, start, count)
         return requests.get(api_url).json()
     
@@ -56,6 +56,7 @@ def GetMatchIds(puuid, start, count):
 
     while not isinstance(matchIds, list):
         retries += 1
+        print(matchIds)
         print(f"[STATUS]: [IDS]: Limit exceeded. Waiting {sleepingTime} seconds ({retries}/{120 // sleepingTime})")
         time.sleep(sleepingTime)
         matchIds = aux(puuid, start, count)
@@ -281,3 +282,7 @@ if __name__ == "__main__":
             pass
         else:
             getKillsFromHistory()
+
+def getParticipantIdInMatch(puuid, match):
+    participants = match["metadata"]["participants"]
+    return participants.index(puuid)

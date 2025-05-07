@@ -41,12 +41,33 @@ def getChampionNamesAndKda(frames):
     
     championNames = championNames[1:]
     # Thank you, RIOT GAMES, for having me create a nameProbabilityVector. Appreciated!
+
+    correctedChampionNames = {
+        "MonkeyKing": "Wukong",
+        "JarvanIV": "Jarvan_IV",
+        "Khazix": "Kha'Zix",
+        "Kaisa": "Kai'Sa",
+        "RekSai": "Rek'Sai",
+        "KogMaw": "Kog'Maw",
+        "Chogath": "Cho'Gath",
+        "Belveth": "Bel'Veth",
+        "Velkoz": "Vel'Koz",
+        "MissFortune": "Miss_Fortune",
+        "TwistedFate": "Twisted_Fate",
+        "Leblanc": "LeBlanc",
+        "LeeSin": "Lee_Sin",
+        "TahmKench": "Tahm_Kench",
+        "XinZhao": "Xin_Zhao",
+        "MasterYi": "Master_Yi",
+        "Dr.Mundo": "Dr._Mundo",
+        "KSante": "K'Sante",
+        "AurelionSol": "Aurelion_Sol",
+        "Nunu&Willump": "Nunu_&_Willump",
+        "RenataGlasc": "Renata_Glasc"
+    }
     for i in range(10):
         championNames[i] = max(set(championNames[i]), key=championNames[i].count)
-        if championNames[i] == "MonkeyKing":
-            championNames[i] = "Wukong" # I can't with this anymore
-        elif championNames[i] == "JarvanIV":
-            championNames[i] = "Jarvan_IV" # I can't with this anymore
+        championNames[i] = correctedChampionNames.get(championNames[i], championNames[i])
         
     championKdas = (championKills[1:], championDeaths[1:], championAssists[1:])
     return (championNames, championKdas)
@@ -130,11 +151,12 @@ def getChampionInMatch(index, champions):
 
 def didIndexWin(index, match):
     winningTeam = getWinningTeam(match)
+    print(winningTeam)
     return index < 5 and winningTeam == 100 or \
            index > 4 and winningTeam == 200
 def didPuuidWin(puuid, match):
     index = getPuuids(match)[puuid] - 1
-    didIndexWin(index, match)
+    return didIndexWin(index, match)
 
  
 api_key = "RGAPI-f10a772f-6eb3-4447-b771-9eae485c9092"

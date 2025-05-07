@@ -82,6 +82,15 @@
             display: none;
             transform: translateX(-50%);
         }
+        .gray {
+            color: #bbbbbb;
+        }
+        .green {
+            color: lime;
+        }
+        .darkRed {
+            color: darkred;
+        }
 
     </style>
 </head>
@@ -97,10 +106,22 @@
             <tr>
                 <td class="blueTeam championName">
                     <a href="{{ url_for('championDetails') }}?championName={{champions[i]}}&championSkillLevels={{skillLevelUps[i]}}">
-                        <img src="{{'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ champions[i] ~ '_OriginalSquare.png/70px- ~ champions[i] ~_OriginalSquare.png?54659.png.webp' }}">
-                    </a>
+                        <img src="{{'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ champions[i] ~ '_OriginalSquare.png/70px- '~ champions[i] ~ '_OriginalSquare.png?54659.png.webp' }}">
+                    </a><br>
+                    {{champions[i]}}
                 </td>
-                <td class="blueTeam championKDA">{{ kdas[0][i] }}/{{ kdas[1][i] }}/{{ kdas[2][i] }}</td>
+                
+                <td class="blueTeam championKDA">
+                    {% if kdas[1][i] == 0 %}
+                        <span class="green">{{ kdas[0][i] }}/{{ kdas[1][i] }}/{{ kdas[2][i] }}</span>
+                    {% elif ((kdas[0][i] + kdas[2][i]) / kdas[1][i]) >= 4 %}
+                        <span class="green">{{ kdas[0][i] }}/{{ kdas[1][i] }}/{{ kdas[2][i] }}</span>
+                    {% elif ((kdas[0][i] + kdas[2][i]) / kdas[1][i]) <= 1 %}
+                        <span class="darkRed">{{ kdas[0][i] }}/{{ kdas[1][i] }}/{{ kdas[2][i] }}</span>
+                    {% else %}
+                        <span class="gray">{{ kdas[0][i] }}/{{ kdas[1][i] }}/{{ kdas[2][i] }}</span>
+                    {% endif %}
+                </td>
                 <td class="blueTeam championItems">
                     {% for j in range(4) %}
                         {% if builds[i][j] %}
@@ -124,9 +145,20 @@
                 <td class="redTeam championName">
                     <a href="{{ url_for('championDetails') }}?championName={{champions[i+5]}}&championSkillLevels={{skillLevelUps[i+5]}}">
                         <img src="{{'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ champions[i+5] ~ '_OriginalSquare.png/70px- ~ champions[i+5] ~_OriginalSquare.png?54659.png.webp' }}">
-                    </a>
+                    </a><br>
+                    {{champions[i+5]}}
                 </td>
-                <td class="redTeam championKDA">{{ kdas[0][i + 5] }}/{{ kdas[1][i + 5] }}/{{ kdas[2][i + 5] }}</td>
+                <td class="redTeam championKDA">
+                    {% if kdas[1][i + 5] == 0 %}
+                        <span class="green">{{ kdas[0][i + 5] }}/{{ kdas[1][i + 5] }}/{{ kdas[2][i + 5] }}</span>
+                    {% elif ((kdas[0][i + 5] + kdas[2][i + 5]) / kdas[1][i + 5]) >= 4 %}
+                        <span class="green">{{ kdas[0][i + 5] }}/{{ kdas[1][i + 5] }}/{{ kdas[2][i + 5] }}</span>
+                    {% elif ((kdas[0][i + 5] + kdas[2][i + 5]) / kdas[1][i + 5]) <= 1 %}
+                        <span class="darkRed">{{ kdas[0][i + 5] }}/{{ kdas[1][i + 5] }}/{{ kdas[2][i + 5] }}</span>
+                    {% else %}
+                        <span class="gray">{{ kdas[0][i + 5] }}/{{ kdas[1][i + 5] }}/{{ kdas[2][i + 5] }}</span>
+                    {% endif %}
+                </td>
                 <td class="redTeam championItems">
                     {% for j in range(4) %}
                         {% if builds[i+5][j] %}

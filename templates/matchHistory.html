@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Scripts</title>
+    <style>
+        h1 {
+            padding: 50px;
+        }
+        #centerContainer {
+            position: relative;
+            width: 700px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #222222;
+            text-align: center;
+            padding-bottom: 20px;
+            border-radius: 20px;
+        }
+
+        .matchRow {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #404040;
+            width: fit-content;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 20px;
+        }
+        .matchRow, .itemRow {
+            display: flex;
+        }
+        a {
+            text-decoration: none;
+        }
+        
+        .detailsElement {
+            width: 140px;
+        }
+        .kdaElement {
+            padding-right: 30px;
+            top: 30px;
+            position: relative;
+            font-weight: bolder;
+        }
+        .iconSlot, .championElement {
+            background-color: #181818;
+        }
+        .championElement, .championElement img {
+            width: 60px;
+            height: 60px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3); /*0.2 0.19*/
+        }
+        .championElement {
+            position: relative;
+            top: 40px;
+            transform: translateY(-50%);
+        }
+        .iconSlot, .iconSlot img {
+            width: 40px;
+            height: 40px;
+            border-radius: 25%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3); /*0.2 0.19*/
+        }
+
+        .gray {
+            color: #bbbbbb;
+        }
+        .green {
+            color: lime;
+        }
+        .red {
+            color: red;
+        }
+        .darkRed {
+            color: darkred;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <div id="centerContainer">
+        <h1>Your match history</h1>
+        {% for preview in previews %}
+            <a href="{{ url_for('myMatch', matchId=preview[4]) }}">
+                <div class="matchRow">
+                    <div class="championElement">
+                        <img src="{{'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ preview[0] ~ '_OriginalSquare.png/70px-' ~ preview[0] ~ '_OriginalSquare.png?54659.png.webp' }}">
+                    </div>
+                    <div class="detailsElement">
+                        {% if preview[1][0][0] == "V" %}
+                            <div class="green">{{ preview[1][0] }}</div>
+                        {% else %}
+                            <div class="red">{{ preview[1][0] }}</div>
+                        {% endif %}
+                        <br>
+                        {{ preview[1][1] }}
+                        <br>
+                        {{ preview[1][2] }}
+                    </div>
+                    <div class="kdaElement">
+                        {% if preview[2][1] == 0 %}
+                            <span class="green">{{ preview[2][0] }}/{{ preview[2][1] }}/{{ preview[2][2] }}</span>
+                        {% elif ((preview[2][0] + preview[2][2]) / preview[2][1]) >= 4 %}
+                            <span class="green">{{ preview[2][0] }}/{{ preview[2][1] }}/{{ preview[2][2] }}</span>
+                        {% elif ((preview[2][0] + preview[2][2]) / preview[2][1]) <= 1 %}
+                            <span class="darkRed">{{ preview[2][0] }}/{{ preview[2][1] }}/{{ preview[2][2] }}</span>
+                        {% else %}
+                            <span class="gray">{{ preview[2][0] }}/{{ preview[2][1] }}/{{ preview[2][2] }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="buildElement">
+                        <div class="itemRow">
+                            {% for i in range(4) %}
+                                <div class="iconSlot">
+                                    {% if preview[3][i] is defined %}
+                                        <img src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ preview[3][i] ~ '.png.webp' }}">
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="itemRow">
+                            {% for i in range(4, 7) %}
+                                <div class="iconSlot">
+                                    {% if preview[3][i] is defined %}
+                                        <img src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ preview[3][i] ~ '.png.webp' }}">
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</body>
+</html>
