@@ -77,6 +77,42 @@
         transform: translateX(-50%);
         width: max-content;
     }
+
+    .spacingRow {
+        height: 100px;
+    }
+
+    .recommendedItems {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .recommendedItemIcon,
+    .recommendedItemName {
+        padding-bottom: 0px !important ;
+        height: auto !important ;
+    }
+    .recommendedItemIcon img {
+        position: relative;
+        transform: translateX(-50%);
+        left: 50%;
+    }
+    .physicalSpan {
+        color: #D1543B;
+    }
+    .magicSpan {
+        color: #2EB4D5;
+    }
+    .trueSpan {
+        color: #DCDDDD;
+    }
+
+    .itemPerMinuteContent {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min-content;
+    }
 </style>
 
 {% include 'header.html' %}
@@ -204,16 +240,78 @@
             <img class="plot" src="data:image/png;base64,{{ goldPlot }}" alt="Plot Image">
         </td>
     </tr>
+    <tr>
+        <td style="width: min-content; text-align: center;" colspan="5">
+            {% for stat in buildStats %}
+                {{stat}}: {{buildStats[stat]}}<br>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" style="text-align: center;">
+            Damage received during the match<br><br>
+            {% set PDpercent = (100 * playerChampionStats["physicalDamageTaken"] / (playerChampionStats["physicalDamageTaken"] + playerChampionStats["magicDamageTaken"] + playerChampionStats["trueDamageTaken"]))|round(1) %}
+            {% set MDpercent = (100 * playerChampionStats["magicDamageTaken"] / (playerChampionStats["physicalDamageTaken"] + playerChampionStats["magicDamageTaken"] + playerChampionStats["trueDamageTaken"]))|round(1) %}
+            {% set TDpercent = (100 * playerChampionStats["trueDamageTaken"] / (playerChampionStats["physicalDamageTaken"] + playerChampionStats["magicDamageTaken"] + playerChampionStats["trueDamageTaken"]))|round(1) %}
+            <div class="damageBarContainer">
+                <div class="damageBar" style="background-image: linear-gradient(90deg, 
+                    #D1543B 0% {{PDpercent-0.2}}%,
+                    black {{PDpercent-0.2}}% {{PDpercent+0.2}}%,
+                    #2EB4D5 {{PDpercent+0.2}}% {{PDpercent+MDpercent-0.2}}%,
+                    black {{PDpercent+MDpercent-0.2}}% {{PDpercent+MDpercent+0.2}}%,
+                    #DCDDDD {{PDpercent+MDpercent+0.2}}% 100%);
+                    ">
+                </div>
+            </div><br>
+            <span class="physicalSpan">{{PDpercent}}% Physical Damage</span>,
+            <span class="magicSpan">{{MDpercent}}% Magic Damage</span>,
+            <span class="trueSpan">{{TDpercent}}% True Damage</span>
+        </td>
+    </tr>
+    
+    {% set shouldBuyAntiheal = False %}
+    {% set ns = namespace(omnivamp = 0) %}
+    {% for stats in enemyChampionStats[-1] %}
+        {% set ns.omnivamp = ns.omnivamp + enemyChampionStats[-1][stats]["omnivamp"] %}
+    {% endfor %}
+    {{ ns.omnivamp }}
+    {% if ns.omnivamp > 20 %}
+        <tr>
+            <td colspan="5" style="text-align: center;">
+                The enemies have a combined value of {{ ns.omnivamp }} omnivamp. <br>
+                Buying Antiheal is recommended. <br>
+                <table class="recommendedItems">
+                    <tr>
+                        <td class="recommendedItemIcon"><img src='https://cdn.darkintaqt.com/lol/c-assets/items/6609.png.webp'></td>
+                        <td class="recommendedItemIcon"><img src='https://cdn.darkintaqt.com/lol/c-assets/items/3165.png.webp'></td>
+                        <td class="recommendedItemIcon"><img src='https://cdn.darkintaqt.com/lol/c-assets/items/3075.png.webp'></td>
+                    </tr>
+                    <tr>
+                        <td class="recommendedItemName">Chempunk<br>Chainsword</td>
+                        <td class="recommendedItemName">Morellonomicon</td>
+                        <td class="recommendedItemName">Thornmail</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    {% endif %}
+
+    <tr>
+        <td colspan="5" style="text-align: center;">
+            PLAYER BUILDS MAGIC RESIST EVEN THOUGH ENEMY DEALT MAINLY PHYSICAL DAMAGE
+        </td>
+    </tr>
+
     {% for i in range(deathStats|length) %}
         <tr>
-            <td colspan="5" style="width: min-content;">
+            <td colspan="5" style="width: min-content; text-align: center;">
                 {% set minute = deathStats[i]["timestamp"] // 1000 // 60 %}
                 {% set second = deathStats[i]["timestamp"] // 1000 % 60 %}
                 <center>
                 {% if second < 10 %}
-                    {{ deathStats[i]["location"] }} at {{ minute }}:0{{ second }}
+                    Death in {{ deathStats[i]["location"] }} at {{ minute }}:0{{ second }}
                 {% else %}
-                    {{ deathStats[i]["location"] }} at {{ minute }}:{{ second }}
+                    Death in {{ deathStats[i]["location"] }} at {{ minute }}:{{ second }}
                 {% endif %}</center>
                 <br>
                 {% set p1 = deathStats[i]["victimDamageReceived"]["physicalDamage"] / deathStats[i]["victimDamageReceived"]["totalDamage"] * 100 %}
@@ -227,22 +325,42 @@
                         #DCDDDD {{p2+0.2}}% 100%);
                         ">
                     </div>
+                </div><br>
+                <span class="physicalSpan">{{p1|round(1)}}% Physical Damage</span>, 
+                <span class="magicSpan">{{(p2-p1)|round(1)}}% Magic Damage</span>, 
+                <span class="trueSpan">{{(100-p2)|round(1)}}% True Damage</span>
+            </td>
+        </tr>
+        <tr class="itemsPerMinuteRow">
+            <td colspan="5">
+                <div class="itemPerMinuteContent">
+                    <div class="championItemsTitle">Player build at time of death:</div>
+                    <div class="championItems">
+                        {% set deathMinute = deathStats[i]["timestamp"] // 1000 // 60 %}
+                        {% for j in range(4) %}
+                            {% if itemsPerMinute[deathMinute][j] %}
+                                <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ itemsPerMinute[deathMinute][j] ~ '.png.webp' }}" id="[{{j}}]">
+                                <div class="overlayText" id="text_[{{j}}]">{{itemNames[j]}}</div>
+                            {% else %}
+                                <div class="emptyItemSlot"></div>
+                            {% endif %}
+                        {% endfor %}
+                        <br>
+                        {% for j in range(3) %}
+                            {% if itemsPerMinute[deathMinute][j+4] %}
+                                <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ itemsPerMinute[deathMinute][j+4] ~ '.png.webp' }}" id="[{{j}}]">
+                                <div class="overlayText" id="text_[{{j+4}}]">{{itemNames[j+4]}}</div>
+                            {% else %}
+                                <div class="emptyItemSlot"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             </td>
         </tr>
+        <tr class="spacingRow"></tr>
     {% endfor %}
-    <tr>
-        <td style="width: min-content;" colspan="5">
-            {% for stat in buildStats %}
-                <p>{{stat}}: {{buildStats[stat]}}</p>
-            {% endfor %}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="5" style="text-align: center;">
-            PLAYER BUILDS MAGIC RESIST EVEN THOUGH ENEMY DEALT MAINLY PHYSICAL DAMAGE
-        </td>
-    </tr>
+    
 </table>
 <script>
     const imgs = document.getElementsByClassName("itemImage");

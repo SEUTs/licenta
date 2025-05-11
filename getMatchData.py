@@ -17,6 +17,137 @@ def saveMatchToFile(matchId):
             f.close()
     return matchFile
 
+def getPlayerBuildPerMinute(playerId, matchFile):
+    destroyedFor = []
+    components = []
+    def undoForComponents(event):
+        result = []
+        for component in components:
+            if component[0] == event["beforeId"] and component[1] == event["participantId"]:
+                for item in component[2]:
+                   result.append(item)
+        return result
+
+    def getDestroyedComponents(event):
+        result = []
+        for index in range(len(destroyedFor)):
+            entry = destroyedFor[index] # itemId, timestamp, participantId
+            if event["timestamp"] == entry[1] and event["participantId"] == entry[2]:
+                result.append(entry[0])
+        return result
+
+    items = {}
+    with open("items.json", 'r') as f:
+        items = json.load(f)
+        f.close()
+
+    jungleItems = [1101, 1102, 1103]
+    healthPotAndControl = [2003, 2055]
+
+    wards = [3330, 3340, 3348, 3363, 3364] #fiddle stealth arena farsight oracle
+    runeItems = [2010, 2150, 2151, 2152, 2422] #cookies, rune elixirs and magical boots
+    otherItems = [3865, 3866, 3867, 3513] #support items 1,2,3 and eye of herald
+    elixirs = [2138, 2139, 2140] # elixirs
+    matchId = ""
+    result = []
+    with open(matchFile, 'r') as f:
+        timestampsOfPurchases = set()
+        data = json.load(f)
+        matchId = data["metadata"]["matchId"]
+        frames = data["info"]["frames"]
+        for frame in frames:
+            events = frame["events"]
+            for event in events:
+                if event["type"][0:6] == "ITEM_P" and event["participantId"] == playerId:
+                    timestampsOfPurchases.add(event["timestamp"])
+        
+        build = []
+        for frame in frames:
+            events = frame["events"]
+            for event in events:
+                if event["type"][0:4] == "ITEM" and event["participantId"] == playerId:
+                    type = event["type"]
+                    if type[5] == "P": #ITEM_PURCHASED
+                        if event["itemId"] in wards:
+                            for item in build:
+                                if item in wards:
+                                    build.remove(item)
+                        if event["itemId"] in elixirs and len([x for x in build if x not in wards]) == 6:
+                            continue
+                        build.append(event["itemId"])
+                        components.append([event["itemId"], event["participantId"], getDestroyedComponents(event)])
+                        # print({event["itemId"]: getDestroyedComponents(event)})
+
+                    elif type[5] == "D": #ITEM_DESTROYED
+                        if event["itemId"] in jungleItems and event["itemId"] in build:
+                            build.remove(event["itemId"])
+                        if event["itemId"] in healthPotAndControl:
+                            build.remove(event["itemId"])
+                        elif event["itemId"] == 3003: #Archangel's Staff
+                            build.remove(event["itemId"])
+                            build.append(3040) #Seraph's Embrace
+                            timestampsOfPurchases.add(event["timestamp"])
+                        elif event["itemId"] == 3119: #Winter's approach
+                            build.remove(event["itemId"])
+                            build.append(3121) #Fimbulwinter
+                            timestampsOfPurchases.add(event["timestamp"])
+                        elif event["itemId"] == 3042: #Manamune
+                            build.remove(event["itemId"])
+                            build.append(3004) #Muramana
+                            timestampsOfPurchases.add(event["timestamp"])
+                        elif event["itemId"] == 2420 and event["timestamp"] not in timestampsOfPurchases: #Seeker's Armguard
+                            build.remove(event["itemId"])
+                            build.append(2421) #Shattered Armguard
+                        elif event["itemId"] not in wards and event["itemId"] not in runeItems and event["itemId"] not in otherItems and event["itemId"] not in elixirs:
+                            if event["timestamp"] in timestampsOfPurchases:
+                        # elif event["itemId"] in builds[event["participantId"] - 1]:
+                                # print(event["itemId"], builds[event["participantId"] - 1], event["timestamp"])
+                                build.remove(event["itemId"])
+                                destroyedFor.append([event["itemId"], event["timestamp"], event['participantId']])
+
+                    elif type[5] == "S": #ITEM_SOLD
+                        pass
+                        # print(event["timestamp"], items[str(event['itemId'])], event['itemId'], builds[event["participantId"] - 1])
+                        build.remove(event["itemId"])
+
+                    elif type[5] == "U": #ITEM_UNDO
+                        if event["afterId"] in wards:
+                            for item in build:
+                                if item in wards:
+                                    build.remove(item)
+                        if event["beforeId"] != 0:
+                            build.remove(event["beforeId"])
+                            reAdd = undoForComponents(event)
+                            # print(reAdd)
+                            for item in reAdd:
+                                build.append(item)
+                        if event["afterId"] != 0:
+                            build.append(event["afterId"])
+            result.append(build.copy())
+        f.close()
+        
+    for build in result:
+    # print(result)
+        found = False
+        for ward in wards:
+            if ward in build:
+                build.remove(ward)
+                build.insert(3, ward)
+                found = True
+        if not found:
+            build.insert(3, wards[1])
+
+    correctedItemIds = {
+        3191: 2420,
+        3192: 2421,
+    }
+    for build in result:
+        for i in range(len(build)):
+            build[i] = correctedItemIds.get(build[i], build[i])
+
+    itemNames = [[items[str(x)] for x in build] for build in result]
+    return (result, itemNames)
+
 def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
     builds = [[] for _ in range(10)]
     
@@ -302,3 +433,34 @@ def getDeathStats(matchFile):
                     updated.append(death)
                     deaths.update({event["victimId"]: updated})
     return deaths
+
+def getDamageStatsOfAll(matchFile, playerRange):
+    playerRange = [str(x) for x in playerRange]
+    minuteStats = []
+    with open(matchFile, 'r') as f:
+        data = json.load(f)
+        f.close()
+
+        rawChampionStats = data["info"]["frames"][-1]["participantFrames"]
+        
+        frames = data["info"]["frames"]
+        for frame in frames:
+            rawChampionStats = frame["participantFrames"]
+            stats = {}
+            for champion in playerRange:
+                rawDamageStats = rawChampionStats[champion]["damageStats"]
+                rawValueStats = rawChampionStats[champion]["championStats"]
+                processedStats = {
+                    "physicalDamageDealt": rawDamageStats["physicalDamageDoneToChampions"],
+                    "physicalDamageTaken": rawDamageStats["physicalDamageTaken"],
+                    "magicDamageDealt": rawDamageStats["magicDamageDoneToChampions"],
+                    "magicDamageTaken": rawDamageStats["magicDamageTaken"],
+                    "trueDamageDealt": rawDamageStats["trueDamageDoneToChampions"],
+                    "trueDamageTaken": rawDamageStats["trueDamageTaken"],
+                    "omnivamp": rawValueStats["lifesteal"] + rawValueStats["omnivamp"] + rawValueStats["physicalVamp"]
+                }
+                stats.update({int(champion): processedStats})
+            minuteStats.append(stats)
+    for stats in minuteStats:
+        print(stats[int(playerRange[0])])
+    return minuteStats

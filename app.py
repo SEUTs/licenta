@@ -184,8 +184,17 @@ def championDetails():
 
     goldPlot = licenta.generate2GoldPlot(participantId + 1)
     
-    deathStats = getMatchData.getDeathStats("Match_EUN1_3724671147.json")[participantId + 1]
+    deathStats = getMatchData.getDeathStats(matchFile)[participantId + 1]
 
+    itemsPerMinute, itemNamesPerMinute = getMatchData.getPlayerBuildPerMinute(participantId + 1, matchFile)
+
+    enemyTeam = 1 if participantId < 6 else 0
+    championRange = list(range(enemyTeam * 5 + 1, (enemyTeam+1) * 5 + 1))
+    championRange.append(participantId + 1)
+    championStats = getMatchData.getDamageStatsOfAll(matchFile, championRange)
+    enemyChampionStats = championStats[:-1]
+    playerChampionStats = championStats[-1][participantId + 1]
+    
     return render_template(
         'championPage.html', 
         championName=championName, 
@@ -197,6 +206,10 @@ def championDetails():
         championBuild=championBuild,
         itemNames=itemNames,
         buildStats=buildStats,
+        itemsPerMinute=itemsPerMinute,
+        itemNamesPerMinute=itemNamesPerMinute,
+        enemyChampionStats=enemyChampionStats,
+        playerChampionStats=playerChampionStats
     )
 
 
