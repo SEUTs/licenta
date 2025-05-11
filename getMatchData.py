@@ -3,16 +3,18 @@ import extractData
 import licenta
 import os
 import time
+import deathLocations
 
 def saveMatchToFile(matchId):
-    matchFile = "Match_" + matchId + ".json"
+    matchFile = "E:\\licenta\\games\\Match_" + matchId + ".json"
     isFile = os.path.isfile(matchFile)
     if not (isFile):
         print(f"FILE {matchFile} ADDED!\n")
         data = licenta.getMatchTimeline(matchId)
-        with open(matchFile, "x") as f:
-            f.write(json.dumps(data))
-        f.close()
+        if data != {}:
+            with open(matchFile, "x") as f:
+                f.write(json.dumps(data))
+            f.close()
     return matchFile
 
 def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
@@ -141,6 +143,14 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
         if not found:
             build.insert(3, wards[1])
 
+    correctedItemIds = {
+        3191: 2420,
+        3192: 2421,
+    }
+    for build in builds:
+        for i in range(len(build)):
+            build[i] = correctedItemIds.get(build[i], build[i])
+
     result.append([[items[str(x)] for x in build] for build in builds])
     result.append(matchId)
     # print(result)
@@ -195,3 +205,100 @@ def getMatchPreview(puuid, matchFile):
         result = (champion, details, kda, build, matchId)
         print(result)
         return result
+    
+def getGoldPerMinuteData(playerIndex, matchFile):
+    enemyIndex = str(playerIndex + 5 if playerIndex < 6 else playerIndex - 5)
+    playerIndex = str(playerIndex)
+    with open(matchFile, 'r') as f:
+        data = json.load(f)
+        f.close()
+        frames = data["info"]["frames"]
+        goldData = [[], []]
+        for frame in frames[:-1]:
+            participantFrames = frame["participantFrames"]
+            goldData[0].append(participantFrames[playerIndex]["totalGold"])
+            goldData[1].append(participantFrames[enemyIndex]["totalGold"])
+
+        lastFrameDataPlayer = frames[-1]["participantFrames"][playerIndex]
+        lastFrameDataEnemy = frames[-1]["participantFrames"][enemyIndex]
+        goldDifferencePlayer = lastFrameDataPlayer["totalGold"] - goldData[0][-1]
+        goldDifferenceEnemy = lastFrameDataEnemy["totalGold"] - goldData[1][-1]
+        multiplier = 60000 / (frames[-1]["timestamp"] % 60000)
+        goldData[0].append(goldData[0][-1] + goldDifferencePlayer * multiplier)
+        goldData[1].append(goldData[1][-1] + goldDifferenceEnemy * multiplier)
+    return (([range(len(goldData[0])), goldData[0]], [range(len(goldData[1])), goldData[1]]))
+
+def getDeathStats(matchFile):
+    deaths = {}
+    for i in range(1, 11):
+        deaths.update({i: []})
+    # dir_path = r'E:\\licenta\\games'
+    # file = os.listdir(dir_path)[0]
+    # with open(dir_path + '\\' + file, 'r') as f:
+    with open(matchFile, 'r') as f:
+        data = json.load(f)
+        f.close()
+        frames = data["info"]["frames"]
+        for frame in frames:
+            HPs = {}
+            championStats = frame["participantFrames"]
+            for i in range(1, 11):
+                HPs.update({i: championStats[str(i)]["championStats"]["healthMax"]})
+            events = frame["events"]
+            for event in events:
+                if event["type"] == "CHAMPION_KILL":
+                    totalDamageReceived = [0, 0, 0, 0]
+                    receivedFrom = {}
+                    totalDamageDealt = 0
+                    dealtTo = {}
+                    for damageReceived in event["victimDamageReceived"]:
+                        totalDamageReceived[0] += damageReceived["physicalDamage"]
+                        totalDamageReceived[1] += damageReceived["physicalDamage"]
+                        totalDamageReceived[0] += damageReceived["magicDamage"]
+                        totalDamageReceived[2] += damageReceived["magicDamage"]
+                        totalDamageReceived[0] += damageReceived["trueDamage"]
+                        totalDamageReceived[3] += damageReceived["trueDamage"]
+                        receivedFrom.update({damageReceived["participantId"]: receivedFrom.get(damageReceived["participantId"], 0) + damageReceived["physicalDamage"] + damageReceived["magicDamage"] + damageReceived["trueDamage"]})
+                    for damageDealt in event.get("victimDamageDealt", []):
+                        totalDamageDealt += damageDealt["physicalDamage"]
+                        totalDamageDealt += damageDealt["magicDamage"]
+                        totalDamageDealt += damageDealt["trueDamage"]
+                        dealtTo.update({damageDealt["participantId"]: dealtTo.get(damageDealt["participantId"], 0) + damageDealt["physicalDamage"] + damageDealt["magicDamage"] + damageDealt["trueDamage"]})
+
+                    # print(f"{totalDamageReceived[0]}/{HPs[event["victimId"]]}: {totalDamageReceived[1]}P {totalDamageReceived[2]}M {totalDamageReceived[3]}T\n{receivedFrom}")
+                    # print(f"{totalDamageDealt}")
+                    # for entry in dealtTo:
+                    #     print(f"Dealt {dealtTo[entry]}/{HPs[entry]} to {entry}")
+
+                    percentageReceived = round(totalDamageReceived[0]/HPs[event["victimId"]] * 100, 2)
+                    percentageDealt = 0
+                    if dealtTo:
+                        percentageDealt = round(sum(dealtTo[x]/HPs[x] for x in dealtTo) * 100, 2)
+
+                    # print(f"Percentage received: {percentageReceived}%")
+                    # print(f"Percentage dealt: {percentageDealt}%")
+                    # print("\n")
+
+                    death = {
+                        "victimHP": HPs[event["victimId"]],
+                        "victimDamageReceived": {
+                            "totalDamage": totalDamageReceived[0],
+                            "physicalDamage": totalDamageReceived[1],
+                            "magicDamage": totalDamageReceived[2],
+                            "trueDamage": totalDamageReceived[3],
+                        },
+                        "totalDamageDealt": sum(dealtTo[x] for x in dealtTo),
+                        "killersDamageReceived": [],
+                        "timestamp": event["timestamp"],
+                        "location": deathLocations.findRegion((event["position"]['x'], event["position"]['y']))
+                    }
+                    for entry in dealtTo:
+                        death["killersDamageReceived"].append({
+                            "killerId": entry,
+                            "killerHP": HPs[entry],
+                            "killerTotalDamage": dealtTo[entry]
+                        })
+                    updated = deaths[event["victimId"]]
+                    updated.append(death)
+                    deaths.update({event["victimId"]: updated})
+    return deaths

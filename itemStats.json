@@ -1,0 +1,891 @@
+{
+    "Cull": {
+        "attack damage": 7,
+        "health on-hit": 3
+    },
+    "Dark Seal": {
+        "ability power": 15,
+        "health": 50
+    },
+    "Doran's Blade": {
+        "attack damage": 10,
+        "health": 80,
+        "life steal": 3
+    },
+    "Doran's Ring": {
+        "ability power": 18,
+        "health": 90
+    },
+    "Doran's Shield": {
+        "health": 110,
+        "health per 5 seconds": 4
+    },
+    "Guardian's Blade": {
+        "attack damage": 30,
+        "ability haste": 15,
+        "health": 150
+    },
+    "Guardian's Hammer": {
+        "attack damage": 25,
+        "health": 150,
+        "life steal": 5
+    },
+    "Guardian's Horn": {
+        "health": 150,
+        "health per 5 seconds": 20
+    },
+    "Guardian's Orb": {
+        "ability power": 50,
+        "health": 150
+    },
+    "Gustwalker Hatchling": {},
+    "Mosstomper Seedling": {},
+    "Scorchclaw Pup": {},
+    "Tear of the Goddess": {
+        "mana": 240
+    },
+    "World Atlas": {
+        "health": 30,
+        "base health regeneration": 25,
+        "base mana regeneration": 25
+    },
+    "Cappa Juice": {},
+    "Control Ward": {},
+    "Elixir of Iron": {},
+    "Elixir of Sorcery": {},
+    "Elixir of Wrath": {},
+    "Health Potion": {},
+    "Refillable Potion": {},
+    "Farsight Alteration": {},
+    "Oracle Lens": {},
+    "Stealth Ward": {},
+    "Elixir of Avarice": {},
+    "Elixir of Force": {},
+    "Elixir of Skill": {},
+    "Eye of the Herald": {},
+    "Poro-Snax": {},
+    "Slightly Magical Boots": {
+        "movement speed": 25
+    },
+    "Total Biscuit of Everlasting Will": {},
+    "Your Cut": {},
+    "Armored Advance": {
+        "armor": 40,
+        "movement speed": 50
+    },
+    "Berserker's Greaves": {
+        "attack speed": 25,
+        "movement speed": 45
+    },
+    "Boots": {
+        "movement speed": 25
+    },
+    "Boots of Swiftness": {
+        "movement speed": 55
+    },
+    "Chainlaced Crushers": {
+        "magic resistance": 35,
+        "movement speed": 50,
+        "tenacity": 30
+    },
+    "Crimson Lucidity": {
+        "ability haste": 25,
+        "movement speed": 50
+    },
+    "Forever Forward": {
+        "movement speed": 55
+    },
+    "Gunmetal Greaves": {
+        "attack speed": 40,
+        "movement speed": 50
+    },
+    "Ionian Boots of Lucidity": {
+        "ability haste": 10,
+        "movement speed": 45
+    },
+    "Mercury's Treads": {
+        "magic resistance": 20,
+        "movement speed": 45,
+        "tenacity": 30
+    },
+    "Plated Steelcaps": {
+        "armor": 25,
+        "movement speed": 45
+    },
+    "Sorcerer's Shoes": {
+        "magic penetration": 12,
+        "movement speed": 45
+    },
+    "Spellslinger's Shoes": {
+        "magic penetration": 18,
+        "movement speed": 50
+    },
+    "Swiftmarch": {
+        "movement speed": 65
+    },
+    "Symbiotic Soles": {
+        "movement speed": 40
+    },
+    "Synchronized Souls": {
+        "movement speed": 45
+    },
+    "Amplifying Tome": {
+        "ability power": 20
+    },
+    "B. F. Sword": {
+        "attack damage": 40
+    },
+    "Blasting Wand": {
+        "ability power": 45
+    },
+    "Cloak of Agility": {
+        "critical strike chance": 15
+    },
+    "Cloth Armor": {
+        "armor": 15
+    },
+    "Dagger": {
+        "attack speed": 10
+    },
+    "Faerie Charm": {
+        "base mana regeneration": 50
+    },
+    "Glowing Mote": {
+        "ability haste": 5
+    },
+    "Long Sword": {
+        "attack damage": 10
+    },
+    "Needlessly Large Rod": {
+        "ability power": 65
+    },
+    "Null-Magic Mantle": {
+        "magic resistance": 20
+    },
+    "Pickaxe": {
+        "attack damage": 25
+    },
+    "Rejuvenation Bead": {
+        "base health regeneration": 100
+    },
+    "Ruby Crystal": {
+        "health": 150
+    },
+    "Sapphire Crystal": {
+        "mana": 300
+    },
+    "Aegis of the Legion": {
+        "ability haste": 10,
+        "armor": 25,
+        "magic resistance": 25
+    },
+    "Aether Wisp": {
+        "ability power": 30,
+        "movement speed": 4
+    },
+    "Bami's Cinder": {
+        "ability haste": 5,
+        "health": 150
+    },
+    "Bandleglass Mirror": {
+        "ability power": 20,
+        "ability haste": 10,
+        "base mana regeneration": 100
+    },
+    "Blighting Jewel": {
+        "ability power": 25,
+        "magic penetration": 13
+    },
+    "Bramble Vest": {
+        "armor": 30
+    },
+    "Catalyst of Aeons": {
+        "health": 350,
+        "mana": 375
+    },
+    "Caulfield's Warhammer": {
+        "attack damage": 20,
+        "ability haste": 10
+    },
+    "Chain Vest": {
+        "armor": 40
+    },
+    "Crystalline Bracer": {
+        "health": 200,
+        "base health regeneration": 100
+    },
+    "Executioner's Calling": {
+        "attack damage": 15
+    },
+    "Fated Ashes": {
+        "ability power": 30
+    },
+    "Fiendish Codex": {
+        "ability power": 25,
+        "ability haste": 10
+    },
+    "Forbidden Idol": {
+        "base mana regeneration": 50,
+        "heal and shield power": 8
+    },
+    "Giant's Belt": {
+        "health": 350
+    },
+    "Glacial Buckler": {
+        "ability haste": 10,
+        "armor": 25,
+        "mana": 300
+    },
+    "Haunting Guise": {
+        "ability power": 30,
+        "health": 200
+    },
+    "Hearthbound Axe": {
+        "attack damage": 20,
+        "attack speed": 20
+    },
+    "Hexdrinker": {
+        "attack damage": 25,
+        "magic resistance": 25
+    },
+    "Hextech Alternator": {
+        "ability power": 45
+    },
+    "Kindlegem": {
+        "ability haste": 10,
+        "health": 200
+    },
+    "Last Whisper": {
+        "attack damage": 20,
+        "armor penetration": 18
+    },
+    "Lost Chapter": {
+        "ability power": 40,
+        "ability haste": 10,
+        "mana": 300
+    },
+    "Negatron Cloak": {
+        "magic resistance": 45
+    },
+    "Noonquiver": {
+        "attack damage": 15,
+        "critical strike chance": 20
+    },
+    "Oblivion Orb": {
+        "ability power": 25
+    },
+    "Phage": {
+        "attack damage": 15,
+        "health": 200
+    },
+    "Quicksilver Sash": {
+        "magic resistance": 30
+    },
+    "Rectrix": {
+        "attack damage": 15,
+        "movement speed": 4
+    },
+    "Recurve Bow": {
+        "attack speed": 15
+    },
+    "Runic Compass": {
+        "health": 100,
+        "base health regeneration": 50,
+        "base mana regeneration": 50
+    },
+    "Scout's Slingshot": {
+        "attack speed": 20
+    },
+    "Seeker's Armguard": {
+        "ability power": 40,
+        "armor": 25
+    },
+    "Serrated Dirk": {
+        "attack damage": 20,
+        "lethality": 10
+    },
+    "Shattered Armguard": {
+        "ability power": 40,
+        "armor": 25
+    },
+    "Sheen": {
+        "ability haste": 10
+    },
+    "Spectre's Cowl": {
+        "magic resistance": 35,
+        "health": 200,
+        "base health regeneration": 100
+    },
+    "Steel Sigil": {
+        "attack damage": 15,
+        "armor": 30
+    },
+    "The Brutalizer": {
+        "attack damage": 25,
+        "ability haste": 10,
+        "lethality": 5
+    },
+    "Tiamat": {
+        "attack damage": 20
+    },
+    "Tunneler": {
+        "attack damage": 15,
+        "health": 250
+    },
+    "Vampiric Scepter": {
+        "attack damage": 15,
+        "life steal": 7
+    },
+    "Verdant Barrier": {
+        "ability power": 40,
+        "magic resistance": 25
+    },
+    "Warden's Mail": {
+        "armor": 40
+    },
+    "Watchful Wardstone": {
+        "ability haste": 10,
+        "armor": 10,
+        "magic resistance": 15,
+        "health": 150
+    },
+    "Winged Moonplate": {
+        "health": 200,
+        "movement speed": 4
+    },
+    "Zeal": {
+        "attack speed": 15,
+        "critical strike chance": 15,
+        "movement speed": 4
+    },
+    "Abyssal Mask": {
+        "ability haste": 15,
+        "magic resistance": 45,
+        "health": 350
+    },
+    "Archangel's Staff": {
+        "ability power": 70,
+        "ability haste": 25,
+        "mana": 600
+    },
+    "Ardent Censer": {
+        "ability power": 45,
+        "base mana regeneration": 125,
+        "heal and shield power": 10,
+        "movement speed": 4
+    },
+    "Axiom Arc": {
+        "attack damage": 55,
+        "ability haste": 20,
+        "lethality": 18
+    },
+    "Banshee's Veil": {
+        "ability power": 105,
+        "magic resistance": 40
+    },
+    "Black Cleaver": {
+        "attack damage": 40,
+        "ability haste": 20,
+        "health": 400
+    },
+    "Blackfire Torch": {
+        "ability power": 80,
+        "ability haste": 20,
+        "mana": 600
+    },
+    "Blade of the Ruined King": {
+        "attack damage": 40,
+        "attack speed": 25,
+        "life steal": 10
+    },
+    "Bloodletter's Curse": {
+        "ability power": 60,
+        "ability haste": 15,
+        "health": 350
+    },
+    "Bloodsong": {
+        "health": 200,
+        "base health regeneration": 75,
+        "base mana regeneration": 75
+    },
+    "Bloodthirster": {
+        "attack damage": 80,
+        "life steal": 15
+    },
+    "Bounty of Worlds": {
+        "health": 200,
+        "base health regeneration": 75,
+        "base mana regeneration": 75
+    },
+    "Celestial Opposition": {
+        "health": 200,
+        "base health regeneration": 75,
+        "base mana regeneration": 75
+    },
+    "Chempunk Chainsword": {
+        "attack damage": 45,
+        "ability haste": 15,
+        "health": 450
+    },
+    "Cosmic Drive": {
+        "ability power": 70,
+        "ability haste": 25,
+        "health": 350,
+        "movement speed": 4
+    },
+    "Cryptbloom": {
+        "ability power": 60,
+        "ability haste": 20,
+        "magic penetration": 30
+    },
+    "Dawncore": {
+        "ability power": 45,
+        "base mana regeneration": 100,
+        "heal and shield power": 16
+    },
+    "Dead Man's Plate": {
+        "armor": 55,
+        "health": 350,
+        "movement speed": 4
+    },
+    "Death's Dance": {
+        "attack damage": 60,
+        "ability haste": 15,
+        "armor": 50
+    },
+    "Dream Maker": {
+        "health": 200,
+        "base health regeneration": 75,
+        "base mana regeneration": 75
+    },
+    "Echoes of Helia": {
+        "ability power": 35,
+        "ability haste": 20,
+        "health": 200,
+        "base mana regeneration": 125
+    },
+    "Eclipse": {
+        "attack damage": 60,
+        "ability haste": 15
+    },
+    "Edge of Night": {
+        "attack damage": 50,
+        "lethality": 15,
+        "health": 250
+    },
+    "Essence Reaver": {
+        "attack damage": 60,
+        "ability haste": 15,
+        "critical strike chance": 25
+    },
+    "Experimental Hexplate": {
+        "attack damage": 40,
+        "attack speed": 20,
+        "health": 450
+    },
+    "Fimbulwinter": {
+        "ability haste": 15,
+        "health": 550,
+        "mana": 860
+    },
+    "Force of Nature": {
+        "magic resistance": 55,
+        "health": 400,
+        "movement speed": 4
+    },
+    "Frozen Heart": {
+        "ability haste": 20,
+        "armor": 75,
+        "mana": 400
+    },
+    "Guardian Angel": {
+        "attack damage": 55,
+        "armor": 45
+    },
+    "Guinsoo's Rageblade": {
+        "attack damage": 30,
+        "ability power": 30,
+        "attack speed": 25
+    },
+    "Heartsteel": {
+        "health": 900,
+        "base health regeneration": 100
+    },
+    "Hextech Rocketbelt": {
+        "ability power": 60,
+        "ability haste": 15,
+        "health": 350
+    },
+    "Hollow Radiance": {
+        "ability haste": 10,
+        "magic resistance": 40,
+        "health": 400,
+        "base health regeneration": 100
+    },
+    "Horizon Focus": {
+        "ability power": 75,
+        "ability haste": 25
+    },
+    "Hubris": {
+        "attack damage": 60,
+        "ability haste": 10,
+        "lethality": 18
+    },
+    "Hullbreaker": {
+        "attack damage": 40,
+        "health": 500,
+        "movement speed": 4
+    },
+    "Iceborn Gauntlet": {
+        "ability haste": 15,
+        "armor": 50,
+        "health": 300
+    },
+    "Immortal Shieldbow": {
+        "attack damage": 55,
+        "critical strike chance": 25
+    },
+    "Imperial Mandate": {
+        "ability power": 60,
+        "ability haste": 20,
+        "base mana regeneration": 125
+    },
+    "Infinity Edge": {
+        "attack damage": 65,
+        "critical strike chance": 25,
+        "critical strike damage": 40
+    },
+    "Jak'Sho, The Protean": {
+        "armor": 45,
+        "magic resistance": 45,
+        "health": 350
+    },
+    "Kaenic Rookern": {
+        "magic resistance": 80,
+        "health": 400,
+        "base health regeneration": 100
+    },
+    "Knight's Vow": {
+        "ability haste": 10,
+        "armor": 40,
+        "health": 200,
+        "base health regeneration": 100
+    },
+    "Kraken Slayer": {
+        "attack damage": 45,
+        "attack speed": 40,
+        "movement speed": 4
+    },
+    "Liandry's Torment": {
+        "ability power": 70,
+        "health": 300
+    },
+    "Lich Bane": {
+        "ability power": 115,
+        "ability haste": 10,
+        "movement speed": 4
+    },
+    "Locket of the Iron Solari": {
+        "ability haste": 10,
+        "armor": 25,
+        "magic resistance": 25,
+        "health": 200
+    },
+    "Lord Dominik's Regards": {
+        "attack damage": 35,
+        "armor penetration": 40,
+        "critical strike chance": 25
+    },
+    "Luden's Companion": {
+        "ability power": 100,
+        "ability haste": 10,
+        "mana": 600
+    },
+    "Malignance": {
+        "ability power": 85,
+        "ability haste": 15,
+        "mana": 600
+    },
+    "Manamune": {
+        "attack damage": 35,
+        "ability haste": 15,
+        "mana": 500
+    },
+    "Maw of Malmortius": {
+        "attack damage": 60,
+        "ability haste": 15,
+        "magic resistance": 40
+    },
+    "Mejai's Soulstealer": {
+        "ability power": 20,
+        "health": 100
+    },
+    "Mercurial Scimitar": {
+        "attack damage": 40,
+        "magic resistance": 40,
+        "life steal": 10
+    },
+    "Mikael's Blessing": {
+        "ability haste": 15,
+        "health": 250,
+        "base mana regeneration": 100,
+        "heal and shield power": 12
+    },
+    "Moonstone Renewer": {
+        "ability power": 25,
+        "ability haste": 20,
+        "health": 200,
+        "base mana regeneration": 125
+    },
+    "Morellonomicon": {
+        "ability power": 75,
+        "ability haste": 15,
+        "health": 350
+    },
+    "Mortal Reminder": {
+        "attack damage": 35,
+        "armor penetration": 35,
+        "critical strike chance": 25
+    },
+    "Muramana": {
+        "attack damage": 35,
+        "ability haste": 15,
+        "mana": 860
+    },
+    "Nashor's Tooth": {
+        "ability power": 80,
+        "ability haste": 15,
+        "attack speed": 50
+    },
+    "Navori Flickerblade": {
+        "attack speed": 40,
+        "critical strike chance": 25,
+        "movement speed": 4
+    },
+    "Opportunity": {
+        "attack damage": 55,
+        "lethality": 18
+    },
+    "Overlord's Bloodmail": {
+        "attack damage": 30,
+        "health": 550
+    },
+    "Phantom Dancer": {
+        "attack speed": 60,
+        "critical strike chance": 25,
+        "movement speed": 8
+    },
+    "Profane Hydra": {
+        "attack damage": 60,
+        "ability haste": 10,
+        "lethality": 18
+    },
+    "Rabadon's Deathcap": {
+        "ability power": 130
+    },
+    "Randuin's Omen": {
+        "armor": 75,
+        "health": 350
+    },
+    "Rapid Firecannon": {
+        "attack speed": 35,
+        "critical strike chance": 25,
+        "movement speed": 4
+    },
+    "Ravenous Hydra": {
+        "attack damage": 65,
+        "ability haste": 15,
+        "life steal": 12
+    },
+    "Redemption": {
+        "ability haste": 15,
+        "health": 200,
+        "base mana regeneration": 100,
+        "heal and shield power": 10
+    },
+    "Riftmaker": {
+        "ability power": 70,
+        "ability haste": 15,
+        "health": 350
+    },
+    "Rod of Ages": {
+        "ability power": 45,
+        "health": 350,
+        "mana": 400
+    },
+    "Runaan's Hurricane": {
+        "attack speed": 40,
+        "critical strike chance": 25,
+        "movement speed": 4
+    },
+    "Rylai's Crystal Scepter": {
+        "ability power": 65,
+        "health": 400
+    },
+    "Seraph's Embrace": {
+        "ability power": 70,
+        "ability haste": 25,
+        "mana": 1000
+    },
+    "Serpent's Fang": {
+        "attack damage": 55,
+        "lethality": 15
+    },
+    "Serylda's Grudge": {
+        "attack damage": 45,
+        "ability haste": 15,
+        "armor penetration": 35
+    },
+    "Shadowflame": {
+        "ability power": 110,
+        "magic penetration": 15
+    },
+    "Shurelya's Battlesong": {
+        "ability power": 50,
+        "ability haste": 15,
+        "base mana regeneration": 125,
+        "movement speed": 4
+    },
+    "Solstice Sleigh": {
+        "health": 200,
+        "base health regeneration": 75,
+        "base mana regeneration": 75
+    },
+    "Spear of Shojin": {
+        "attack damage": 45,
+        "health": 450
+    },
+    "Spirit Visage": {
+        "ability haste": 10,
+        "magic resistance": 50,
+        "health": 400,
+        "base health regeneration": 100
+    },
+    "Staff of Flowing Water": {
+        "ability power": 35,
+        "ability haste": 15,
+        "base mana regeneration": 125,
+        "heal and shield power": 10
+    },
+    "Statikk Shiv": {
+        "attack damage": 45,
+        "attack speed": 30,
+        "movement speed": 4
+    },
+    "Sterak's Gage": {
+        "health": 400,
+        "tenacity": 20
+    },
+    "Stormsurge": {
+        "ability power": 90,
+        "magic penetration": 15,
+        "movement speed": 4
+    },
+    "Stridebreaker": {
+        "attack damage": 40,
+        "attack speed": 25,
+        "health": 450
+    },
+    "Sundered Sky": {
+        "attack damage": 40,
+        "ability haste": 10,
+        "health": 400
+    },
+    "Sunfire Aegis": {
+        "ability haste": 10,
+        "armor": 50,
+        "health": 350
+    },
+    "Terminus": {
+        "attack damage": 30,
+        "attack speed": 35
+    },
+    "The Collector": {
+        "attack damage": 50,
+        "lethality": 10,
+        "critical strike chance": 25
+    },
+    "Thornmail": {
+        "armor": 75,
+        "health": 150
+    },
+    "Titanic Hydra": {
+        "attack damage": 40,
+        "health": 600
+    },
+    "Trailblazer": {
+        "armor": 40,
+        "health": 250,
+        "movement speed": 4
+    },
+    "Trinity Force": {
+        "attack damage": 36,
+        "ability haste": 15,
+        "attack speed": 30,
+        "health": 333
+    },
+    "Umbral Glaive": {
+        "attack damage": 55,
+        "ability haste": 10,
+        "lethality": 15
+    },
+    "Unending Despair": {
+        "ability haste": 10,
+        "armor": 25,
+        "magic resistance": 25,
+        "health": 400
+    },
+    "Vigilant Wardstone": {
+        "ability haste": 20,
+        "armor": 25,
+        "magic resistance": 30,
+        "health": 250
+    },
+    "Void Staff": {
+        "ability power": 95,
+        "magic penetration": 40
+    },
+    "Voltaic Cyclosword": {
+        "attack damage": 55,
+        "ability haste": 10,
+        "lethality": 18
+    },
+    "Warmog's Armor": {
+        "health": 1000,
+        "base health regeneration": 100
+    },
+    "Winter's Approach": {
+        "ability haste": 15,
+        "health": 550,
+        "mana": 500
+    },
+    "Wit's End": {
+        "magic resistance": 45,
+        "attack speed": 50,
+        "tenacity": 20
+    },
+    "Youmuu's Ghostblade": {
+        "attack damage": 55,
+        "lethality": 18,
+        "movement speed": 4
+    },
+    "Yun Tal Wildarrows": {
+        "attack damage": 55,
+        "attack speed": 35
+    },
+    "Zaz'Zak's Realmspike": {
+        "health": 200,
+        "base health regeneration": 75,
+        "base mana regeneration": 75
+    },
+    "Zeke's Convergence": {
+        "ability haste": 10,
+        "armor": 25,
+        "magic resistance": 25,
+        "health": 300
+    },
+    "Zhonya's Hourglass": {
+        "ability power": 105,
+        "armor": 50
+    }
+}

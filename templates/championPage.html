@@ -6,7 +6,7 @@
         top: 50px;
         transform: translateX(-50%);
     }
-    td img {
+    #championImage, .plot {
         transform: translateX(-50%);
         position: relative;
         left: 50%;
@@ -19,7 +19,7 @@
         text-align: center;
     }
     h2 {
-        margin-bottom: 0px;
+        margin-top: 0px;
     }
 
     #skillLevelUpTable tr td {
@@ -34,36 +34,116 @@
     .notSelected {
         background-color: #0C0C42;
     }
+
+    .damageBar {
+        height: 25px;
+        width: 500px;
+        background-color: black;
+    }
+    .damageBarContainer {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        border: solid 2px black;
+        width: min-content;
+    } 
+    .championItems {
+        width: 182px;
+        height: 87px;
+        padding: 5px;
+        padding-left: 15px;
+        background-color: #242486;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 20px;
+        border: gray solid 2px;
+    }
+    .itemImage, .emptyItemSlot {
+        width: 40px;
+        border-radius: 25%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3); /*0.2 0.19*/
+        height: 40px;
+        background-color: rgb(18, 18, 18);
+        position: relative;
+        display: inline-block;
+    }
+
+    .overlayText {
+        position: fixed;
+        z-index: 2;
+        background-color: rgb(30, 30, 30);
+        display: none;
+        transform: translateX(-50%);
+        width: max-content;
+    }
 </style>
 
 {% include 'header.html' %}
 <table id="bigTable">
     <tr>
         <td>
+            <img id="championImage" src="{{'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ championName ~ '_OriginalSquare.png/70px- ~ championName ~_OriginalSquare.png?54659.png.webp' }}">
             <h2>{{ championName }}</h2>
-            <img src="{{'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ championName ~ '_OriginalSquare.png/70px- ~ championName ~_OriginalSquare.png?54659.png.webp' }}">
         </td>
         <td>
-            <p>Winrate<br>00:00 - 06:00</p>
-            <p>N/A</p>
+            <p>Winrate<br>Overall</p>
+            {% if winrates[0] != -1 %}
+                <p>{{ winrates[0] }}%</p>
+            {% else %}
+                <p>N/A</p>
+            {% endif %}
         </td>
         <td>
-            <p>Winrate<br>06:00 - 12:00</p>
-            <p>N/A</p>
+            <p>Winrate<br>00:00 - 08:00</p>
+            {% if winrates[1] != -1 %}
+                <p>{{ winrates[1] }}%</p>
+            {% else %}
+                <p>N/A</p>
+            {% endif %}
         </td>
         <td>
-            <p>Winrate<br>12:00 - 18:00</p>
-            <p>N/A</p>
+            <p>Winrate<br>08:00 - 16:00</p>
+            {% if winrates[2] != -1 %}
+                <p>{{ winrates[2] }}%</p>
+            {% else %}
+                <p>N/A</p>
+            {% endif %}
         </td>
         <td>
-            <p>Winrate<br>18:00 - 00:00</p>
-            <p>N/A</p>
+            <p>Winrate<br>16:00 - 00:00</p>
+            {% if winrates[3] != -1 %}
+                <p>{{ winrates[3] }}%</p>
+            {% else %}
+                <p>N/A</p>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td class="championItems">
+            {% for i in range(4) %}
+                {% if championBuild[i] %}
+                    <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ championBuild[i] ~ '.png.webp' }}" id="[{{i}}]">
+                    <div class="overlayText" id="text_[{{i}}]">{{itemNames[i]}}</div>
+                {% else %}
+                    <div class="emptyItemSlot"></div>
+                {% endif %}
+            {% endfor %}
+            <br>
+            {% for i in range(3) %}
+                {% if championBuild[i+4] %}
+                    <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ championBuild[i+4] ~ '.png.webp' }}" id="[{{i+4}}]">
+                    <div class="overlayText" id="text_[{{i+4}}]">{{itemNames[i+4]}}</div>
+                {% else %}
+                    <div class="emptyItemSlot"></div>
+                {% endif %}
+            {% endfor %}
         </td>
     </tr>
     <tr>
         <td>
             <h2>Max Order</h2>
-            <p>Q>W>E</p>
+            <p>{{ order }}</p>
         </td>
         <td colspan="4">
             <table id="skillLevelUpTable">
@@ -71,8 +151,8 @@
                     <tr>
                         {% if i == 0 %}
                             <td>Q</td>
-                            {% for j in range(championSkillLevels|length // 3)%}
-                                {% if i+1 == (championSkillLevels[j*3+1])|int %}
+                            {% for j in range(championSkillLevels|length)%}
+                                {% if i+1 == (championSkillLevels[j])|int %}
                                     <td class="selected"></td>
                                 {% else %}
                                     <td class="notSelected"></td>
@@ -80,8 +160,8 @@
                             {% endfor %}
                         {% elif i == 1 %}
                             <td>W</td>
-                            {% for j in range(championSkillLevels|length // 3)%}
-                                {% if i+1 == (championSkillLevels[j*3+1])|int %}
+                            {% for j in range(championSkillLevels|length)%}
+                                {% if i+1 == (championSkillLevels[j])|int %}
                                     <td class="selected"></td>
                                 {% else %}
                                     <td class="notSelected"></td>
@@ -89,8 +169,8 @@
                             {% endfor %}
                         {% elif i == 2 %}
                             <td>E</td>
-                            {% for j in range(championSkillLevels|length // 3)%}
-                                {% if i+1 == (championSkillLevels[j*3+1])|int %}
+                            {% for j in range(championSkillLevels|length)%}
+                                {% if i+1 == (championSkillLevels[j])|int %}
                                     <td class="selected"></td>
                                 {% else %}
                                     <td class="notSelected"></td>
@@ -98,8 +178,8 @@
                             {% endfor %}
                         {% else %}
                             <td>R</td>
-                            {% for j in range(championSkillLevels|length // 3)%}
-                                {% if i+1 == (championSkillLevels[j*3+1])|int %}
+                            {% for j in range(championSkillLevels|length)%}
+                                {% if i+1 == (championSkillLevels[j])|int %}
                                     <td class="selected"></td>
                                 {% else %}
                                     <td class="notSelected"></td>
@@ -110,7 +190,7 @@
                 {% endfor %}
                 <tr>
                     <td></td>
-                    {% for j in range(1, championSkillLevels|length // 3 + 1)%}
+                    {% for j in range(1, championSkillLevels|length + 1)%}
                         <td>
                             {{ j }}
                         </td>
@@ -119,4 +199,67 @@
             </table>
         </td>
     </tr>
+    <tr>
+        <td colspan="5">
+            <img class="plot" src="data:image/png;base64,{{ goldPlot }}" alt="Plot Image">
+        </td>
+    </tr>
+    {% for i in range(deathStats|length) %}
+        <tr>
+            <td colspan="5" style="width: min-content;">
+                {% set minute = deathStats[i]["timestamp"] // 1000 // 60 %}
+                {% set second = deathStats[i]["timestamp"] // 1000 % 60 %}
+                <center>
+                {% if second < 10 %}
+                    {{ deathStats[i]["location"] }} at {{ minute }}:0{{ second }}
+                {% else %}
+                    {{ deathStats[i]["location"] }} at {{ minute }}:{{ second }}
+                {% endif %}</center>
+                <br>
+                {% set p1 = deathStats[i]["victimDamageReceived"]["physicalDamage"] / deathStats[i]["victimDamageReceived"]["totalDamage"] * 100 %}
+                {% set p2 = p1 + deathStats[i]["victimDamageReceived"]["magicDamage"] / deathStats[i]["victimDamageReceived"]["totalDamage"] * 100 %}
+                <div class="damageBarContainer">
+                    <div class="damageBar" style="background-image: linear-gradient(90deg, 
+                        #D1543B 0% {{p1-0.2}}%,
+                        black {{p1-0.2}}% {{p1+0.2}}%,
+                        #2EB4D5 {{p1+0.2}}% {{p2-0.2}}%,
+                        black {{p2-0.2}}% {{p2+0.2}}%,
+                        #DCDDDD {{p2+0.2}}% 100%);
+                        ">
+                    </div>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    <tr>
+        <td style="width: min-content;" colspan="5">
+            {% for stat in buildStats %}
+                <p>{{stat}}: {{buildStats[stat]}}</p>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" style="text-align: center;">
+            PLAYER BUILDS MAGIC RESIST EVEN THOUGH ENEMY DEALT MAINLY PHYSICAL DAMAGE
+        </td>
+    </tr>
 </table>
+<script>
+    const imgs = document.getElementsByClassName("itemImage");
+    const overlays = document.getElementsByClassName("overlayText");
+    for (let overlay of overlays) {
+        console.log(overlay.id)
+        overlay.style.left = (43 * (overlay.id[6] - 4 * Math.floor(overlay.id[6] / 4)) + 42) + "px";
+        console.log(overlay.style.left)
+    }
+    for (let img of imgs)
+        img.addEventListener("mouseover", () => {
+            let id = "text_" + img.id
+            document.getElementById(id).style.display = "block";
+    })
+    for (let img of imgs)
+        img.addEventListener("mouseleave", () => {
+            let id = "text_" + img.id
+            document.getElementById(id).style.display = "none";
+    })
+</script>

@@ -2,6 +2,67 @@ import json
 from csv import writer
 import time
 import requests
+import os
+
+def getChampionNames(frames): 
+    #I HATE PICKING THE NAMES SO MUCH
+    championNames = [[] for _ in range(11)]
+
+    for frame in frames:
+        events = frame.get("events")
+        for event in events:
+            type = event.get("type")
+            if type == "CHAMPION_KILL":
+                victimId = event.get("victimId")
+
+                victimDamageDealt = event.get("victimDamageDealt")
+                if victimDamageDealt is not None:
+                    victimName = victimDamageDealt[0].get("name")
+                    championNames[victimId].append(victimName)
+
+                victimDamageReceived = event.get("victimDamageReceived")
+                if victimDamageReceived is not None:
+                    for damage in victimDamageReceived:
+                        type = damage.get("type")
+                        if type != "MINION" and type != "TOWER" and type != "MONSTER":
+                            takedownerId = damage.get("participantId")
+                            takedownerName = damage.get("name")
+                            championNames[takedownerId].append(takedownerName)
+    
+    championNames = championNames[1:]
+    # Thank you, RIOT GAMES, for having me create a nameProbabilityVector. Appreciated!
+
+    correctedChampionNames = {
+        "MonkeyKing": "Wukong",
+        "JarvanIV": "Jarvan_IV",
+        "Khazix": "Kha'Zix",
+        "Kaisa": "Kai'Sa",
+        "RekSai": "Rek'Sai",
+        "KogMaw": "Kog'Maw",
+        "Chogath": "Cho'Gath",
+        "Belveth": "Bel'Veth",
+        "Velkoz": "Vel'Koz",
+        "MissFortune": "Miss_Fortune",
+        "TwistedFate": "Twisted_Fate",
+        "Leblanc": "LeBlanc",
+        "LeeSin": "Lee_Sin",
+        "TahmKench": "Tahm_Kench",
+        "XinZhao": "Xin_Zhao",
+        "MasterYi": "Master_Yi",
+        "Dr.Mundo": "Dr._Mundo",
+        "KSante": "K'Sante",
+        "AurelionSol": "Aurelion_Sol",
+        "Nunu&Willump": "Nunu_&_Willump",
+        "RenataGlasc": "Renata_Glasc"
+    }
+    for i in range(10):
+        if not championNames[i]:
+            championNames[i] = "Cappa"
+        else:
+            championNames[i] = max(set(championNames[i]), key=championNames[i].count)
+            championNames[i] = correctedChampionNames.get(championNames[i], championNames[i])
+        
+    return championNames
 
 def getChampionNamesAndKda(frames): 
     #I HATE PICKING THE NAMES SO MUCH
@@ -66,13 +127,18 @@ def getChampionNamesAndKda(frames):
         "RenataGlasc": "Renata_Glasc"
     }
     for i in range(10):
-        championNames[i] = max(set(championNames[i]), key=championNames[i].count)
-        championNames[i] = correctedChampionNames.get(championNames[i], championNames[i])
+        if not championNames[i]:
+            championNames[i] = "Cappa"
+        else:
+            championNames[i] = max(set(championNames[i]), key=championNames[i].count)
+            championNames[i] = correctedChampionNames.get(championNames[i], championNames[i])
         
     championKdas = (championKills[1:], championDeaths[1:], championAssists[1:])
     return (championNames, championKdas)
 
 def writeSkillLevelUps(matchFile):
+    if not os.path.isfile(matchFile):
+        return
     with open(matchFile, 'r') as f:
         data = json.load(f)
         with open("skillLevelUps.txt", 'w') as g:
@@ -90,8 +156,11 @@ def writeSkillLevelUps(matchFile):
         f.close()
 
 def getSkillLevelUps(matchFile):
+    if not os.path.isfile(matchFile):
+        return [[] for _ in range(10)]
     with open(matchFile, 'r') as f:
         data = json.load(f)
+        f.close()
         result = [[] for _ in range(10)]
         frames = data["info"]["frames"]
         for frame in frames:
@@ -99,8 +168,7 @@ def getSkillLevelUps(matchFile):
             for event in events:
                 if event["type"] == "SKILL_LEVEL_UP":
                     result[event["participantId"] - 1].append(event["skillSlot"])
-        f.close()
-        return result        
+        return result
 
 def getTimeOfMatch(match):
     daysOfTheWeek = [
@@ -135,7 +203,13 @@ def getTimeOfMatch(match):
     return result
 
 def getWinningTeam(match):
-    return match.get("info").get("frames")[-1].get("events")[-1].get("winningTeam")
+    return int(match.get("info").get("frames")[-1].get("events")[-1].get("winningTeam") / 100)
+def getWinningTeamFromFile(matchFile):
+    with open(matchFile, 'r') as f:
+        data = json.load(f)
+        f.close()
+        return data.get("info").get("frames")[-1].get("events")[-1].get("winningTeam") / 100
+
 def getPuuids(match):
     participants =  match.get("info").get("participants")
     result = {}
@@ -152,8 +226,8 @@ def getChampionInMatch(index, champions):
 def didIndexWin(index, match):
     winningTeam = getWinningTeam(match)
     print(winningTeam)
-    return index < 5 and winningTeam == 100 or \
-           index > 4 and winningTeam == 200
+    return index < 5 and winningTeam == 1 or \
+           index > 4 and winningTeam == 2
 def didPuuidWin(puuid, match):
     index = getPuuids(match)[puuid] - 1
     return didIndexWin(index, match)

@@ -1,6 +1,12 @@
 import requests
 import json
 import time
+import getMatchData
+import base64
+import io
+import matplotlib.pyplot as plt
+
+gamesFolder = "E:\\licenta\\games"
 
 # api_key = "RGAPI-6977ba4c-8a65-41f1-8766-d94feaf633d9"
 # api_key = "RGAPI-231f39d7-da32-4266-a2fc-9c35f9d534be"
@@ -81,7 +87,15 @@ def getChampionNames(link: str):
 def getMatchTimeline(matchId: str):
     def aux(matchId: str):
         api_url = getMatchTimelineUrl(matchId)
-        return requests.get(api_url).json()
+        try:
+            response = requests.get(api_url).json()
+            if response.get("status_code") != 403:
+                return response
+            return {}
+        except ValueError as ne:
+            with open("E:\\licenta\\exceptions\\exceptions.txt", "a") as f:
+                f.write(str(ne))
+            return {}
     
     sleepingTime = 2
     result = aux(matchId)
@@ -179,9 +193,39 @@ def getDeathsForLastGames(puuid: str, count = 20):
     overallDeaths = {k: v for k, v in sorted(overallDeaths.items(), key=lambda item: item[1])}
     print(overallDeaths)
 def getSummonersWithRank(rank: str, rankDistribution: int, rankQueue = rankQueue, page: int = 1):
-    api_url = f'https://eun1.api.riotgames.com/lol/league-exp/v4/entries/{rankQueue}/{rank}/{romans[rankDistribution]}?page={page}&api_key={api_key}'
-    data = requests.get(api_url).json()
-    
+    def auxPage(rank, rankDistribution, rankQueue, page):
+        api_url = f'https://eun1.api.riotgames.com/lol/league-exp/v4/entries/{rankQueue}/{rank}/{romans[rankDistribution]}?page={page}&api_key={api_key}'
+        data = requests.get(api_url).json()
+        return data
+    def auxPuuid(entry):
+        api_url = f'https://eun1.api.riotgames.com/lol/summoner/v4/summoners/{entry.get('summonerId')}?api_key={api_key}'
+        data = requests.get(api_url).json()
+        return data
+    sleepingTime = 2
+
+    SUMMONERS = auxPage(rank, rankDistribution, rankQueue, page)
+    retries = 0
+    while "status" in SUMMONERS:
+        retries += 1
+        print(SUMMONERS)
+        print(f"[STATUS]: [GETTING SUMMONERS PAGE]: Limit exceeded. Waiting {sleepingTime} seconds ({retries}/{120 // sleepingTime})")
+        time.sleep(sleepingTime)
+        SUMMONERS = auxPage(rank, rankDistribution, rankQueue, page)
+
+    puuids = [summoner["puuid"] for summoner in SUMMONERS]
+    # for summoner in SUMMONERS:
+    #     data = auxPuuid(summoner)
+    #     retries = 0
+    #     while "status" in data:
+    #         retries += 1
+    #         print(f"[STATUS]: [GETTING PUUID]: Limit exceeded. Waiting {sleepingTime} seconds ({retries}/{120 // sleepingTime})")
+    #         time.sleep(sleepingTime)
+    #         data = auxPuuid(summoner)
+    #     puuid = data.get("puuid")
+    #     puuids.append(puuid)
+
+    return puuids
+
     if count > len(data):
         count = len(data)
 
@@ -238,7 +282,30 @@ def insertMatchesIntoFiles():
 
         outputFile.write(']')
 
+def generate2GoldPlot(player):
+    data = getMatchData.getGoldPerMinuteData(player, "E:\\licenta\\games\\Match_EUN1_3682989051.json")
+    dataPlayer = data[0]
+    dataEnemy = data[1]
+    fig, ax = plt.subplots()
+    fig.patch.set_facecolor('#181864')
+    ax.set_facecolor('#181864')
+    ax.plot(dataPlayer[0], dataPlayer[1], label="Selected player")
+    ax.plot(dataEnemy[0], dataEnemy[1], c='r', label="Enemy laner")
+    ax.set_xlabel('Time (min)')
+    ax.set_ylabel('Total Gold')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+    ax.tick_params(colors="white")
+    ax.legend()
+    ax.grid()
+    ax.set_title("Player Gold", color="white")
 
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png")
+    buf.seek(0)
+    image_base64 = base64.b64encode(buf.read()).decode("utf-8")
+
+    return image_base64
 
 
 

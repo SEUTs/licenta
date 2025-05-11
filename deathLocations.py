@@ -3,11 +3,10 @@ import json
 from matplotlib import pyplot as plt
 import math
 
-outputDirectory = "output"
 # api_key = "RGAPI-7d5cc397-1c5f-41dc-ab01-39bf09e0e897"
-api_key = "RGAPI-f10a772f-6eb3-4447-b771-9eae485c9092"
-if 'status' in requests.get(f'https://europe.api.riotgames.com/lol/match/v5/matches/50124?api_key={api_key}').json():
-    raise Exception("INVALID API KEY")
+# api_key = "RGAPI-f10a772f-6eb3-4447-b771-9eae485c9092"
+# if 'status' in requests.get(f'https://europe.api.riotgames.com/lol/match/v5/matches/50124?api_key={api_key}').json():
+#     raise Exception("INVALID API KEY")
 
 def getPuuidUrl(gameName: str, tagLine: str):
     return f'https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}?api_key={api_key}'
@@ -17,48 +16,17 @@ def getPuuid(gameName: str, tagLine: str):
     print(result)
     return result.get("puuid")
 
-myPuuid = '0eVFsOl4yyzV538TUwDUo9qLISJ4fKosKDlpi0f8M_NoXluWsVF1hk-YSt21YjgV2C3GPXfjV1lwfw'
-myPuuid = getPuuid("pumnal", "0015")
-print(myPuuid)
+# myPuuid = '0eVFsOl4yyzV538TUwDUo9qLISJ4fKosKDlpi0f8M_NoXluWsVF1hk-YSt21YjgV2C3GPXfjV1lwfw'
+# myPuuid = getPuuid("pumnal", "0015")
+# print(myPuuid)
 
 
-img = plt.imread("minimapDeaths.png")
-plt.figure(figsize=(11, 5))
 
 # input_file = open (f'{outputDirectory}/matchHistory.json', 'r')
 # json_array = json.load(input_file)
 # input_file.close()
-input_file2 = open (f'{outputDirectory}/matchHistoryfergus123.json', 'r')
-json_array = json.load(input_file2)
-input_file2.close()
 
 # print(len(json_array), len(json_array2))
-
-WestJungle = ((1680, 4050, 6500, 1900), (5700, 5000, 7367, 11550))
-NorthJungle = ((7300, 10000, 9250, 3200), (8140, 10750, 13400, 13100))
-SouthJungle = ((4900, 7443, 11650, 5700), (4300, 6800, 2300, 1700))
-EastJungle = ((12550, 13100, 10750, 8257), (3150, 9400, 10050, 7600))
-
-NWRiver = ((1900, 6500, 7300, 3200), (11550, 7367, 8140, 13100))
-SERiver = ((7443, 11650, 12550, 8257), (6800, 2300, 3150, 7600))
-
-BlueTopLane = ((1680, 0, 0, 2550), (5700, 5700, 15000, 12325))
-BlueMidLane = ((7850, 6900, 4050, 4900), (7200, 7754, 5000, 4300))
-BlueBotLane = ((5700, 5700, 14800, 12100), (1700, 0, 0, 2725))
-
-RedTopLane = ((9250, 9250, 0, 2550), (13400, 15000, 15000, 12325))
-RedMidLane = ((7850, 6900, 10000, 10750), (7200, 7754, 10750, 10050))
-RedBotLane = ((13100, 14800, 14800, 12100), (9400, 9400, 0, 2725))
-
-regions = (WestJungle, SouthJungle, EastJungle, NorthJungle,
-           NWRiver, SERiver, 
-           BlueTopLane, BlueMidLane, BlueBotLane,
-           RedTopLane, RedMidLane, RedBotLane)
-regionNames = ("Blue Topside Jungle", "Blue Botside Jungle", "Red Botside Jungle", "Red Topside Jungle",
-               "Topside River", "Botside River",
-               "Blue Toplane", "Blue Midlane", "Blue Botlane",
-               "Red Toplane", "Red Midlane", "Red Botlane",
-               "Blue Base", "Red Base")
 
 def updateDeathLocations(deathLocations, deathCoords):
     for index in range(len(deathCoords[0])):
@@ -91,25 +59,11 @@ def findRegion(point):
         return "Blue Base"
     else:
         return "Red Base"
-deathLocations = {
-    "Blue Base": 0,
-    "Blue Toplane": 0,
-    "Blue Midlane": 0,
-    "Blue Botlane": 0,
-    "Blue Topside Jungle": 0,
-    "Blue Botside Jungle": 0,
-    "Topside River": 0,
-    "Botside River": 0,
-    "Red Base": 0,
-    "Red Toplane": 0,
-    "Red Midlane": 0,
-    "Red Botlane": 0,
-    "Red Topside Jungle": 0,
-    "Red Botside Jungle": 0
-}
+
+
 def drawGoldLines(times, minions, playerTeam, playerId): 
-    plt.subplot(1, 2, 2)
-    plt.title(f'CS in game {json_item_index + 1}')
+    plt.clf()
+    plt.title(f'CS in game {1}')
     ax = plt.gca()
     ax.set_facecolor("#121212")
     plt.grid(color="#40404080")
@@ -183,12 +137,12 @@ def getKDAstats(item):
         "assistCoords": assistCoords
     }
     return result
-def getPlayerIdAndTeam(item):
+def getPlayerIdAndTeam(puuid, data):
     playerTeam = 0
     playerId = 0
-    participants = item.get("metadata").get("participants")
+    participants = data.get("metadata").get("participants")
     for index in range(len(participants)):
-        if participants[index] == myPuuid:
+        if participants[index] == puuid:
             playerId = index
             if playerId > 5:
                 playerTeam = 1
@@ -196,8 +150,8 @@ def getPlayerIdAndTeam(item):
         
     return (playerId, playerTeam)
 def drawDeathPointsPlot(deaths, playerTeam, playerId):  
-    plt.subplot(1, 2, 1)
-    plt.title(f'Deaths in game {json_item_index + 1} ({teamPositions[playerId % 5]} for {teamColor[playerTeam]} Team)')
+    plt.clf()
+    plt.title(f'Deaths in game {1} ({teamPositions[playerId % 5]} for {teamColor[playerTeam]} Team)')
     plt.imshow(img, extent=[0, 14800, 0, 15000], aspect='auto')
     plt.axis('off')
 
@@ -265,32 +219,51 @@ def drawKDAPlot(kdaStatsArray):
     plt.plot(myRange, kdaRatios, linewidth=2, c="#7070ff")
     plt.legend(["KDA"])
 
+WestJungle = ((1680, 4050, 6500, 1900), (5700, 5000, 7367, 11550))
+NorthJungle = ((7300, 10000, 9250, 3200), (8140, 10750, 13400, 13100))
+SouthJungle = ((4900, 7443, 11650, 5700), (4300, 6800, 2300, 1700))
+EastJungle = ((12550, 13100, 10750, 8257), (3150, 9400, 10050, 7600))
+
+NWRiver = ((1900, 6500, 7300, 3200), (11550, 7367, 8140, 13100))
+SERiver = ((7443, 11650, 12550, 8257), (6800, 2300, 3150, 7600))
+
+BlueTopLane = ((1680, 0, 0, 2550), (5700, 5700, 15000, 12325))
+BlueMidLane = ((7850, 6900, 4050, 4900), (7200, 7754, 5000, 4300))
+BlueBotLane = ((5700, 5700, 14800, 12100), (1700, 0, 0, 2725))
+
+RedTopLane = ((9250, 9250, 0, 2550), (13400, 15000, 15000, 12325))
+RedMidLane = ((7850, 6900, 10000, 10750), (7200, 7754, 10750, 10050))
+RedBotLane = ((13100, 14800, 14800, 12100), (9400, 9400, 0, 2725))
+
+regions = (WestJungle, SouthJungle, EastJungle, NorthJungle,
+           NWRiver, SERiver, 
+           BlueTopLane, BlueMidLane, BlueBotLane,
+           RedTopLane, RedMidLane, RedBotLane)
+regionNames = ("Blue Topside Jungle", "Blue Botside Jungle", "Red Botside Jungle", "Red Topside Jungle",
+               "Topside River", "Botside River",
+               "Blue Toplane", "Blue Midlane", "Blue Botlane",
+               "Red Toplane", "Red Midlane", "Red Botlane",
+               "Blue Base", "Red Base")
+deathLocations = {
+    "Blue Base": 0,
+    "Blue Toplane": 0,
+    "Blue Midlane": 0,
+    "Blue Botlane": 0,
+    "Blue Topside Jungle": 0,
+    "Blue Botside Jungle": 0,
+    "Topside River": 0,
+    "Botside River": 0,
+    "Red Base": 0,
+    "Red Toplane": 0,
+    "Red Midlane": 0,
+    "Red Botlane": 0,
+    "Red Topside Jungle": 0,
+    "Red Botside Jungle": 0
+}
+
 teamPositions = ["Top", "Jungle", "Mid", "Bot", "Support"]
 teamColor = ["Blue", "Red"]
-json_item_index = 0
-kdaStatsArray = []
-for item in json_array:
-    # gettingDeathStats
-    kdaStats = getKDAstats(item)
-    kdaStatsArray.append(kdaStats)
-    (playerId, playerTeam) = getPlayerIdAndTeam(item)
-    if playerId == 0:
-        print("[ERROR]: PLAYER NOT FOUND BY PUUID")
-        break
 
-    playerDeathsCoords = [kdaStats.get("deathCoords")[0][playerId], kdaStats.get("deathCoords")[1][playerId]]
-    updateDeathLocations(deathLocations, playerDeathsCoords)
-
-    # TODO: Add subplot coordinates
-    drawDeathPointsPlot(kdaStats.get("deathCoords"), playerTeam, playerId)
-    drawCreepScorePlot(item)
-    plt.savefig("output/result" + str(json_item_index) + ".png")
-    
-    json_item_index += 1
-    plt.clf()
-    
-drawKDAPlot(kdaStatsArray)
-plt.savefig("output/kdaResult.png")
 
 def dictWithMergedLanes(originalDict: dict):
     returnedDict = {}
@@ -308,12 +281,6 @@ def dictWithMergedLanes(originalDict: dict):
 
     return dict(sorted(returnedDict.items(), key=lambda item: -item[1]))
 
-# print(deathLocations)
-sum = 0
-for i in deathLocations:
-    sum += deathLocations[i]
-    
-displayableDeaths = dictWithMergedLanes(deathLocations)
 def printDeaths(displayableDeaths):
     for i in displayableDeaths:
         print(f'{i}: {displayableDeaths[i]}/{sum} ({round(displayableDeaths[i] * 100 / sum, 2)}%)')
@@ -334,5 +301,44 @@ def plotMapRegionPoints():
     plt.scatter(RedBotLane[0], RedBotLane[1], c='r')
 
 
-
 # print(f'Games analyzed: {len(json_array)}')
+
+if __name__ == "__main__":
+    outputDirectory = "E:\\licenta\\games"
+
+    img = plt.imread("minimapDeaths.png")
+    plt.figure(figsize=(11, 5))
+    kdaStatsArray = []
+
+    input_file2 = open (f'{outputDirectory}/Match_EUN1_3777906190.json', 'r')
+    data = json.load(input_file2)
+    input_file2.close()
+
+    # gettingDeathStats
+    kdaStats = getKDAstats(data)
+    kdaStatsArray.append(kdaStats)
+    playerId = 1
+    playerTeam = 0
+    # (playerId, playerTeam) = getPlayerIdAndTeam(data)
+    # if playerId == 0:
+    #     print("[ERROR]: PLAYER NOT FOUND BY PUUID")
+    #     return
+
+    playerDeathsCoords = [kdaStats.get("deathCoords")[0][playerId], kdaStats.get("deathCoords")[1][playerId]]
+    updateDeathLocations(deathLocations, playerDeathsCoords)
+
+    # TODO: Add subplot coordinates
+    drawDeathPointsPlot(kdaStats.get("deathCoords"), playerTeam, playerId)
+    drawCreepScorePlot(data)
+    plt.savefig("output/result.png")
+    plt.clf()
+        
+    drawKDAPlot(kdaStatsArray)
+    plt.savefig("output/kdaResult.png")
+
+    # print(deathLocations)
+    sum = 0
+    for i in deathLocations:
+        sum += deathLocations[i]
+        
+    displayableDeaths = dictWithMergedLanes(deathLocations)
