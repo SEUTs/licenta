@@ -1,0 +1,182 @@
+<html>
+    <head>
+        <style>
+            #bigTable {
+                background-color: #181864;
+                position: relative;
+                left: 50%;
+                top: 50px;
+                transform: translateX(-50%);
+            }
+            td {
+                width: 150px;
+            }
+            .damageBarContainer {
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                border: solid 2px black;
+                width: min-content;
+            }
+            .damageBar {
+                height: 25px;
+                width: 500px;
+                background-color: black;
+            }
+            .physicalSpan {
+                color: #D1543B;
+            }
+            .magicSpan {
+                color: #2EB4D5;
+            }
+            .trueSpan {
+                color: #DCDDDD;
+            }
+
+            .itemPerMinuteContent {
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                width: min-content;
+            }
+            .championItems {
+                width: 182px;
+                height: 87px;
+                padding: 5px;
+                padding-left: 15px;
+                padding: 20px;
+                background-color: #242486;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 20px;
+                border: gray solid 2px;
+            }
+            .itemImage, .emptyItemSlot {
+                width: 40px;
+                border-radius: 25%;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3); /*0.2 0.19*/
+                height: 40px;
+                background-color: rgb(18, 18, 18);
+                position: relative;
+                display: inline-block;
+            }
+
+            .overlayText {
+                position: fixed;
+                z-index: 2;
+                background-color: rgb(30, 30, 30);
+                display: none;
+                transform: translateX(-50%);
+                width: max-content;
+            }
+            .centered {
+                width: max-content;
+                transform: translate(-50%);
+                left: 50%;
+                position: relative;
+            }
+            .centering {
+                text-align: center;
+            }
+            .padded {
+                padding: 2px;
+            }
+
+            .spacingRow {
+                height: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        {% include 'header.html' %}
+        <table id="bigTable">
+            <tr class="spacingRow"></tr>
+            {% for i in range(deathStats|length) %}
+                <tr>
+                    <td colspan="5" style="width: min-content; text-align: center;">
+                        {% set minute = deathStats[i]["timestamp"] // 1000 // 60 %}
+                        {% set second = deathStats[i]["timestamp"] // 1000 % 60 %}
+                        <center>
+                        {% if second < 10 %}
+                            Death in {{ deathStats[i]["location"] }} at {{ minute }}:0{{ second }}
+                        {% else %}
+                            Death in {{ deathStats[i]["location"] }} at {{ minute }}:{{ second }}
+                        {% endif %}</center>
+                        <br>
+                        {% set p1 = deathStats[i]["victimDamageReceived"]["physicalDamage"] / deathStats[i]["victimDamageReceived"]["totalDamage"] * 100 %}
+                        {% set p2 = p1 + deathStats[i]["victimDamageReceived"]["magicDamage"] / deathStats[i]["victimDamageReceived"]["totalDamage"] * 100 %}
+                        <div class="damageBarContainer">
+                            <div class="damageBar" style="background-image: linear-gradient(90deg, 
+                                #D1543B 0% {{p1-0.2}}%,
+                                black {{p1-0.2}}% {{p1+0.2}}%,
+                                #2EB4D5 {{p1+0.2}}% {{p2-0.2}}%,
+                                black {{p2-0.2}}% {{p2+0.2}}%,
+                                #DCDDDD {{p2+0.2}}% 100%);
+                                ">
+                            </div>
+                        </div><br>
+                        <span class="physicalSpan">{{p1|round(1)}}% Physical Damage</span>, 
+                        <span class="magicSpan">{{(p2-p1)|round(1)}}% Magic Damage</span>, 
+                        <span class="trueSpan">{{(100-p2)|round(1)}}% True Damage</span>
+                    </td>
+                </tr>
+                <tr class="itemsPerMinuteRow">
+                    <td></td>
+                    <td colspan="2">
+                        <div class="itemPerMinuteContent">
+                            <div class="championItemsTitle">Player build at time of death:</div>
+                            <div class="championItems">
+                                {% set deathMinute = deathStats[i]["timestamp"] // 1000 // 60 %}
+                                {% for j in range(4) %}
+                                    {% if itemsPerMinute[deathMinute][j] %}
+                                        <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ itemsPerMinute[deathMinute][j] ~ '.png.webp' }}" id="[{{j}}][{{deathMinute}}]">
+                                        <div class="overlayText" id="text_[{{j}}][{{deathMinute}}]">{{itemNamesPerMinute[deathMinute][j]}}</div>
+                                    {% else %}
+                                        <div class="emptyItemSlot"></div>
+                                    {% endif %}
+                                {% endfor %}
+                                <br>
+                                {% for j in range(3) %}
+                                    {% if itemsPerMinute[deathMinute][j+4] %}
+                                        <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ itemsPerMinute[deathMinute][j+4] ~ '.png.webp' }}" id="[{{j+4}}][{{deathMinute}}]">
+                                        <div class="overlayText" id="text_[{{j+4}}][{{deathMinute}}]">{{itemNamesPerMinute[deathMinute][j+4]}}</div>
+                                    {% else %}
+                                        <div class="emptyItemSlot"></div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 0px;">
+                        <div>
+                            <div class="centering">
+                                Defensive stats
+                            </div><br>
+                            <div class="centering padded">
+                                {{ deathStats[i]["victimHP"] }}
+                                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Health_icon.png/15px-Health_icon.png?f8c57">
+                            </div>
+                            <div class="centering padded">
+                                {{ deathStats[i]["victimArmor"] }}
+                                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Armor_icon.png/15px-Armor_icon.png?393ad">
+                            </div>
+                            <div class="centering padded">
+                                {{ deathStats[i]["victimMagicResist"] }}
+                                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Magic_resistance_icon.png/15px-Magic_resistance_icon.png?86931">
+                            </div>
+                            <div class="centering padded">
+                                {{ deathStats[i]["victimOmnivamp"] }}
+                                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Life_steal_icon.png/15px-Life_steal_icon.png?e8287">
+                                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Omnivamp_icon.png/15px-Omnivamp_icon.png?ccdd9">
+                            </div>   
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr class="spacingRow"></tr>
+                <tr class="spacingRow"></tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

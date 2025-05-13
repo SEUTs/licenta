@@ -49,7 +49,7 @@ def getChampionNames(frames):
         "TahmKench": "Tahm_Kench",
         "XinZhao": "Xin_Zhao",
         "MasterYi": "Master_Yi",
-        "Dr.Mundo": "Dr._Mundo",
+        "DrMundo": "Dr._Mundo",
         "KSante": "K'Sante",
         "AurelionSol": "Aurelion_Sol",
         "Nunu&Willump": "Nunu_&_Willump",
@@ -120,7 +120,7 @@ def getChampionNamesAndKda(frames):
         "TahmKench": "Tahm_Kench",
         "XinZhao": "Xin_Zhao",
         "MasterYi": "Master_Yi",
-        "Dr.Mundo": "Dr._Mundo",
+        "DrMundo": "Dr._Mundo",
         "KSante": "K'Sante",
         "AurelionSol": "Aurelion_Sol",
         "Nunu&Willump": "Nunu_&_Willump",
@@ -132,6 +132,7 @@ def getChampionNamesAndKda(frames):
         else:
             championNames[i] = max(set(championNames[i]), key=championNames[i].count)
             championNames[i] = correctedChampionNames.get(championNames[i], championNames[i])
+    print(championNames)
         
     championKdas = (championKills[1:], championDeaths[1:], championAssists[1:])
     return (championNames, championKdas)
@@ -225,7 +226,7 @@ def getChampionInMatch(index, champions):
 
 def didIndexWin(index, match):
     winningTeam = getWinningTeam(match)
-    print(winningTeam)
+    # print(winningTeam)
     return index < 5 and winningTeam == 1 or \
            index > 4 and winningTeam == 2
 def didPuuidWin(puuid, match):

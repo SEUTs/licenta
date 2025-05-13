@@ -11,9 +11,16 @@
         position: relative;
         left: 50%;
     }
-    #bigTable tr td {
+    .flexy {
+        display: flex;
+    }
+    td {
+        width: 150px;
+    }
+    .bigTableCell {
         height: 140px;
         padding: 20px;
+        width: 100px;
     }
     p, h2 {
         text-align: center;
@@ -52,6 +59,7 @@
         height: 87px;
         padding: 5px;
         padding-left: 15px;
+        padding: 20px;
         background-color: #242486;
         position: relative;
         left: 50%;
@@ -79,7 +87,7 @@
     }
 
     .spacingRow {
-        height: 100px;
+        height: 50px;
     }
 
     .recommendedItems {
@@ -88,14 +96,22 @@
         transform: translateX(-50%);
     }
     .recommendedItemIcon,
-    .recommendedItemName {
+    .recommendedItemName, .simpleTD {
         padding-bottom: 0px !important ;
         height: auto !important ;
+    }
+    .simpleTD {
+        padding: 0px !important;
+        padding-left: 10px !important;
+        width: auto !important;
     }
     .recommendedItemIcon img {
         position: relative;
         transform: translateX(-50%);
         left: 50%;
+    }
+    .recommendedItemName {
+        text-align: center;
     }
     .physicalSpan {
         color: #D1543B;
@@ -113,10 +129,23 @@
         transform: translateX(-50%);
         width: min-content;
     }
+    .centered {
+        width: max-content;
+        transform: translate(-50%);
+        left: 50%;
+        position: relative;
+    }
+    .centering {
+        text-align: center;
+    }
+    .padded {
+        padding: 2px;
+    }
 </style>
 
 {% include 'header.html' %}
 <table id="bigTable">
+    <tr class="spacingRow"></tr>
     <tr>
         <td>
             <img id="championImage" src="{{'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ championName ~ '_OriginalSquare.png/70px- ~ championName ~_OriginalSquare.png?54659.png.webp' }}">
@@ -155,98 +184,124 @@
             {% endif %}
         </td>
     </tr>
+    <tr class="spacingRow"></tr>
     <tr>
-        <td class="championItems">
-            {% for i in range(4) %}
-                {% if championBuild[i] %}
-                    <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ championBuild[i] ~ '.png.webp' }}" id="[{{i}}]">
-                    <div class="overlayText" id="text_[{{i}}]">{{itemNames[i]}}</div>
-                {% else %}
-                    <div class="emptyItemSlot"></div>
-                {% endif %}
-            {% endfor %}
-            <br>
-            {% for i in range(3) %}
-                {% if championBuild[i+4] %}
-                    <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ championBuild[i+4] ~ '.png.webp' }}" id="[{{i+4}}]">
-                    <div class="overlayText" id="text_[{{i+4}}]">{{itemNames[i+4]}}</div>
-                {% else %}
-                    <div class="emptyItemSlot"></div>
-                {% endif %}
-            {% endfor %}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <h2>Max Order</h2>
-            <p>{{ order }}</p>
-        </td>
-        <td colspan="4">
-            <table id="skillLevelUpTable">
+        <td></td>
+        <td colspan='2'>
+            <div class="championItems">
                 {% for i in range(4) %}
-                    <tr>
-                        {% if i == 0 %}
-                            <td>Q</td>
-                            {% for j in range(championSkillLevels|length)%}
-                                {% if i+1 == (championSkillLevels[j])|int %}
-                                    <td class="selected"></td>
-                                {% else %}
-                                    <td class="notSelected"></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% elif i == 1 %}
-                            <td>W</td>
-                            {% for j in range(championSkillLevels|length)%}
-                                {% if i+1 == (championSkillLevels[j])|int %}
-                                    <td class="selected"></td>
-                                {% else %}
-                                    <td class="notSelected"></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% elif i == 2 %}
-                            <td>E</td>
-                            {% for j in range(championSkillLevels|length)%}
-                                {% if i+1 == (championSkillLevels[j])|int %}
-                                    <td class="selected"></td>
-                                {% else %}
-                                    <td class="notSelected"></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            <td>R</td>
-                            {% for j in range(championSkillLevels|length)%}
-                                {% if i+1 == (championSkillLevels[j])|int %}
-                                    <td class="selected"></td>
-                                {% else %}
-                                    <td class="notSelected"></td>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                    </tr>
+                    {% if championBuild[i] %}
+                        <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ championBuild[i] ~ '.png.webp' }}" id="[{{i}}]">
+                        <div class="overlayText" id="text_[{{i}}]">{{itemNames[i]}}</div>
+                    {% else %}
+                        <div class="emptyItemSlot"></div>
+                    {% endif %}
                 {% endfor %}
-                <tr>
-                    <td></td>
-                    {% for j in range(1, championSkillLevels|length + 1)%}
-                        <td>
-                            {{ j }}
-                        </td>
-                    {% endfor %}
-                </tr>
-            </table>
+                <br>
+                {% for i in range(3) %}
+                    {% if championBuild[i+4] %}
+                        <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ championBuild[i+4] ~ '.png.webp' }}" id="[{{i+4}}]">
+                        <div class="overlayText" id="text_[{{i+4}}]">{{itemNames[i+4]}}</div>
+                    {% else %}
+                        <div class="emptyItemSlot"></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </td>
+        <td style="text-align: center;">
+            <h2>Stats from items</h2>
+            {% set ns = namespace(spacing = 1) %}
+            {% for stat in buildStats %}
+                {{buildStats[stat]}} <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/{{stat}}_icon.png/15px-ad.png">
+                {% set ns.spacing = ns.spacing * -1 %}
+                {% if ns.spacing == 1 %}
+                    <br>
+                {% endif %}
+            {% endfor %}
+        </td>
+        <td></td>
+    </tr>
+    <tr class="spacingRow"></tr>
+    <tr>
+        <td colspan="5">
+            <div class="flexy centered">
+                <div>
+                    <h2>Max Order</h2>
+                    <p>{{ order }}</p>
+                </div>
+                <div>
+                    <table id="skillLevelUpTable">
+                        {% for i in range(4) %}
+                            <tr>
+                                {% if i == 0 %}
+                                    <td>Q</td>
+                                    {% for j in range(championSkillLevels|length)%}
+                                        {% if i+1 == (championSkillLevels[j])|int %}
+                                            <td class="selected"></td>
+                                        {% else %}
+                                            <td class="notSelected"></td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% elif i == 1 %}
+                                    <td>W</td>
+                                    {% for j in range(championSkillLevels|length)%}
+                                        {% if i+1 == (championSkillLevels[j])|int %}
+                                            <td class="selected"></td>
+                                        {% else %}
+                                            <td class="notSelected"></td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% elif i == 2 %}
+                                    <td>E</td>
+                                    {% for j in range(championSkillLevels|length)%}
+                                        {% if i+1 == (championSkillLevels[j])|int %}
+                                            <td class="selected"></td>
+                                        {% else %}
+                                            <td class="notSelected"></td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <td>R</td>
+                                    {% for j in range(championSkillLevels|length)%}
+                                        {% if i+1 == (championSkillLevels[j])|int %}
+                                            <td class="selected"></td>
+                                        {% else %}
+                                            <td class="notSelected"></td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td></td>
+                            {% for j in range(1, championSkillLevels|length + 1)%}
+                                <td>
+                                    {{ j }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                </td>
+            </div>
         </td>
     </tr>
     <tr>
         <td colspan="5">
-            <img class="plot" src="data:image/png;base64,{{ goldPlot }}" alt="Plot Image">
+            <img class="plot" src="data:image/png;base64,{{ teamGoldPlot }}" alt="Plot Image">
         </td>
     </tr>
     <tr>
-        <td style="width: min-content; text-align: center;" colspan="5">
-            {% for stat in buildStats %}
-                {{stat}}: {{buildStats[stat]}}<br>
-            {% endfor %}
+        <td colspan="5" style="text-align: center;">
+            {{ gameEvolution[0] }} <br> {{ gameEvolution[1] }}
         </td>
     </tr>
+    <tr>
+        <td colspan="5">
+            <img class="plot" src="data:image/png;base64,{{ playerGoldPlot }}" alt="Plot Image">
+        </td>
+    </tr>
+    <tr class="spacingRow"></tr>
+    <tr class="spacingRow"></tr>
     <tr>
         <td colspan="5" style="text-align: center;">
             Damage received during the match<br><br>
@@ -268,6 +323,7 @@
             <span class="trueSpan">{{TDpercent}}% True Damage</span>
         </td>
     </tr>
+    <tr class="spacingRow"></tr>
     
     {% set shouldBuyAntiheal = False %}
     {% set ns = namespace(omnivamp = 0) %}
@@ -276,10 +332,12 @@
     {% endfor %}
     {{ ns.omnivamp }}
     {% if ns.omnivamp > 20 %}
+        <tr><td colspan="5"><h1 class="centered">Recommendations:</h1></td></tr>
         <tr>
             <td colspan="5" style="text-align: center;">
-                The enemies have a combined value of {{ ns.omnivamp }} omnivamp. <br>
-                Buying Antiheal is recommended. <br>
+                The enemy team has a combined value of {{ ns.omnivamp }}% omnivamp. <br>
+                As a result, they have increased healing and are tougher to fight. <br>
+                Buying <strong>Antiheal</strong> is recommended. <br><br>
                 <table class="recommendedItems">
                     <tr>
                         <td class="recommendedItemIcon"><img src='https://cdn.darkintaqt.com/lol/c-assets/items/6609.png.webp'></td>
@@ -296,70 +354,23 @@
         </tr>
     {% endif %}
 
-    <tr>
+    <!-- <tr>
         <td colspan="5" style="text-align: center;">
             PLAYER BUILDS MAGIC RESIST EVEN THOUGH ENEMY DEALT MAINLY PHYSICAL DAMAGE
         </td>
+    </tr> -->
+    <tr class="spacingRow"></tr>
+    <tr class="spacingRow"></tr>
+    <tr>
+        <td colspan="5" style="text-align: center;">
+            <a id="deathsLink" href="{{url_for('deathDetails')}}?matchId={{ matchId }}&participant={{ participantId }}">
+                <h2>See player deaths details</h2>
+            </a>
+        </td>
     </tr>
-
-    {% for i in range(deathStats|length) %}
-        <tr>
-            <td colspan="5" style="width: min-content; text-align: center;">
-                {% set minute = deathStats[i]["timestamp"] // 1000 // 60 %}
-                {% set second = deathStats[i]["timestamp"] // 1000 % 60 %}
-                <center>
-                {% if second < 10 %}
-                    Death in {{ deathStats[i]["location"] }} at {{ minute }}:0{{ second }}
-                {% else %}
-                    Death in {{ deathStats[i]["location"] }} at {{ minute }}:{{ second }}
-                {% endif %}</center>
-                <br>
-                {% set p1 = deathStats[i]["victimDamageReceived"]["physicalDamage"] / deathStats[i]["victimDamageReceived"]["totalDamage"] * 100 %}
-                {% set p2 = p1 + deathStats[i]["victimDamageReceived"]["magicDamage"] / deathStats[i]["victimDamageReceived"]["totalDamage"] * 100 %}
-                <div class="damageBarContainer">
-                    <div class="damageBar" style="background-image: linear-gradient(90deg, 
-                        #D1543B 0% {{p1-0.2}}%,
-                        black {{p1-0.2}}% {{p1+0.2}}%,
-                        #2EB4D5 {{p1+0.2}}% {{p2-0.2}}%,
-                        black {{p2-0.2}}% {{p2+0.2}}%,
-                        #DCDDDD {{p2+0.2}}% 100%);
-                        ">
-                    </div>
-                </div><br>
-                <span class="physicalSpan">{{p1|round(1)}}% Physical Damage</span>, 
-                <span class="magicSpan">{{(p2-p1)|round(1)}}% Magic Damage</span>, 
-                <span class="trueSpan">{{(100-p2)|round(1)}}% True Damage</span>
-            </td>
-        </tr>
-        <tr class="itemsPerMinuteRow">
-            <td colspan="5">
-                <div class="itemPerMinuteContent">
-                    <div class="championItemsTitle">Player build at time of death:</div>
-                    <div class="championItems">
-                        {% set deathMinute = deathStats[i]["timestamp"] // 1000 // 60 %}
-                        {% for j in range(4) %}
-                            {% if itemsPerMinute[deathMinute][j] %}
-                                <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ itemsPerMinute[deathMinute][j] ~ '.png.webp' }}" id="[{{j}}]">
-                                <div class="overlayText" id="text_[{{j}}]">{{itemNames[j]}}</div>
-                            {% else %}
-                                <div class="emptyItemSlot"></div>
-                            {% endif %}
-                        {% endfor %}
-                        <br>
-                        {% for j in range(3) %}
-                            {% if itemsPerMinute[deathMinute][j+4] %}
-                                <img class="itemImage" src="{{'https://cdn.darkintaqt.com/lol/c-assets/items/' ~ itemsPerMinute[deathMinute][j+4] ~ '.png.webp' }}" id="[{{j}}]">
-                                <div class="overlayText" id="text_[{{j+4}}]">{{itemNames[j+4]}}</div>
-                            {% else %}
-                                <div class="emptyItemSlot"></div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr class="spacingRow"></tr>
-    {% endfor %}
+    
+    <tr class="spacingRow"></tr>
+    <tr class="spacingRow"></tr>
     
 </table>
 <script>

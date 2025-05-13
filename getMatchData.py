@@ -179,8 +179,17 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
 
     wards = [3330, 3340, 3348, 3363, 3364] #fiddle stealth arena farsight oracle
     runeItems = [2010, 2150, 2151, 2152, 2422] #cookies, rune elixirs and magical boots
-    otherItems = [3865, 3866, 3867, 3513] #support items 1,2,3 and eye of herald
+    otherItems = [3865, 3866, 3867, 3513, 3400, 3599, 3600] #support items 1,2,3, eye of herald, your cut and kalista's spears (2 of them for some reason)
     elixirs = [2138, 2139, 2140] # elixirs
+    bootsEvolutionsToRoot = {
+        3172: 3006, # Gunmetal Greaves => Berzerker's Greaves
+        3174: 3047, # Armored Advance => Plated Steelcaps / Ninja Tabi
+        3170: 3009, # Swiftmarch => Boots of Swiftness
+        3175: 3020, # Spellslinger's Shoes => Sorcerer's Shoes
+        3171: 3158, # Crimson Lucidity => Ionian Boots of Lucidity
+        3013: 3010, # Synchronized Souls => Symbiotic Soles
+        3173: 3111  # Chainlaced Crushers => Mercury's Treads
+    }
     matchId = ""
     with open(matchFile, 'r') as f:
         timestampsOfPurchases = set()
@@ -217,7 +226,7 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
                     elif type[5] == "D": #ITEM_DESTROYED
                         if event["itemId"] in jungleItems and event["itemId"] in builds[event["participantId"] - 1]:
                             builds[event["participantId"] - 1].remove(event["itemId"])
-                        if event["itemId"] in healthPotAndControl:
+                        if event["itemId"] in healthPotAndControl and event["itemId"] in builds[event["participantId"] - 1]:
                             builds[event["participantId"] - 1].remove(event["itemId"])
                         elif event["itemId"] == 3003: #Archangel's Staff
                             builds[event["participantId"] - 1].remove(event["itemId"])
@@ -238,10 +247,15 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
                             if event["timestamp"] in timestampsOfPurchases:
                         # elif event["itemId"] in builds[event["participantId"] - 1]:
                                 # print(event["itemId"], builds[event["participantId"] - 1], event["timestamp"])
-                                builds[event["participantId"] - 1].remove(event["itemId"])
+                                # print(event["itemId"])
+                                if event["itemId"] in bootsEvolutionsToRoot and event["itemId"] not in builds[event["participantId"] - 1]:
+                                    builds[event["participantId"] - 1].remove(bootsEvolutionsToRoot[event["itemId"]])
+                                else:
+                                    builds[event["participantId"] - 1].remove(event["itemId"])
+
                                 destroyedFor.append([event["itemId"], event["timestamp"], event['participantId']])
 
-                    elif type[5] == "S": #ITEM_SOLD
+                    elif type[5] == "S" and event["itemId"] not in runeItems and event["itemId"] not in otherItems: #ITEM_SOLD
                         pass
                         # print(event["timestamp"], items[str(event['itemId'])], event['itemId'], builds[event["participantId"] - 1])
                         builds[event["participantId"] - 1].remove(event["itemId"])
@@ -334,9 +348,23 @@ def getMatchPreview(puuid, matchFile):
         matchId = processed[4]
 
         result = (champion, details, kda, build, matchId)
-        print(result)
+        # print(result)
         return result
     
+def getTeamGoldDifference(matchFile, playerTeam):
+    data = getGoldPerMinuteForAll(matchFile)
+    teamGoldDifferences = []
+    teamMultiplier = 1 if playerTeam == 0 else -1
+    for minute in data[0]:
+        difference = 0
+        for i in range(1, 6):
+            # print(data[1][str(i)][minute])
+            difference += data[1][str(i)][minute] * teamMultiplier
+        for i in range(6, 11):
+            difference -= data[1][str(i)][minute] * teamMultiplier
+        teamGoldDifferences.append(difference)
+    return teamGoldDifferences
+
 def getGoldPerMinuteData(playerIndex, matchFile):
     enemyIndex = str(playerIndex + 5 if playerIndex < 6 else playerIndex - 5)
     playerIndex = str(playerIndex)
@@ -355,11 +383,37 @@ def getGoldPerMinuteData(playerIndex, matchFile):
         goldDifferencePlayer = lastFrameDataPlayer["totalGold"] - goldData[0][-1]
         goldDifferenceEnemy = lastFrameDataEnemy["totalGold"] - goldData[1][-1]
         multiplier = 60000 / (frames[-1]["timestamp"] % 60000)
-        goldData[0].append(goldData[0][-1] + goldDifferencePlayer * multiplier)
-        goldData[1].append(goldData[1][-1] + goldDifferenceEnemy * multiplier)
+        goldData[0].append(int(goldData[0][-1] + goldDifferencePlayer * multiplier))
+        goldData[1].append(int(goldData[1][-1] + goldDifferenceEnemy * multiplier))
     return (([range(len(goldData[0])), goldData[0]], [range(len(goldData[1])), goldData[1]]))
 
-def getDeathStats(matchFile):
+
+def getGoldPerMinuteForAll(matchFile="E:\\licenta\\games\\Match_EUN1_3682989051.json"):
+    data = ""
+    # print("\n\n\n\n" + str(matchFile) + "\n\n\n\n")
+    with open(matchFile, 'r') as f:
+        data = json.load(f)
+        f.close()
+
+    frames = data["info"]["frames"]
+    goldData = [[] for _ in range(10)]
+    for frame in frames[:-1]:
+        participantFrames = frame["participantFrames"]
+        for player in participantFrames:
+            goldData[int(player)-1].append(participantFrames[player]["totalGold"])
+
+    multiplier = 60000 / (frames[-1]["timestamp"] % 60000)
+    for i in range(10):
+        lastFrameDataPlayer = frames[-1]["participantFrames"][str(i+1)]
+        goldDifferencePlayer = lastFrameDataPlayer["totalGold"] - goldData[i][-1]
+        goldData[i].append(int(goldData[i][-1] + goldDifferencePlayer * multiplier))
+
+    result = {}    
+    for i in range(10):
+        result.update({str(i+1): goldData[i]})
+    return ((range(len(goldData[0])), result))
+
+def getDeathStats(matchFile="E:\\licenta\\games\\Match_EUN1_3682989051.json"):
     deaths = {}
     for i in range(1, 11):
         deaths.update({i: []})
@@ -412,6 +466,11 @@ def getDeathStats(matchFile):
 
                     death = {
                         "victimHP": HPs[event["victimId"]],
+                        "victimArmor": championStats[str(event["victimId"])]["championStats"]["armor"],
+                        "victimMagicResist": championStats[str(event["victimId"])]["championStats"]["magicResist"],
+                        "victimOmnivamp": championStats[str(event["victimId"])]["championStats"]["lifesteal"]
+                                        + championStats[str(event["victimId"])]["championStats"]["omnivamp"]
+                                        + championStats[str(event["victimId"])]["championStats"]["physicalVamp"],
                         "victimDamageReceived": {
                             "totalDamage": totalDamageReceived[0],
                             "physicalDamage": totalDamageReceived[1],
@@ -461,6 +520,6 @@ def getDamageStatsOfAll(matchFile, playerRange):
                 }
                 stats.update({int(champion): processedStats})
             minuteStats.append(stats)
-    for stats in minuteStats:
-        print(stats[int(playerRange[0])])
+    # for stats in minuteStats:
+    #     print(stats[int(playerRange[0])])
     return minuteStats

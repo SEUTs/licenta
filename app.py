@@ -8,14 +8,11 @@ import json
 import matplotlib.pyplot as plt
 import io
 import base64
+import credentialsValidity
+import processingData
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Change this!
-
-# Simulated user database
-users = {
-    "saseunticnit#seuts": generate_password_hash("gelatina2002")
-}
 
 # Route for the main page with buttons
 @app.route('/')
@@ -38,20 +35,49 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = (request.form['username'] + "#" + request.form['riotTag']).lower()
+        username = request.form['username']
+        tag = request.form['riotTag']
+        usernameTag = (username + "#" + tag).lower()
         password = request.form['password']
         
-        user_password_hash = users.get(username)
+        users = {}
+        with open("users.json", 'r') as f:
+            users = json.load(f)
+            f.close()
+
+        user_password_hash = users.get(usernameTag)
         if user_password_hash is None:
-            users.update({username: generate_password_hash(password)})
-            print(users)
-            session['username'] = username
-            flash('Register successful!')
-            return redirect(url_for('dashboard'))
+            if credentialsValidity.check(username, tag) == False:
+                flash("Account does not exist")
+                return render_template('register.html')
+            
+            users.update({usernameTag: generate_password_hash(password)})
+            users_json = json.dumps(users, indent=4)
+            with open("users.json", "w") as f:
+                f.write(users_json)
+                f.close()
+
+            puuids = {}
+            with open("puuids.json", 'r') as f:
+                puuids = json.load(f)
+                f.close()
+
+            puuids.update({usernameTag: licenta.getPuuid(username, tag)})
+            puuids_json = json.dumps(puuids, indent=4)
+            with open("puuids.json", "w") as f:
+                f.write(puuids_json)
+                f.close()
+                
+            session['username'] = usernameTag
+            return redirect(url_for('index'))
         else:
             flash('Invalid username or password')
 
     return render_template('register.html')
+
+@app.route('/needToLogin')
+def needToLogin():
+    return render_template('needToLogin.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -59,13 +85,19 @@ def login():
         username = (request.form['username'] + "#" + request.form['riotTag']).lower()
         password = request.form['password']
         
+        users = {}
+        with open("users.json", 'r') as f:
+            users = json.load(f)
+            f.close()
+
         user_password_hash = users.get(username)
         if user_password_hash and check_password_hash(user_password_hash, password):
             session['username'] = username
-            flash('Login successful!')
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('index'))
+        elif user_password_hash:
+            flash('Invalid password')
         else:
-            flash('Invalid username or password')
+            flash('Invalid user')
 
     return render_template('login.html')
 
@@ -87,13 +119,16 @@ def logout():
 
 @app.route('/lastGames')
 def lastGames():
+    if 'username' not in session:
+        return render_template('needToLogin.html')
     with open("puuids.json", 'r') as f:
         puuids = json.load(f)
+        f.close()
         credentials = session['username']
         puuid = puuids.get(credentials)
-        print(puuid)
+        print("Getting matches for " + puuid)
         if puuid is None:
-            return render_template('index.html')
+            return render_template('index.html', errorMessage="Your account doesn't exist.<br>Try registering again!")
         ids = licenta.GetMatchIds(puuid, 0, 20)
         previews = []
         for id in ids:
@@ -103,6 +138,8 @@ def lastGames():
 
 @app.route('/searchForMatch', methods=['GET'])
 def searchForMatch():
+    if 'username' not in session:
+        return render_template('needToLogin.html')
     return render_template('searchForMatch.html')
 
 @app.route('/match', methods=['GET'])
@@ -139,7 +176,16 @@ def championDetails():
         f.close()
         for itemName in itemNames:
             for statName in stats[itemName]:
-                buildStats.update({statName: buildStats.get(statName, 0) + stats[itemName][statName]})
+                if statName == "ability haste":
+                    replaced = "Cooldown_reduction"
+                elif statName == "lethality":
+                    replaced = "Armor_penetration"
+                elif statName[:4] == "base":
+                    replaced = statName[5:]
+                    replaced = replaced[0].upper() + replaced.replace(' ', '_')[1:]
+                else:
+                    replaced = statName[0].upper() + statName.replace(' ', '_')[1:]
+                buildStats.update({replaced: buildStats.get(replaced, 0) + stats[itemName][statName]})
     
     winrates = []
     with open("sample.json", 'r') as f:
@@ -182,11 +228,10 @@ def championDetails():
     if order:
         order = order[:-3]
 
-    goldPlot = licenta.generate2GoldPlot(participantId + 1)
-    
-    deathStats = getMatchData.getDeathStats(matchFile)[participantId + 1]
-
-    itemsPerMinute, itemNamesPerMinute = getMatchData.getPlayerBuildPerMinute(participantId + 1, matchFile)
+    playerGoldPlot = licenta.generate2GoldPlot(participantId + 1, matchFile)
+    teamGoldDifferences = getMatchData.getTeamGoldDifference(matchFile, 0 if participantId < 5 else 1)
+    teamGoldPlot = licenta.generateTeamGoldPlot(matchFile, 0 if participantId < 5 else 1)
+    gameEvolution = processingData.getGameEvolution(teamGoldDifferences)
 
     enemyTeam = 1 if participantId < 6 else 0
     championRange = list(range(enemyTeam * 5 + 1, (enemyTeam+1) * 5 + 1))
@@ -197,22 +242,38 @@ def championDetails():
     
     return render_template(
         'championPage.html', 
+        matchId=matchId,
+        participantId=participantId,
         championName=championName, 
         championSkillLevels=championSkillLevels, 
-        goldPlot=goldPlot, 
+        playerGoldPlot=playerGoldPlot, 
+        teamGoldPlot=teamGoldPlot, 
         winrates=winrates, 
         order=order,
-        deathStats=deathStats,
         championBuild=championBuild,
         itemNames=itemNames,
         buildStats=buildStats,
-        itemsPerMinute=itemsPerMinute,
-        itemNamesPerMinute=itemNamesPerMinute,
         enemyChampionStats=enemyChampionStats,
-        playerChampionStats=playerChampionStats
+        playerChampionStats=playerChampionStats,
+        gameEvolution=gameEvolution
     )
 
 
+@app.route('/deathDetails', methods=['GET'])
+def deathDetails():
+    matchId = request.args.get("matchId")
+    participantId = int(request.args.get("participant"))
+    matchFile = getMatchData.saveMatchToFile(matchId)
+    
+    deathStats = getMatchData.getDeathStats(matchFile)[participantId + 1]
+    itemsPerMinute, itemNamesPerMinute = getMatchData.getPlayerBuildPerMinute(participantId + 1, matchFile)
+    
+    return render_template(
+        'deathDetails.html', 
+        deathStats=deathStats,
+        itemsPerMinute=itemsPerMinute,
+        itemNamesPerMinute=itemNamesPerMinute
+    )
 
 
 
@@ -234,4 +295,5 @@ def run_script3():
     return "deathLocations.py has been executed!"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000, host='0.0.0.0')
+

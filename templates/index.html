@@ -4,14 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Run Scripts</title>
+    <style>
+        body {
+            width: 100vw;
+        }
+        .myButton {
+            padding: 20px;
+            border-radius: 25px;
+            border: rgba(255, 255, 255, 0.6) solid 5px;
+            font-size: 20px;
+            background-color: #008080;
+            width: max-content;
+            color: white;
+            box-shadow: 0 0 20px white, inset 0 0 20px white;
+        }
+        a {
+            text-decoration: none;
+        }
+        .redTeam{
+            background-color: rgba(255, 91, 96, 0.5);
+        }
+        .centeredHorizontally {
+            transform: translateX(-50%);
+            position: relative;
+            left: 50%;
+        }
+        .centeredVertically {
+            transform: translateY(-50%);
+            position: relative;
+            top: 50%;
+        }
+        .centered {
+            transform: translate(-50%, -50%);
+            position: relative;
+            top: 50%;
+            left: 50%;
+        }
+        .bigButtonLink {
+            margin: 20px;
+        }
+        .buttonContainers {
+            width: min-content;
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
     {% include 'header.html' %}
 
-    <h1>Run Python Scripts</h1>
-    <a href="{{ url_for('searchForMatch') }}"><button>SearchForMatch</button></a>
-    <a href="{{ url_for('lastGames') }}"><button>Get last 100 games</button></a>
-    <button onclick="window.location.href='/run_script1'">Run licenta.py</button>
-    <button onclick="window.location.href='/run_script2'">Run deathLocations.py</button>
+    <!-- <h1>Run Python Scripts</h1> -->
+    <div class="buttonContainers centered">
+        <a href="{{ url_for('lastGames') }}" class="bigButtonLink">
+            <div class="myButton centered">
+                Match History
+            </div>
+        </a>
+        <a href="{{ url_for('searchForMatch') }}" class="bigButtonLink">
+            <div class="myButton centered">
+                Search for a match by id
+            </div>
+        </a>
+    </div>
+    <!-- <button onclick="window.location.href='/run_script1'">Run licenta.py</button>
+    <button onclick="window.location.href='/run_script2'">Run deathLocations.py</button> -->
 </body>
 </html>

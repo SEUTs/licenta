@@ -5,6 +5,7 @@ import getMatchData
 import base64
 import io
 import matplotlib.pyplot as plt
+import numpy
 
 gamesFolder = "E:\\licenta\\games"
 
@@ -282,8 +283,38 @@ def insertMatchesIntoFiles():
 
         outputFile.write(']')
 
-def generate2GoldPlot(player):
-    data = getMatchData.getGoldPerMinuteData(player, "E:\\licenta\\games\\Match_EUN1_3682989051.json")
+def generateTeamGoldPlot(matchFile, playerTeam):
+    teamGoldDifferences = getMatchData.getTeamGoldDifference(matchFile, playerTeam)
+    xRange = range(len(teamGoldDifferences))
+    fig, ax = plt.subplots()
+    fig.patch.set_facecolor('#181864')
+    ax.set_facecolor('#181864')
+    ax.plot(xRange, teamGoldDifferences, c='w')
+    ax.set_xlabel('Time (min)')
+    ax.yaxis.labelpad = -5
+    ax.set_ylabel('Total Gold')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+    x = numpy.array(xRange)
+    y = numpy.array(teamGoldDifferences)
+    zeros = numpy.zeros_like(y)
+    ax.fill_between(x, y, zeros, where=(y > zeros), color='#00FFFF', alpha=0.2, interpolate=True)
+    ax.fill_between(x, y, zeros, where=(y <= zeros), color='r', alpha=0.4, interpolate=True)
+    absMaxY = max([abs(y) for y in teamGoldDifferences]) * 1.1
+    ax.set_ylim(-absMaxY, absMaxY)
+    ax.tick_params(colors="white")
+    ax.grid()
+    ax.set_title("Team Gold Difference", color="white")
+
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png")
+    buf.seek(0)
+    image_base64 = base64.b64encode(buf.read()).decode("utf-8")
+
+    return image_base64
+
+def generate2GoldPlot(player, matchFile):
+    data = getMatchData.getGoldPerMinuteData(player, matchFile)
     dataPlayer = data[0]
     dataEnemy = data[1]
     fig, ax = plt.subplots()
@@ -291,6 +322,11 @@ def generate2GoldPlot(player):
     ax.set_facecolor('#181864')
     ax.plot(dataPlayer[0], dataPlayer[1], label="Selected player")
     ax.plot(dataEnemy[0], dataEnemy[1], c='r', label="Enemy laner")
+    x = numpy.array(dataPlayer[0])
+    y = numpy.array(dataPlayer[1])
+    enemy = numpy.array(dataEnemy[1])
+    ax.fill_between(x, y, enemy, where=(y > enemy), color='#00FFFF', alpha=0.2, interpolate=True)
+    ax.fill_between(x, y, enemy, where=(y <= enemy), color='r', alpha=0.4, interpolate=True)
     ax.set_xlabel('Time (min)')
     ax.set_ylabel('Total Gold')
     ax.xaxis.label.set_color('white')

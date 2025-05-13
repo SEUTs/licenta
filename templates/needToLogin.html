@@ -44,45 +44,33 @@
             margin: 20px;
         }
         .buttonContainers {
-            width: min-content;
+            width: max-content;
             position: absolute;
+            font-size: 25px;
         }
-        a {
-            color: cyan;
+        #disclaimer {
+            margin: 50px;
         }
     </style>
 </head>
 <body>
     {% include 'header.html' %}
+
     <div class="buttonContainers centered">
-        <h2>Login</h2>
-        <form method="POST">
-            <table>
-                <tr>
-                    <td>Username</td>
-                    <td></td>
-                    <td>Tag</td>
-                </tr>
-                <tr>
-                    <td><input name="username"></td>
-                    <td>#</td>
-                    <td><input name="riotTag" size="5"></td>
-                </tr>
-            </table>
-            Password: <br>
-            <input type="password" name="password" id="passwordInput"><br>
-            <input type="checkbox" onclick="showPassword()">Show Password <br><br>
-            <input type="submit" value="Login">
-        </form>
-        <p>Don't have an account? <br><a href="{{ url_for('register') }}">Register now!</a></p>
+        <div id="disclaimer">
+            We are sorry, but using our services requires that the users are logged in.
+        </div>
+        
+        <a href="{{ url_for('login') }}" class="bigButtonLink">
+            <div class="myButton centered">
+                Login
+            </div>
+        </a>
+        <a href="{{ url_for('register') }}" class="bigButtonLink">
+            <div class="myButton centered">
+                Register
+            </div>
+        </a>
     </div>
 </body>
-<script>
-    function showPassword() {
-        var element = document.getElementById("passwordInput");
-        if (element.type === "password")
-            element.type = "text";
-        else
-            element.type = "password";
-    } 
-</script>
+</html>
