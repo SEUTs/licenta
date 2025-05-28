@@ -53,7 +53,8 @@ def getChampionNames(frames):
         "KSante": "K'Sante",
         "AurelionSol": "Aurelion_Sol",
         "Nunu&Willump": "Nunu_&_Willump",
-        "RenataGlasc": "Renata_Glasc"
+        "Renata": "Renata_Glasc",
+        "FiddleSticks": "Fiddlesticks"
     }
     for i in range(10):
         if not championNames[i]:
@@ -124,7 +125,7 @@ def getChampionNamesAndKda(frames):
         "KSante": "K'Sante",
         "AurelionSol": "Aurelion_Sol",
         "Nunu&Willump": "Nunu_&_Willump",
-        "RenataGlasc": "Renata_Glasc"
+        "Renata": "Renata_Glasc"
     }
     for i in range(10):
         if not championNames[i]:

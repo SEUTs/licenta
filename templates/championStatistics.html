@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #bigTable {
+            background-color: #181864;
+            position: relative;
+            left: 50%;
+            top: 50px;
+            transform: translateX(-50%);
+        }
+        #thisChampionImage {
+            margin-top: 0px;
+            display: block;
+            filter: drop-shadow(0px 0px 32px rgb(0, 0, 0));
+            border-radius: 5px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 95%;
+        }
+        .championImage {
+            margin-top: 19.92px;
+        }
+        .plot {
+            padding-left: 31px;
+        }
+        .championImage, .plot {
+            transform: translateX(-50%);
+            position: relative;
+            left: 50%;
+        }
+        .flexy {
+            display: flex;
+        }
+        td {
+            width: 150px;
+        }
+        .bigTableCell {
+            height: 140px;
+            padding: 20px;
+            width: 100px;
+        }
+        p, h2 {
+            text-align: center;
+        }
+        h2 {
+            margin-top: 0px;
+        }
+
+        .spacingRow {
+            height: 50px;
+        }
+        .emptyCell {
+            width: 80px;
+        }
+        
+        .centered {
+            width: max-content;
+            transform: translate(-50%);
+            left: 50%;
+            position: relative;
+        }
+        .centering {
+            text-align: center;
+        }
+        .padded {
+            padding: 2px;
+        }
+        .timeImg {
+            width: 60px;
+            position: absolute;
+            margin-left: 45px;
+            top: 587px;
+        }
+
+        #winratesTable td {
+            border: solid 1px white;
+            font-weight: bolder;
+            color: white;
+            font-family: Helvetica;
+            padding-bottom: 19.92px;
+        }
+        .ascending {
+            background-color: #a05050;
+        }
+        .descending {
+            background-color: #4080a0;
+        }
+        .wideDiv {
+            width: 200px;
+        }
+        th {
+            font-weight: bolder;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <table id="bigTable">
+        <tr>
+            <td colspan="6">
+                <div id="thisChampionDiv">
+                    <img id="thisChampionImage" class="championImage" src="{{'https://wiki.leagueoflegends.com/en-us/images/' ~ championName ~ '_OriginalSkin.jpg?c9173' }}">
+                </div>
+                <h2 stlye="margin-bottom: 0px;">{{ championName }}</h2>
+            </td>
+        </tr>
+        <tr class="spacingRow"></tr>
+        <tr class="spacingRow"></tr>
+        <tr>
+            <td class="emptyCell"></td>
+            <td>
+                <p style="margin-top: 16px;">Winrate<br>Overall</p>
+                {% if winrates[0] != -1 %}
+                    <p>{{ winrates[0] }}%</p>
+                {% else %}
+                    <p>N/A</p>
+                {% endif %}
+            </td>
+            <td>
+                <img class="timeImg" src="../static/icons/morning.png">
+                <p>Winrate<br>00:00 - 08:00</p>
+                {% if winrates[1] != -1 %}
+                    <p>{{ winrates[1] }}%</p>
+                {% else %}
+                    <p>N/A</p>
+                {% endif %}
+            </td>
+            <td>
+                <img class="timeImg" src="../static/icons/afternoon.png">
+                <p>Winrate<br>08:00 - 16:00</p>
+                {% if winrates[2] != -1 %}
+                    <p>{{ winrates[2] }}%</p>
+                {% else %}
+                    <p>N/A</p>
+                {% endif %}
+            </td>
+            <td>
+                <img class="timeImg" src="../static/icons/night.png">
+                <p>Winrate<br>16:00 - 00:00</p>
+                {% if winrates[3] != -1 %}
+                    <p>{{ winrates[3] }}%</p>
+                {% else %}
+                    <p>N/A</p>
+                {% endif %}
+            </td>
+            <td class="emptyCell"></td>
+        </tr>
+        <tr class="spacingRow"></tr>
+        <tr>
+            <td class="emptyCell"></td>
+            <td colspan="4">
+                <table id="winratesTable" class="centered">
+                    <tr>
+                        <th>
+                            Worst paired with
+                        </th>
+                        <th>
+                            Best paired with
+                        </th>
+                    </tr>
+                    {% set total = stats|length-1 %}
+                    {% for index in range(total+1) %}
+                        <tr>
+                            <td class="winrateCell ascending">
+                                <a href="championStatistics?champion={{stats[index][0]}}">
+                                    <img class="championImage" src="{{'static\\icons\\champions\\' ~ stats[index][0] ~ '.jpg' }}">
+                                </a>
+                                <div class="centering wideDiv">
+                                    <div>
+                                        {{ stats[index][0] }}
+                                    </div>
+                                    <div>
+                                        {{ (stats[index][1]["wins"] / stats[index][1]["met"] * 100)|round(2) }}%
+                                        <br>
+                                        {{ stats[index][1]["met"] }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="winrateCell descending">
+                                <a href="championStatistics?champion={{stats[total-index][0]}}">
+                                    <img class="championImage" src="{{'static\\icons\\champions\\' ~ stats[total-index][0] ~ '.jpg' }}">
+                                </a>
+                                <div class="centering wideDiv">
+                                    <div>
+                                        {{ stats[total-index][0] }}
+                                    </div>
+                                    <div>
+                                        {{ (stats[total-index][1]["wins"] / stats[total-index][1]["met"] * 100)|round(2) }}%
+                                        <br>
+                                        {{ stats[total-index][1]["met"] }}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+            <td class="emptyCell"></td>
+        </tr>
+    </table>
+</body>
+<script>
+    const winrateCells = document.getElementsByClassName("winrateCell")
+    for(let i of winrateCells) {
+        let winrate = i.children[1].children[1].innerHTML.trim().split('%')[0]
+        if (winrate < 42)
+            i.style.backgroundColor = "#a05050";
+        else if (winrate > 55)
+            i.style.backgroundColor = "#4080a0";
+        else {
+            let ratio = (winrate - 42) / 13,
+                red = 160 - ratio * 96,  // (160 - 64)
+                green = 80 + ratio * 48, // (128 - 80)
+                blue = 80 + ratio * 80;  // (160 - 80)
+            i.style.backgroundColor = "rgb(" + red + ',' + green + ',' + blue + ")";
+        }
+    }
+        // .ascending {
+        //     background-color: #a05050;
+        // }
+        // .descending {
+        //     background-color: #4080a0;
+        // }
+</script>
+</html>

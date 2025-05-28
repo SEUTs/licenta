@@ -1,0 +1,2892 @@
+{
+    "Darius": [
+        {
+            "hour": 0,
+            "wins": 56,
+            "met": 103
+        },
+        {
+            "hour": 8,
+            "wins": 242,
+            "met": 483
+        },
+        {
+            "hour": 16,
+            "wins": 242,
+            "met": 524
+        }
+    ],
+    "Jarvan_IV": [
+        {
+            "hour": 0,
+            "wins": 55,
+            "met": 101
+        },
+        {
+            "hour": 8,
+            "wins": 295,
+            "met": 534
+        },
+        {
+            "hour": 16,
+            "wins": 350,
+            "met": 701
+        }
+    ],
+    "Fizz": [
+        {
+            "hour": 0,
+            "wins": 21,
+            "met": 41
+        },
+        {
+            "hour": 8,
+            "wins": 101,
+            "met": 208
+        },
+        {
+            "hour": 16,
+            "wins": 106,
+            "met": 245
+        }
+    ],
+    "Miss_Fortune": [
+        {
+            "hour": 0,
+            "wins": 42,
+            "met": 76
+        },
+        {
+            "hour": 8,
+            "wins": 194,
+            "met": 411
+        },
+        {
+            "hour": 16,
+            "wins": 241,
+            "met": 517
+        }
+    ],
+    "Alistar": [
+        {
+            "hour": 0,
+            "wins": 24,
+            "met": 47
+        },
+        {
+            "hour": 8,
+            "wins": 97,
+            "met": 209
+        },
+        {
+            "hour": 16,
+            "wins": 125,
+            "met": 267
+        }
+    ],
+    "Tahm_Kench": [
+        {
+            "hour": 0,
+            "wins": 37,
+            "met": 62
+        },
+        {
+            "hour": 8,
+            "wins": 169,
+            "met": 314
+        },
+        {
+            "hour": 16,
+            "wins": 216,
+            "met": 375
+        }
+    ],
+    "Nocturne": [
+        {
+            "hour": 0,
+            "wins": 42,
+            "met": 79
+        },
+        {
+            "hour": 8,
+            "wins": 232,
+            "met": 436
+        },
+        {
+            "hour": 16,
+            "wins": 280,
+            "met": 537
+        }
+    ],
+    "Viktor": [
+        {
+            "hour": 0,
+            "wins": 9,
+            "met": 31
+        },
+        {
+            "hour": 8,
+            "wins": 83,
+            "met": 164
+        },
+        {
+            "hour": 16,
+            "wins": 121,
+            "met": 234
+        }
+    ],
+    "Aphelios": [
+        {
+            "hour": 0,
+            "wins": 42,
+            "met": 86
+        },
+        {
+            "hour": 8,
+            "wins": 110,
+            "met": 226
+        },
+        {
+            "hour": 16,
+            "wins": 152,
+            "met": 353
+        }
+    ],
+    "Xerath": [
+        {
+            "hour": 0,
+            "wins": 51,
+            "met": 83
+        },
+        {
+            "hour": 8,
+            "wins": 200,
+            "met": 374
+        },
+        {
+            "hour": 16,
+            "wins": 242,
+            "met": 481
+        }
+    ],
+    "Nasus": [
+        {
+            "hour": 0,
+            "wins": 28,
+            "met": 67
+        },
+        {
+            "hour": 8,
+            "wins": 175,
+            "met": 311
+        },
+        {
+            "hour": 16,
+            "wins": 184,
+            "met": 399
+        }
+    ],
+    "Master_Yi": [
+        {
+            "hour": 0,
+            "wins": 34,
+            "met": 73
+        },
+        {
+            "hour": 8,
+            "wins": 154,
+            "met": 297
+        },
+        {
+            "hour": 16,
+            "wins": 203,
+            "met": 401
+        }
+    ],
+    "Ezreal": [
+        {
+            "hour": 0,
+            "wins": 74,
+            "met": 166
+        },
+        {
+            "hour": 8,
+            "wins": 406,
+            "met": 828
+        },
+        {
+            "hour": 16,
+            "wins": 487,
+            "met": 1066
+        }
+    ],
+    "Blitzcrank": [
+        {
+            "hour": 0,
+            "wins": 27,
+            "met": 72
+        },
+        {
+            "hour": 8,
+            "wins": 134,
+            "met": 286
+        },
+        {
+            "hour": 16,
+            "wins": 192,
+            "met": 413
+        }
+    ],
+    "Volibear": [
+        {
+            "hour": 0,
+            "wins": 68,
+            "met": 119
+        },
+        {
+            "hour": 8,
+            "wins": 276,
+            "met": 566
+        },
+        {
+            "hour": 16,
+            "wins": 341,
+            "met": 679
+        }
+    ],
+    "Diana": [
+        {
+            "hour": 0,
+            "wins": 66,
+            "met": 121
+        },
+        {
+            "hour": 8,
+            "wins": 223,
+            "met": 495
+        },
+        {
+            "hour": 16,
+            "wins": 289,
+            "met": 586
+        }
+    ],
+    "Katarina": [
+        {
+            "hour": 0,
+            "wins": 56,
+            "met": 113
+        },
+        {
+            "hour": 8,
+            "wins": 258,
+            "met": 499
+        },
+        {
+            "hour": 16,
+            "wins": 359,
+            "met": 705
+        }
+    ],
+    "Nilah": [
+        {
+            "hour": 0,
+            "wins": 18,
+            "met": 31
+        },
+        {
+            "hour": 8,
+            "wins": 53,
+            "met": 108
+        },
+        {
+            "hour": 16,
+            "wins": 96,
+            "met": 159
+        }
+    ],
+    "Leona": [
+        {
+            "hour": 0,
+            "wins": 42,
+            "met": 90
+        },
+        {
+            "hour": 8,
+            "wins": 236,
+            "met": 466
+        },
+        {
+            "hour": 16,
+            "wins": 292,
+            "met": 590
+        }
+    ],
+    "Kha'Zix": [
+        {
+            "hour": 0,
+            "wins": 71,
+            "met": 138
+        },
+        {
+            "hour": 8,
+            "wins": 405,
+            "met": 770
+        },
+        {
+            "hour": 16,
+            "wins": 459,
+            "met": 883
+        }
+    ],
+    "Fiddlesticks": [
+        {
+            "hour": 0,
+            "wins": 27,
+            "met": 48
+        },
+        {
+            "hour": 8,
+            "wins": 122,
+            "met": 235
+        },
+        {
+            "hour": 16,
+            "wins": 143,
+            "met": 253
+        }
+    ],
+    "Kog'Maw": [
+        {
+            "hour": 0,
+            "wins": 39,
+            "met": 73
+        },
+        {
+            "hour": 8,
+            "wins": 160,
+            "met": 331
+        },
+        {
+            "hour": 16,
+            "wins": 235,
+            "met": 441
+        }
+    ],
+    "Teemo": [
+        {
+            "hour": 0,
+            "wins": 24,
+            "met": 46
+        },
+        {
+            "hour": 8,
+            "wins": 79,
+            "met": 167
+        },
+        {
+            "hour": 16,
+            "wins": 141,
+            "met": 297
+        }
+    ],
+    "Hecarim": [
+        {
+            "hour": 0,
+            "wins": 57,
+            "met": 110
+        },
+        {
+            "hour": 8,
+            "wins": 252,
+            "met": 487
+        },
+        {
+            "hour": 16,
+            "wins": 329,
+            "met": 606
+        }
+    ],
+    "Annie": [
+        {
+            "hour": 0,
+            "wins": 10,
+            "met": 29
+        },
+        {
+            "hour": 8,
+            "wins": 62,
+            "met": 132
+        },
+        {
+            "hour": 16,
+            "wins": 96,
+            "met": 179
+        }
+    ],
+    "Lulu": [
+        {
+            "hour": 0,
+            "wins": 89,
+            "met": 174
+        },
+        {
+            "hour": 8,
+            "wins": 384,
+            "met": 771
+        },
+        {
+            "hour": 16,
+            "wins": 490,
+            "met": 1014
+        }
+    ],
+    "Jax": [
+        {
+            "hour": 0,
+            "wins": 47,
+            "met": 84
+        },
+        {
+            "hour": 8,
+            "wins": 164,
+            "met": 350
+        },
+        {
+            "hour": 16,
+            "wins": 239,
+            "met": 504
+        }
+    ],
+    "Karthus": [
+        {
+            "hour": 0,
+            "wins": 26,
+            "met": 41
+        },
+        {
+            "hour": 8,
+            "wins": 107,
+            "met": 238
+        },
+        {
+            "hour": 16,
+            "wins": 127,
+            "met": 265
+        }
+    ],
+    "Rakan": [
+        {
+            "hour": 0,
+            "wins": 28,
+            "met": 61
+        },
+        {
+            "hour": 8,
+            "wins": 135,
+            "met": 264
+        },
+        {
+            "hour": 16,
+            "wins": 193,
+            "met": 362
+        }
+    ],
+    "Amumu": [
+        {
+            "hour": 0,
+            "wins": 28,
+            "met": 54
+        },
+        {
+            "hour": 8,
+            "wins": 171,
+            "met": 326
+        },
+        {
+            "hour": 16,
+            "wins": 197,
+            "met": 420
+        }
+    ],
+    "Veigar": [
+        {
+            "hour": 0,
+            "wins": 33,
+            "met": 77
+        },
+        {
+            "hour": 8,
+            "wins": 118,
+            "met": 258
+        },
+        {
+            "hour": 16,
+            "wins": 201,
+            "met": 399
+        }
+    ],
+    "Lucian": [
+        {
+            "hour": 0,
+            "wins": 70,
+            "met": 147
+        },
+        {
+            "hour": 8,
+            "wins": 263,
+            "met": 541
+        },
+        {
+            "hour": 16,
+            "wins": 360,
+            "met": 711
+        }
+    ],
+    "Nami": [
+        {
+            "hour": 0,
+            "wins": 117,
+            "met": 218
+        },
+        {
+            "hour": 8,
+            "wins": 418,
+            "met": 828
+        },
+        {
+            "hour": 16,
+            "wins": 571,
+            "met": 1101
+        }
+    ],
+    "Ahri": [
+        {
+            "hour": 0,
+            "wins": 51,
+            "met": 102
+        },
+        {
+            "hour": 8,
+            "wins": 322,
+            "met": 621
+        },
+        {
+            "hour": 16,
+            "wins": 407,
+            "met": 776
+        }
+    ],
+    "Kalista": [
+        {
+            "hour": 0,
+            "wins": 18,
+            "met": 28
+        },
+        {
+            "hour": 8,
+            "wins": 65,
+            "met": 128
+        },
+        {
+            "hour": 16,
+            "wins": 80,
+            "met": 176
+        }
+    ],
+    "Sejuani": [
+        {
+            "hour": 0,
+            "wins": 18,
+            "met": 35
+        },
+        {
+            "hour": 8,
+            "wins": 75,
+            "met": 160
+        },
+        {
+            "hour": 16,
+            "wins": 95,
+            "met": 212
+        }
+    ],
+    "Malzahar": [
+        {
+            "hour": 0,
+            "wins": 22,
+            "met": 47
+        },
+        {
+            "hour": 8,
+            "wins": 109,
+            "met": 215
+        },
+        {
+            "hour": 16,
+            "wins": 166,
+            "met": 326
+        }
+    ],
+    "Jinx": [
+        {
+            "hour": 0,
+            "wins": 83,
+            "met": 183
+        },
+        {
+            "hour": 8,
+            "wins": 434,
+            "met": 865
+        },
+        {
+            "hour": 16,
+            "wins": 567,
+            "met": 1111
+        }
+    ],
+    "Soraka": [
+        {
+            "hour": 0,
+            "wins": 43,
+            "met": 68
+        },
+        {
+            "hour": 8,
+            "wins": 158,
+            "met": 288
+        },
+        {
+            "hour": 16,
+            "wins": 185,
+            "met": 363
+        }
+    ],
+    "Gwen": [
+        {
+            "hour": 0,
+            "wins": 35,
+            "met": 77
+        },
+        {
+            "hour": 8,
+            "wins": 136,
+            "met": 275
+        },
+        {
+            "hour": 16,
+            "wins": 190,
+            "met": 394
+        }
+    ],
+    "Garen": [
+        {
+            "hour": 0,
+            "wins": 47,
+            "met": 97
+        },
+        {
+            "hour": 8,
+            "wins": 213,
+            "met": 417
+        },
+        {
+            "hour": 16,
+            "wins": 242,
+            "met": 514
+        }
+    ],
+    "Akshan": [
+        {
+            "hour": 0,
+            "wins": 20,
+            "met": 40
+        },
+        {
+            "hour": 8,
+            "wins": 72,
+            "met": 156
+        },
+        {
+            "hour": 16,
+            "wins": 103,
+            "met": 213
+        }
+    ],
+    "Yasuo": [
+        {
+            "hour": 0,
+            "wins": 84,
+            "met": 177
+        },
+        {
+            "hour": 8,
+            "wins": 334,
+            "met": 701
+        },
+        {
+            "hour": 16,
+            "wins": 418,
+            "met": 866
+        }
+    ],
+    "Lux": [
+        {
+            "hour": 0,
+            "wins": 81,
+            "met": 159
+        },
+        {
+            "hour": 8,
+            "wins": 377,
+            "met": 711
+        },
+        {
+            "hour": 16,
+            "wins": 566,
+            "met": 1069
+        }
+    ],
+    "Senna": [
+        {
+            "hour": 0,
+            "wins": 75,
+            "met": 140
+        },
+        {
+            "hour": 8,
+            "wins": 314,
+            "met": 605
+        },
+        {
+            "hour": 16,
+            "wins": 408,
+            "met": 799
+        }
+    ],
+    "Kayle": [
+        {
+            "hour": 0,
+            "wins": 49,
+            "met": 98
+        },
+        {
+            "hour": 8,
+            "wins": 182,
+            "met": 341
+        },
+        {
+            "hour": 16,
+            "wins": 238,
+            "met": 439
+        }
+    ],
+    "Syndra": [
+        {
+            "hour": 0,
+            "wins": 68,
+            "met": 127
+        },
+        {
+            "hour": 8,
+            "wins": 284,
+            "met": 593
+        },
+        {
+            "hour": 16,
+            "wins": 401,
+            "met": 743
+        }
+    ],
+    "Zeri": [
+        {
+            "hour": 0,
+            "wins": 31,
+            "met": 58
+        },
+        {
+            "hour": 8,
+            "wins": 164,
+            "met": 313
+        },
+        {
+            "hour": 16,
+            "wins": 189,
+            "met": 408
+        }
+    ],
+    "Lee_Sin": [
+        {
+            "hour": 0,
+            "wins": 56,
+            "met": 96
+        },
+        {
+            "hour": 8,
+            "wins": 204,
+            "met": 429
+        },
+        {
+            "hour": 16,
+            "wins": 295,
+            "met": 623
+        }
+    ],
+    "Irelia": [
+        {
+            "hour": 0,
+            "wins": 51,
+            "met": 99
+        },
+        {
+            "hour": 8,
+            "wins": 138,
+            "met": 287
+        },
+        {
+            "hour": 16,
+            "wins": 226,
+            "met": 474
+        }
+    ],
+    "Vayne": [
+        {
+            "hour": 0,
+            "wins": 58,
+            "met": 120
+        },
+        {
+            "hour": 8,
+            "wins": 275,
+            "met": 505
+        },
+        {
+            "hour": 16,
+            "wins": 301,
+            "met": 605
+        }
+    ],
+    "Morgana": [
+        {
+            "hour": 0,
+            "wins": 18,
+            "met": 44
+        },
+        {
+            "hour": 8,
+            "wins": 124,
+            "met": 235
+        },
+        {
+            "hour": 16,
+            "wins": 135,
+            "met": 282
+        }
+    ],
+    "Warwick": [
+        {
+            "hour": 0,
+            "wins": 23,
+            "met": 52
+        },
+        {
+            "hour": 8,
+            "wins": 114,
+            "met": 210
+        },
+        {
+            "hour": 16,
+            "wins": 147,
+            "met": 295
+        }
+    ],
+    "Varus": [
+        {
+            "hour": 0,
+            "wins": 44,
+            "met": 72
+        },
+        {
+            "hour": 8,
+            "wins": 159,
+            "met": 345
+        },
+        {
+            "hour": 16,
+            "wins": 212,
+            "met": 414
+        }
+    ],
+    "Ashe": [
+        {
+            "hour": 0,
+            "wins": 73,
+            "met": 146
+        },
+        {
+            "hour": 8,
+            "wins": 361,
+            "met": 682
+        },
+        {
+            "hour": 16,
+            "wins": 494,
+            "met": 941
+        }
+    ],
+    "Shen": [
+        {
+            "hour": 0,
+            "wins": 26,
+            "met": 60
+        },
+        {
+            "hour": 8,
+            "wins": 161,
+            "met": 316
+        },
+        {
+            "hour": 16,
+            "wins": 165,
+            "met": 353
+        }
+    ],
+    "Rammus": [
+        {
+            "hour": 0,
+            "wins": 14,
+            "met": 29
+        },
+        {
+            "hour": 8,
+            "wins": 59,
+            "met": 120
+        },
+        {
+            "hour": 16,
+            "wins": 102,
+            "met": 174
+        }
+    ],
+    "Tryndamere": [
+        {
+            "hour": 0,
+            "wins": 40,
+            "met": 64
+        },
+        {
+            "hour": 8,
+            "wins": 101,
+            "met": 196
+        },
+        {
+            "hour": 16,
+            "wins": 122,
+            "met": 231
+        }
+    ],
+    "Trundle": [
+        {
+            "hour": 0,
+            "wins": 16,
+            "met": 37
+        },
+        {
+            "hour": 8,
+            "wins": 80,
+            "met": 165
+        },
+        {
+            "hour": 16,
+            "wins": 111,
+            "met": 200
+        }
+    ],
+    "Caitlyn": [
+        {
+            "hour": 0,
+            "wins": 90,
+            "met": 196
+        },
+        {
+            "hour": 8,
+            "wins": 485,
+            "met": 958
+        },
+        {
+            "hour": 16,
+            "wins": 579,
+            "met": 1179
+        }
+    ],
+    "Fiora": [
+        {
+            "hour": 0,
+            "wins": 29,
+            "met": 56
+        },
+        {
+            "hour": 8,
+            "wins": 131,
+            "met": 273
+        },
+        {
+            "hour": 16,
+            "wins": 152,
+            "met": 305
+        }
+    ],
+    "Kindred": [
+        {
+            "hour": 0,
+            "wins": 14,
+            "met": 31
+        },
+        {
+            "hour": 8,
+            "wins": 76,
+            "met": 150
+        },
+        {
+            "hour": 16,
+            "wins": 96,
+            "met": 193
+        }
+    ],
+    "Orianna": [
+        {
+            "hour": 0,
+            "wins": 18,
+            "met": 43
+        },
+        {
+            "hour": 8,
+            "wins": 142,
+            "met": 290
+        },
+        {
+            "hour": 16,
+            "wins": 182,
+            "met": 390
+        }
+    ],
+    "Xayah": [
+        {
+            "hour": 0,
+            "wins": 23,
+            "met": 45
+        },
+        {
+            "hour": 8,
+            "wins": 117,
+            "met": 268
+        },
+        {
+            "hour": 16,
+            "wins": 188,
+            "met": 378
+        }
+    ],
+    "Bard": [
+        {
+            "hour": 0,
+            "wins": 16,
+            "met": 33
+        },
+        {
+            "hour": 8,
+            "wins": 91,
+            "met": 162
+        },
+        {
+            "hour": 16,
+            "wins": 132,
+            "met": 258
+        }
+    ],
+    "Yone": [
+        {
+            "hour": 0,
+            "wins": 63,
+            "met": 133
+        },
+        {
+            "hour": 8,
+            "wins": 329,
+            "met": 692
+        },
+        {
+            "hour": 16,
+            "wins": 427,
+            "met": 870
+        }
+    ],
+    "Nidalee": [
+        {
+            "hour": 0,
+            "wins": 28,
+            "met": 46
+        },
+        {
+            "hour": 8,
+            "wins": 75,
+            "met": 165
+        },
+        {
+            "hour": 16,
+            "wins": 94,
+            "met": 196
+        }
+    ],
+    "Zoe": [
+        {
+            "hour": 0,
+            "wins": 19,
+            "met": 43
+        },
+        {
+            "hour": 8,
+            "wins": 79,
+            "met": 143
+        },
+        {
+            "hour": 16,
+            "wins": 103,
+            "met": 239
+        }
+    ],
+    "Draven": [
+        {
+            "hour": 0,
+            "wins": 92,
+            "met": 179
+        },
+        {
+            "hour": 8,
+            "wins": 248,
+            "met": 484
+        },
+        {
+            "hour": 16,
+            "wins": 322,
+            "met": 650
+        }
+    ],
+    "Karma": [
+        {
+            "hour": 0,
+            "wins": 55,
+            "met": 112
+        },
+        {
+            "hour": 8,
+            "wins": 238,
+            "met": 497
+        },
+        {
+            "hour": 16,
+            "wins": 293,
+            "met": 605
+        }
+    ],
+    "Ivern": [
+        {
+            "hour": 0,
+            "wins": 14,
+            "met": 28
+        },
+        {
+            "hour": 8,
+            "wins": 64,
+            "met": 118
+        },
+        {
+            "hour": 16,
+            "wins": 90,
+            "met": 168
+        }
+    ],
+    "Xin_Zhao": [
+        {
+            "hour": 0,
+            "wins": 31,
+            "met": 65
+        },
+        {
+            "hour": 8,
+            "wins": 125,
+            "met": 258
+        },
+        {
+            "hour": 16,
+            "wins": 162,
+            "met": 303
+        }
+    ],
+    "Camille": [
+        {
+            "hour": 0,
+            "wins": 37,
+            "met": 76
+        },
+        {
+            "hour": 8,
+            "wins": 186,
+            "met": 407
+        },
+        {
+            "hour": 16,
+            "wins": 268,
+            "met": 521
+        }
+    ],
+    "Taliyah": [
+        {
+            "hour": 0,
+            "wins": 26,
+            "met": 59
+        },
+        {
+            "hour": 8,
+            "wins": 117,
+            "met": 220
+        },
+        {
+            "hour": 16,
+            "wins": 119,
+            "met": 247
+        }
+    ],
+    "Pyke": [
+        {
+            "hour": 0,
+            "wins": 43,
+            "met": 88
+        },
+        {
+            "hour": 8,
+            "wins": 213,
+            "met": 434
+        },
+        {
+            "hour": 16,
+            "wins": 260,
+            "met": 544
+        }
+    ],
+    "Kai'Sa": [
+        {
+            "hour": 0,
+            "wins": 139,
+            "met": 280
+        },
+        {
+            "hour": 8,
+            "wins": 663,
+            "met": 1346
+        },
+        {
+            "hour": 16,
+            "wins": 834,
+            "met": 1686
+        }
+    ],
+    "Rengar": [
+        {
+            "hour": 0,
+            "wins": 42,
+            "met": 86
+        },
+        {
+            "hour": 8,
+            "wins": 141,
+            "met": 308
+        },
+        {
+            "hour": 16,
+            "wins": 197,
+            "met": 410
+        }
+    ],
+    "Dr._Mundo": [
+        {
+            "hour": 0,
+            "wins": 19,
+            "met": 43
+        },
+        {
+            "hour": 8,
+            "wins": 113,
+            "met": 238
+        },
+        {
+            "hour": 16,
+            "wins": 159,
+            "met": 324
+        }
+    ],
+    "Sylas": [
+        {
+            "hour": 0,
+            "wins": 83,
+            "met": 143
+        },
+        {
+            "hour": 8,
+            "wins": 301,
+            "met": 603
+        },
+        {
+            "hour": 16,
+            "wins": 368,
+            "met": 724
+        }
+    ],
+    "Ornn": [
+        {
+            "hour": 0,
+            "wins": 27,
+            "met": 56
+        },
+        {
+            "hour": 8,
+            "wins": 167,
+            "met": 313
+        },
+        {
+            "hour": 16,
+            "wins": 196,
+            "met": 405
+        }
+    ],
+    "Janna": [
+        {
+            "hour": 0,
+            "wins": 71,
+            "met": 142
+        },
+        {
+            "hour": 8,
+            "wins": 341,
+            "met": 613
+        },
+        {
+            "hour": 16,
+            "wins": 419,
+            "met": 766
+        }
+    ],
+    "Shaco": [
+        {
+            "hour": 0,
+            "wins": 44,
+            "met": 89
+        },
+        {
+            "hour": 8,
+            "wins": 191,
+            "met": 378
+        },
+        {
+            "hour": 16,
+            "wins": 229,
+            "met": 473
+        }
+    ],
+    "Olaf": [
+        {
+            "hour": 0,
+            "wins": 11,
+            "met": 22
+        },
+        {
+            "hour": 8,
+            "wins": 75,
+            "met": 134
+        },
+        {
+            "hour": 16,
+            "wins": 98,
+            "met": 149
+        }
+    ],
+    "Vex": [
+        {
+            "hour": 0,
+            "wins": 16,
+            "met": 32
+        },
+        {
+            "hour": 8,
+            "wins": 129,
+            "met": 227
+        },
+        {
+            "hour": 16,
+            "wins": 124,
+            "met": 258
+        }
+    ],
+    "Yuumi": [
+        {
+            "hour": 0,
+            "wins": 25,
+            "met": 68
+        },
+        {
+            "hour": 8,
+            "wins": 95,
+            "met": 190
+        },
+        {
+            "hour": 16,
+            "wins": 169,
+            "met": 357
+        }
+    ],
+    "Kled": [
+        {
+            "hour": 0,
+            "wins": 11,
+            "met": 24
+        },
+        {
+            "hour": 8,
+            "wins": 37,
+            "met": 78
+        },
+        {
+            "hour": 16,
+            "wins": 55,
+            "met": 113
+        }
+    ],
+    "Sion": [
+        {
+            "hour": 0,
+            "wins": 17,
+            "met": 39
+        },
+        {
+            "hour": 8,
+            "wins": 87,
+            "met": 195
+        },
+        {
+            "hour": 16,
+            "wins": 115,
+            "met": 238
+        }
+    ],
+    "Lillia": [
+        {
+            "hour": 0,
+            "wins": 28,
+            "met": 68
+        },
+        {
+            "hour": 8,
+            "wins": 147,
+            "met": 326
+        },
+        {
+            "hour": 16,
+            "wins": 190,
+            "met": 398
+        }
+    ],
+    "Qiyana": [
+        {
+            "hour": 0,
+            "wins": 26,
+            "met": 52
+        },
+        {
+            "hour": 8,
+            "wins": 84,
+            "met": 173
+        },
+        {
+            "hour": 16,
+            "wins": 110,
+            "met": 249
+        }
+    ],
+    "Sona": [
+        {
+            "hour": 0,
+            "wins": 16,
+            "met": 45
+        },
+        {
+            "hour": 8,
+            "wins": 74,
+            "met": 155
+        },
+        {
+            "hour": 16,
+            "wins": 121,
+            "met": 231
+        }
+    ],
+    "Pantheon": [
+        {
+            "hour": 0,
+            "wins": 29,
+            "met": 63
+        },
+        {
+            "hour": 8,
+            "wins": 147,
+            "met": 313
+        },
+        {
+            "hour": 16,
+            "wins": 193,
+            "met": 405
+        }
+    ],
+    "Mordekaiser": [
+        {
+            "hour": 0,
+            "wins": 30,
+            "met": 68
+        },
+        {
+            "hour": 8,
+            "wins": 207,
+            "met": 381
+        },
+        {
+            "hour": 16,
+            "wins": 234,
+            "met": 462
+        }
+    ],
+    "Kayn": [
+        {
+            "hour": 0,
+            "wins": 55,
+            "met": 113
+        },
+        {
+            "hour": 8,
+            "wins": 199,
+            "met": 404
+        },
+        {
+            "hour": 16,
+            "wins": 295,
+            "met": 565
+        }
+    ],
+    "Cho'Gath": [
+        {
+            "hour": 0,
+            "wins": 15,
+            "met": 25
+        },
+        {
+            "hour": 8,
+            "wins": 95,
+            "met": 205
+        },
+        {
+            "hour": 16,
+            "wins": 135,
+            "met": 272
+        }
+    ],
+    "Talon": [
+        {
+            "hour": 0,
+            "wins": 32,
+            "met": 63
+        },
+        {
+            "hour": 8,
+            "wins": 137,
+            "met": 256
+        },
+        {
+            "hour": 16,
+            "wins": 150,
+            "met": 301
+        }
+    ],
+    "Milio": [
+        {
+            "hour": 0,
+            "wins": 37,
+            "met": 71
+        },
+        {
+            "hour": 8,
+            "wins": 187,
+            "met": 366
+        },
+        {
+            "hour": 16,
+            "wins": 220,
+            "met": 460
+        }
+    ],
+    "Vladimir": [
+        {
+            "hour": 0,
+            "wins": 51,
+            "met": 101
+        },
+        {
+            "hour": 8,
+            "wins": 212,
+            "met": 425
+        },
+        {
+            "hour": 16,
+            "wins": 292,
+            "met": 599
+        }
+    ],
+    "Jhin": [
+        {
+            "hour": 0,
+            "wins": 123,
+            "met": 233
+        },
+        {
+            "hour": 8,
+            "wins": 593,
+            "met": 1141
+        },
+        {
+            "hour": 16,
+            "wins": 694,
+            "met": 1362
+        }
+    ],
+    "Zilean": [
+        {
+            "hour": 0,
+            "wins": 19,
+            "met": 37
+        },
+        {
+            "hour": 8,
+            "wins": 101,
+            "met": 194
+        },
+        {
+            "hour": 16,
+            "wins": 115,
+            "met": 240
+        }
+    ],
+    "Viego": [
+        {
+            "hour": 0,
+            "wins": 63,
+            "met": 155
+        },
+        {
+            "hour": 8,
+            "wins": 336,
+            "met": 665
+        },
+        {
+            "hour": 16,
+            "wins": 420,
+            "met": 840
+        }
+    ],
+    "Aurelion_Sol": [
+        {
+            "hour": 0,
+            "wins": 34,
+            "met": 54
+        },
+        {
+            "hour": 8,
+            "wins": 121,
+            "met": 263
+        },
+        {
+            "hour": 16,
+            "wins": 169,
+            "met": 315
+        }
+    ],
+    "Renata_Glasc": [
+        {
+            "hour": 0,
+            "wins": 10,
+            "met": 31
+        },
+        {
+            "hour": 8,
+            "wins": 57,
+            "met": 129
+        },
+        {
+            "hour": 16,
+            "wins": 81,
+            "met": 149
+        }
+    ],
+    "Malphite": [
+        {
+            "hour": 0,
+            "wins": 44,
+            "met": 98
+        },
+        {
+            "hour": 8,
+            "wins": 204,
+            "met": 393
+        },
+        {
+            "hour": 16,
+            "wins": 244,
+            "met": 524
+        }
+    ],
+    "Akali": [
+        {
+            "hour": 0,
+            "wins": 40,
+            "met": 91
+        },
+        {
+            "hour": 8,
+            "wins": 175,
+            "met": 370
+        },
+        {
+            "hour": 16,
+            "wins": 237,
+            "met": 440
+        }
+    ],
+    "Riven": [
+        {
+            "hour": 0,
+            "wins": 54,
+            "met": 90
+        },
+        {
+            "hour": 8,
+            "wins": 172,
+            "met": 324
+        },
+        {
+            "hour": 16,
+            "wins": 184,
+            "met": 384
+        }
+    ],
+    "Gangplank": [
+        {
+            "hour": 0,
+            "wins": 28,
+            "met": 49
+        },
+        {
+            "hour": 8,
+            "wins": 108,
+            "met": 213
+        },
+        {
+            "hour": 16,
+            "wins": 135,
+            "met": 259
+        }
+    ],
+    "Ryze": [
+        {
+            "hour": 0,
+            "wins": 19,
+            "met": 30
+        },
+        {
+            "hour": 8,
+            "wins": 83,
+            "met": 172
+        },
+        {
+            "hour": 16,
+            "wins": 97,
+            "met": 184
+        }
+    ],
+    "Thresh": [
+        {
+            "hour": 0,
+            "wins": 79,
+            "met": 150
+        },
+        {
+            "hour": 8,
+            "wins": 364,
+            "met": 740
+        },
+        {
+            "hour": 16,
+            "wins": 471,
+            "met": 869
+        }
+    ],
+    "Renekton": [
+        {
+            "hour": 0,
+            "wins": 41,
+            "met": 87
+        },
+        {
+            "hour": 8,
+            "wins": 141,
+            "met": 305
+        },
+        {
+            "hour": 16,
+            "wins": 205,
+            "met": 407
+        }
+    ],
+    "Galio": [
+        {
+            "hour": 0,
+            "wins": 19,
+            "met": 49
+        },
+        {
+            "hour": 8,
+            "wins": 85,
+            "met": 176
+        },
+        {
+            "hour": 16,
+            "wins": 125,
+            "met": 260
+        }
+    ],
+    "Tristana": [
+        {
+            "hour": 0,
+            "wins": 38,
+            "met": 73
+        },
+        {
+            "hour": 8,
+            "wins": 137,
+            "met": 262
+        },
+        {
+            "hour": 16,
+            "wins": 180,
+            "met": 361
+        }
+    ],
+    "Ekko": [
+        {
+            "hour": 0,
+            "wins": 44,
+            "met": 94
+        },
+        {
+            "hour": 8,
+            "wins": 190,
+            "met": 384
+        },
+        {
+            "hour": 16,
+            "wins": 251,
+            "met": 507
+        }
+    ],
+    "Rek'Sai": [
+        {
+            "hour": 0,
+            "wins": 16,
+            "met": 32
+        },
+        {
+            "hour": 8,
+            "wins": 49,
+            "met": 102
+        },
+        {
+            "hour": 16,
+            "wins": 72,
+            "met": 158
+        }
+    ],
+    "Azir": [
+        {
+            "hour": 0,
+            "wins": 6,
+            "met": 22
+        },
+        {
+            "hour": 8,
+            "wins": 58,
+            "met": 130
+        },
+        {
+            "hour": 16,
+            "wins": 91,
+            "met": 185
+        }
+    ],
+    "Twitch": [
+        {
+            "hour": 0,
+            "wins": 74,
+            "met": 127
+        },
+        {
+            "hour": 8,
+            "wins": 203,
+            "met": 446
+        },
+        {
+            "hour": 16,
+            "wins": 324,
+            "met": 616
+        }
+    ],
+    "Nautilus": [
+        {
+            "hour": 0,
+            "wins": 61,
+            "met": 120
+        },
+        {
+            "hour": 8,
+            "wins": 291,
+            "met": 578
+        },
+        {
+            "hour": 16,
+            "wins": 377,
+            "met": 735
+        }
+    ],
+    "Illaoi": [
+        {
+            "hour": 0,
+            "wins": 20,
+            "met": 50
+        },
+        {
+            "hour": 8,
+            "wins": 110,
+            "met": 222
+        },
+        {
+            "hour": 16,
+            "wins": 165,
+            "met": 307
+        }
+    ],
+    "LeBlanc": [
+        {
+            "hour": 0,
+            "wins": 38,
+            "met": 65
+        },
+        {
+            "hour": 8,
+            "wins": 164,
+            "met": 326
+        },
+        {
+            "hour": 16,
+            "wins": 191,
+            "met": 397
+        }
+    ],
+    "Gragas": [
+        {
+            "hour": 0,
+            "wins": 43,
+            "met": 93
+        },
+        {
+            "hour": 8,
+            "wins": 260,
+            "met": 502
+        },
+        {
+            "hour": 16,
+            "wins": 323,
+            "met": 622
+        }
+    ],
+    "Vi": [
+        {
+            "hour": 0,
+            "wins": 23,
+            "met": 49
+        },
+        {
+            "hour": 8,
+            "wins": 103,
+            "met": 238
+        },
+        {
+            "hour": 16,
+            "wins": 177,
+            "met": 361
+        }
+    ],
+    "Graves": [
+        {
+            "hour": 0,
+            "wins": 44,
+            "met": 90
+        },
+        {
+            "hour": 8,
+            "wins": 142,
+            "met": 290
+        },
+        {
+            "hour": 16,
+            "wins": 218,
+            "met": 440
+        }
+    ],
+    "Rumble": [
+        {
+            "hour": 0,
+            "wins": 17,
+            "met": 36
+        },
+        {
+            "hour": 8,
+            "wins": 48,
+            "met": 99
+        },
+        {
+            "hour": 16,
+            "wins": 59,
+            "met": 123
+        }
+    ],
+    "Sivir": [
+        {
+            "hour": 0,
+            "wins": 18,
+            "met": 49
+        },
+        {
+            "hour": 8,
+            "wins": 102,
+            "met": 184
+        },
+        {
+            "hour": 16,
+            "wins": 110,
+            "met": 230
+        }
+    ],
+    "Samira": [
+        {
+            "hour": 0,
+            "wins": 41,
+            "met": 81
+        },
+        {
+            "hour": 8,
+            "wins": 164,
+            "met": 353
+        },
+        {
+            "hour": 16,
+            "wins": 224,
+            "met": 442
+        }
+    ],
+    "Swain": [
+        {
+            "hour": 0,
+            "wins": 26,
+            "met": 52
+        },
+        {
+            "hour": 8,
+            "wins": 120,
+            "met": 250
+        },
+        {
+            "hour": 16,
+            "wins": 140,
+            "met": 292
+        }
+    ],
+    "Taric": [
+        {
+            "hour": 0,
+            "wins": 20,
+            "met": 33
+        },
+        {
+            "hour": 8,
+            "wins": 74,
+            "met": 127
+        },
+        {
+            "hour": 16,
+            "wins": 83,
+            "met": 164
+        }
+    ],
+    "Udyr": [
+        {
+            "hour": 0,
+            "wins": 41,
+            "met": 79
+        },
+        {
+            "hour": 8,
+            "wins": 139,
+            "met": 274
+        },
+        {
+            "hour": 16,
+            "wins": 174,
+            "met": 350
+        }
+    ],
+    "Kennen": [
+        {
+            "hour": 0,
+            "wins": 17,
+            "met": 39
+        },
+        {
+            "hour": 8,
+            "wins": 70,
+            "met": 134
+        },
+        {
+            "hour": 16,
+            "wins": 113,
+            "met": 197
+        }
+    ],
+    "Maokai": [
+        {
+            "hour": 0,
+            "wins": 22,
+            "met": 38
+        },
+        {
+            "hour": 8,
+            "wins": 95,
+            "met": 199
+        },
+        {
+            "hour": 16,
+            "wins": 117,
+            "met": 226
+        }
+    ],
+    "Lissandra": [
+        {
+            "hour": 0,
+            "wins": 34,
+            "met": 67
+        },
+        {
+            "hour": 8,
+            "wins": 147,
+            "met": 290
+        },
+        {
+            "hour": 16,
+            "wins": 161,
+            "met": 340
+        }
+    ],
+    "Aatrox": [
+        {
+            "hour": 0,
+            "wins": 67,
+            "met": 104
+        },
+        {
+            "hour": 8,
+            "wins": 230,
+            "met": 480
+        },
+        {
+            "hour": 16,
+            "wins": 306,
+            "met": 641
+        }
+    ],
+    "Cassiopeia": [
+        {
+            "hour": 0,
+            "wins": 24,
+            "met": 45
+        },
+        {
+            "hour": 8,
+            "wins": 92,
+            "met": 171
+        },
+        {
+            "hour": 16,
+            "wins": 97,
+            "met": 202
+        }
+    ],
+    "Ziggs": [
+        {
+            "hour": 0,
+            "wins": 7,
+            "met": 18
+        },
+        {
+            "hour": 8,
+            "wins": 79,
+            "met": 163
+        },
+        {
+            "hour": 16,
+            "wins": 107,
+            "met": 226
+        }
+    ],
+    "Zac": [
+        {
+            "hour": 0,
+            "wins": 48,
+            "met": 98
+        },
+        {
+            "hour": 8,
+            "wins": 156,
+            "met": 356
+        },
+        {
+            "hour": 16,
+            "wins": 246,
+            "met": 470
+        }
+    ],
+    "Quinn": [
+        {
+            "hour": 0,
+            "wins": 10,
+            "met": 19
+        },
+        {
+            "hour": 8,
+            "wins": 49,
+            "met": 87
+        },
+        {
+            "hour": 16,
+            "wins": 64,
+            "met": 113
+        }
+    ],
+    "Rell": [
+        {
+            "hour": 0,
+            "wins": 27,
+            "met": 62
+        },
+        {
+            "hour": 8,
+            "wins": 135,
+            "met": 274
+        },
+        {
+            "hour": 16,
+            "wins": 170,
+            "met": 334
+        }
+    ],
+    "Cappa": [
+        {
+            "hour": 0,
+            "wins": 23,
+            "met": 54
+        },
+        {
+            "hour": 8,
+            "wins": 28,
+            "met": 80
+        },
+        {
+            "hour": 16,
+            "wins": 22,
+            "met": 68
+        }
+    ],
+    "Evelynn": [
+        {
+            "hour": 0,
+            "wins": 25,
+            "met": 42
+        },
+        {
+            "hour": 8,
+            "wins": 96,
+            "met": 184
+        },
+        {
+            "hour": 16,
+            "wins": 131,
+            "met": 271
+        }
+    ],
+    "Urgot": [
+        {
+            "hour": 0,
+            "wins": 44,
+            "met": 74
+        },
+        {
+            "hour": 8,
+            "wins": 99,
+            "met": 169
+        },
+        {
+            "hour": 16,
+            "wins": 134,
+            "met": 284
+        }
+    ],
+    "Singed": [
+        {
+            "hour": 0,
+            "wins": 12,
+            "met": 25
+        },
+        {
+            "hour": 8,
+            "wins": 44,
+            "met": 93
+        },
+        {
+            "hour": 16,
+            "wins": 53,
+            "met": 109
+        }
+    ],
+    "Brand": [
+        {
+            "hour": 0,
+            "wins": 39,
+            "met": 105
+        },
+        {
+            "hour": 8,
+            "wins": 236,
+            "met": 496
+        },
+        {
+            "hour": 16,
+            "wins": 316,
+            "met": 648
+        }
+    ],
+    "Heimerdinger": [
+        {
+            "hour": 0,
+            "wins": 13,
+            "met": 21
+        },
+        {
+            "hour": 8,
+            "wins": 25,
+            "met": 67
+        },
+        {
+            "hour": 16,
+            "wins": 61,
+            "met": 100
+        }
+    ],
+    "Poppy": [
+        {
+            "hour": 0,
+            "wins": 36,
+            "met": 61
+        },
+        {
+            "hour": 8,
+            "wins": 152,
+            "met": 311
+        },
+        {
+            "hour": 16,
+            "wins": 218,
+            "met": 417
+        }
+    ],
+    "Zed": [
+        {
+            "hour": 0,
+            "wins": 65,
+            "met": 143
+        },
+        {
+            "hour": 8,
+            "wins": 250,
+            "met": 520
+        },
+        {
+            "hour": 16,
+            "wins": 316,
+            "met": 655
+        }
+    ],
+    "Braum": [
+        {
+            "hour": 0,
+            "wins": 48,
+            "met": 77
+        },
+        {
+            "hour": 8,
+            "wins": 128,
+            "met": 285
+        },
+        {
+            "hour": 16,
+            "wins": 221,
+            "met": 429
+        }
+    ],
+    "Wukong": [
+        {
+            "hour": 0,
+            "wins": 23,
+            "met": 55
+        },
+        {
+            "hour": 8,
+            "wins": 119,
+            "met": 235
+        },
+        {
+            "hour": 16,
+            "wins": 153,
+            "met": 288
+        }
+    ],
+    "K'Sante": [
+        {
+            "hour": 0,
+            "wins": 18,
+            "met": 50
+        },
+        {
+            "hour": 8,
+            "wins": 135,
+            "met": 283
+        },
+        {
+            "hour": 16,
+            "wins": 154,
+            "met": 342
+        }
+    ],
+    "Seraphine": [
+        {
+            "hour": 0,
+            "wins": 44,
+            "met": 80
+        },
+        {
+            "hour": 8,
+            "wins": 185,
+            "met": 336
+        },
+        {
+            "hour": 16,
+            "wins": 257,
+            "met": 478
+        }
+    ],
+    "Bel'Veth": [
+        {
+            "hour": 0,
+            "wins": 34,
+            "met": 62
+        },
+        {
+            "hour": 8,
+            "wins": 103,
+            "met": 224
+        },
+        {
+            "hour": 16,
+            "wins": 138,
+            "met": 278
+        }
+    ],
+    "Sett": [
+        {
+            "hour": 0,
+            "wins": 28,
+            "met": 71
+        },
+        {
+            "hour": 8,
+            "wins": 149,
+            "met": 302
+        },
+        {
+            "hour": 16,
+            "wins": 201,
+            "met": 432
+        }
+    ],
+    "Skarner": [
+        {
+            "hour": 0,
+            "wins": 35,
+            "met": 64
+        },
+        {
+            "hour": 8,
+            "wins": 137,
+            "met": 254
+        },
+        {
+            "hour": 16,
+            "wins": 199,
+            "met": 413
+        }
+    ],
+    "Neeko": [
+        {
+            "hour": 0,
+            "wins": 13,
+            "met": 29
+        },
+        {
+            "hour": 8,
+            "wins": 69,
+            "met": 136
+        },
+        {
+            "hour": 16,
+            "wins": 99,
+            "met": 195
+        }
+    ],
+    "Jayce": [
+        {
+            "hour": 0,
+            "wins": 17,
+            "met": 37
+        },
+        {
+            "hour": 8,
+            "wins": 72,
+            "met": 151
+        },
+        {
+            "hour": 16,
+            "wins": 71,
+            "met": 178
+        }
+    ],
+    "Naafiri": [
+        {
+            "hour": 0,
+            "wins": 13,
+            "met": 29
+        },
+        {
+            "hour": 8,
+            "wins": 51,
+            "met": 101
+        },
+        {
+            "hour": 16,
+            "wins": 92,
+            "met": 177
+        }
+    ],
+    "Shyvana": [
+        {
+            "hour": 0,
+            "wins": 24,
+            "met": 44
+        },
+        {
+            "hour": 8,
+            "wins": 104,
+            "met": 202
+        },
+        {
+            "hour": 16,
+            "wins": 155,
+            "met": 286
+        }
+    ],
+    "Zyra": [
+        {
+            "hour": 0,
+            "wins": 35,
+            "met": 62
+        },
+        {
+            "hour": 8,
+            "wins": 124,
+            "met": 274
+        },
+        {
+            "hour": 16,
+            "wins": 171,
+            "met": 348
+        }
+    ],
+    "Nunu": [
+        {
+            "hour": 0,
+            "wins": 19,
+            "met": 42
+        },
+        {
+            "hour": 8,
+            "wins": 101,
+            "met": 211
+        },
+        {
+            "hour": 16,
+            "wins": 124,
+            "met": 251
+        }
+    ],
+    "Anivia": [
+        {
+            "hour": 0,
+            "wins": 20,
+            "met": 41
+        },
+        {
+            "hour": 8,
+            "wins": 107,
+            "met": 183
+        },
+        {
+            "hour": 16,
+            "wins": 117,
+            "met": 210
+        }
+    ],
+    "Elise": [
+        {
+            "hour": 0,
+            "wins": 19,
+            "met": 44
+        },
+        {
+            "hour": 8,
+            "wins": 82,
+            "met": 161
+        },
+        {
+            "hour": 16,
+            "wins": 123,
+            "met": 236
+        }
+    ],
+    "Vel'Koz": [
+        {
+            "hour": 0,
+            "wins": 28,
+            "met": 54
+        },
+        {
+            "hour": 8,
+            "wins": 126,
+            "met": 276
+        },
+        {
+            "hour": 16,
+            "wins": 157,
+            "met": 339
+        }
+    ],
+    "Yorick": [
+        {
+            "hour": 0,
+            "wins": 27,
+            "met": 42
+        },
+        {
+            "hour": 8,
+            "wins": 74,
+            "met": 138
+        },
+        {
+            "hour": 16,
+            "wins": 104,
+            "met": 209
+        }
+    ],
+    "Gnar": [
+        {
+            "hour": 0,
+            "wins": 15,
+            "met": 32
+        },
+        {
+            "hour": 8,
+            "wins": 104,
+            "met": 205
+        },
+        {
+            "hour": 16,
+            "wins": 140,
+            "met": 265
+        }
+    ],
+    "Twisted_Fate": [
+        {
+            "hour": 0,
+            "wins": 32,
+            "met": 77
+        },
+        {
+            "hour": 8,
+            "wins": 119,
+            "met": 237
+        },
+        {
+            "hour": 16,
+            "wins": 169,
+            "met": 325
+        }
+    ],
+    "Corki": [
+        {
+            "hour": 0,
+            "wins": 35,
+            "met": 64
+        },
+        {
+            "hour": 8,
+            "wins": 137,
+            "met": 270
+        },
+        {
+            "hour": 16,
+            "wins": 175,
+            "met": 353
+        }
+    ],
+    "Kassadin": [
+        {
+            "hour": 0,
+            "wins": 35,
+            "met": 70
+        },
+        {
+            "hour": 8,
+            "wins": 115,
+            "met": 235
+        },
+        {
+            "hour": 16,
+            "wins": 155,
+            "met": 341
+        }
+    ],
+    "Briar": [
+        {
+            "hour": 0,
+            "wins": 28,
+            "met": 56
+        },
+        {
+            "hour": 8,
+            "wins": 137,
+            "met": 260
+        },
+        {
+            "hour": 16,
+            "wins": 148,
+            "met": 304
+        }
+    ],
+    "Hwei": [
+        {
+            "hour": 0,
+            "wins": 69,
+            "met": 121
+        },
+        {
+            "hour": 8,
+            "wins": 273,
+            "met": 522
+        },
+        {
+            "hour": 16,
+            "wins": 336,
+            "met": 657
+        }
+    ],
+    "Smolder": [
+        {
+            "hour": 0,
+            "wins": 69,
+            "met": 143
+        },
+        {
+            "hour": 8,
+            "wins": 297,
+            "met": 592
+        },
+        {
+            "hour": 16,
+            "wins": 365,
+            "met": 754
+        }
+    ],
+    "Aurora": [
+        {
+            "hour": 0,
+            "wins": 18,
+            "met": 38
+        },
+        {
+            "hour": 8,
+            "wins": 109,
+            "met": 201
+        },
+        {
+            "hour": 16,
+            "wins": 140,
+            "met": 269
+        }
+    ],
+    "Ambessa": [
+        {
+            "hour": 0,
+            "wins": 4,
+            "met": 20
+        },
+        {
+            "hour": 8,
+            "wins": 18,
+            "met": 42
+        },
+        {
+            "hour": 16,
+            "wins": 34,
+            "met": 60
+        }
+    ]
+}

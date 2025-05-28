@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 import subprocess  # Used to run the Python scripts
 import getMatchData
@@ -10,6 +10,8 @@ import io
 import base64
 import credentialsValidity
 import processingData
+import getStatistics
+import myShapley
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Change this!
@@ -187,23 +189,7 @@ def championDetails():
                     replaced = statName[0].upper() + statName.replace(' ', '_')[1:]
                 buildStats.update({replaced: buildStats.get(replaced, 0) + stats[itemName][statName]})
     
-    winrates = []
-    with open("sample.json", 'r') as f:
-        data = json.load(f)
-        f.close()
-        championData = data.get(championName)
-        if championData is not None:
-            wins = [championData[i]["wins"] for i in range(3)]
-            games = [championData[i]["games"] for i in range(3)]
-            winrates.append(round(sum(wins)/sum(games) * 100, 2))
-
-            for i in range(3):
-                if games[i] != 0:
-                    winrates.append(round(wins[i] / games[i] * 100, 2))
-                else:
-                    winrates.append(-1)
-        else:
-            winrates = (-1, -1, -1, -1)
+    winrates = getStatistics.winrates(championName)
     print(winrates)
 
     championSkillLevels = extractData.getSkillLevelUps(matchFile)[participantId]
@@ -275,7 +261,94 @@ def deathDetails():
         itemNamesPerMinute=itemNamesPerMinute
     )
 
+@app.route('/championStatistics')
+def championStatistics():
+    inputName = request.args.get("champion")
+    found = False
 
+    with open('samples\\sampleReduced.json', 'r') as f:
+        data = json.load(f)
+        f.close()
+        for champ in data:
+            if champ.__contains__(inputName):
+                championName = champ
+                found = True
+                break
+
+    if not found:
+        loweredName = inputName.lower()
+        championName = loweredName.split(' ')
+        
+        result = ""
+        for name in championName:
+            name = name[0].upper() + name[1:].lower()
+            result += name + "_"
+        championName = result[:-1]
+
+        with open('samples\\sampleReduced.json', 'r') as f:
+            data = json.load(f)
+            f.close()
+            for champ in data:
+                if champ.__contains__(championName):
+                    championName = champ
+                    found = True
+                    break
+
+    if not found:
+        championName = loweredName.split('\'')
+        
+        result = ""
+        for name in championName:
+            name = name[0].upper() + name[1:].lower()
+            result += name + "\'"
+        championName = result[:-1]
+
+        with open('samples\\sampleReduced.json', 'r') as f:
+            data = json.load(f)
+            f.close()
+            for champ in data:
+                if champ.__contains__(championName):
+                    championName = champ
+                    found = True
+                    break
+
+    if not found:
+        with open('samples\\sampleReduced.json', 'r') as f:
+            data = json.load(f)
+            f.close()
+            for champ in data:
+                if champ.__contains__(loweredName):
+                    championName = champ
+                    break
+
+    winrates = getStatistics.winrates(championName)
+    stats = getStatistics.forTeammates(championName)
+
+    return render_template(
+        'championStatistics.html',
+        championName=championName,
+        winrates=winrates,
+        stats=stats
+    )
+
+@app.route('/teamBuilder')
+def teamBuilder():
+    champions = []
+    with open("samples\\sampleReduced.json", 'r') as f:
+        data = json.load(f)
+        f.close()
+        for champ in data:
+            print(champ)
+            champions.append(champ)
+    
+    champions = sorted(champions)
+    champions.remove("Cappa")
+    champions.remove("SRU_KrugMiniMini")
+
+    return render_template(
+        "teamBuilder.html",
+        champions=champions
+    )
 
 # Route to run script1
 @app.route('/run_script1')
@@ -293,6 +366,13 @@ def run_script2():
 def run_script3():
     subprocess.run(['python', 'deathLocations.py'])
     return "deathLocations.py has been executed!"
+
+@app.route('/shapley', methods=['POST'])
+def shapley():
+    data = request.get_json()
+    result = data['value']
+    champion = data['champion']
+    return jsonify(result=myShapley.shapley_value(result[champion], result))
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')

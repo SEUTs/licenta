@@ -4,16 +4,17 @@
         font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         background-color: rgb(18, 18, 18);
         color: rgb(200, 200, 200);
-    }
+    }   
     #header {
         color: white;
         font-weight: bolder;
         font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        position: sticky;
+        position: relative;
         background-color: #202020;
         width: 100vw;
         height: 100px;
         display: flex;
+        z-index: 2;
     }
     #header div {
         position: absolute;
@@ -37,6 +38,25 @@
     a {
         color: cyan;
     }
+
+    .centered {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        width: max-content;
+    }
+    .centering {
+        text-align: center;
+    }
+    
+    #searchBar {
+        background-color: #303050;
+        padding: 30px;
+        padding-bottom: 15px;
+        padding-top: 5px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
 </style>
 
 <div id="header">
@@ -48,4 +68,12 @@
     {% else %}
         <div id="login"><a href="{{ url_for('login') }}">Log In</a></div>
     {% endif %}
+</div>
+<div id="searchBar" class="centered centering">
+    <form action="{{ url_for('championStatistics') }}" method="GET">
+        Search for a champion
+        <br>
+        <input name="champion">
+    </form>
+
 </div>

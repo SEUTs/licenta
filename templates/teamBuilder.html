@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        #selectMenu {
+            position: relative;
+            width: 97vw;
+        }
+        td {
+            width: 200px;
+            background-color: #303030;
+        }
+        .flexy {
+            display: flex;
+        }
+        .championSlot {
+            width: 80px;
+            height: 80px;
+        }
+        .championSlot img {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        th {
+            font-size: 20px;
+            font-family: Helvetica;
+            font-weight: bold;
+        }
+        table {
+            text-align: center;
+            padding: 30px;
+        }
+        .red {
+            color: #ff7070
+        }
+        .blue {
+            color: #7070ff
+        }
+        .selectChampionImage {
+            cursor: pointer;
+        }
+        .championWinrate,
+        .championShapley {
+            width: 60px;
+            height: min-content;
+            position: relative;
+            transform: translateY(-50%);
+            top: 35px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <table class="centered">
+        <tr>
+            <th>
+                <span class="blue">Your Team</span>
+                <br>
+                <div id="blueTeamWinrate">50%</div>
+            </th>
+            <th>
+                <span class="red">Enemy Team</span>
+                <br>
+                <div id="redTeamWinrate">50%</div>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate1"></div>
+                    <div class="championSlot" id="champion1"></div>
+                    <div class="championShapley" id="outputValue1"></div>
+                </div>
+            </td>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate2"></div>
+                    <div class="championSlot" id="champion2"></div>
+                    <div class="championShapley" id="outputValue2"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate3"></div>
+                    <div class="championSlot" id="champion3"></div>
+                    <div class="championShapley" id="outputValue3"></div>
+                </div>
+            </td>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate4"></div>
+                    <div class="championSlot" id="champion4"></div>
+                    <div class="championShapley" id="outputValue4"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate5"></div>
+                    <div class="championSlot" id="champion5"></div>
+                    <div class="championShapley" id="outputValue5"></div>
+                </div>
+            </td>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate6"></div>
+                    <div class="championSlot" id="champion7"></div>
+                    <div class="championShapley" id="outputValue6"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate7"></div>
+                    <div class="championSlot" id="champion7"></div>
+                    <div class="championShapley" id="outputValue7"></div>
+                </div>
+            </td>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate8"></div>
+                    <div class="championSlot" id="champion8"></div>
+                    <div class="championShapley" id="outputValue8"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate9"></div>
+                    <div class="championSlot" id="champion9"></div>
+                    <div class="championShapley" id="outputValue9"></div>
+                </div>
+            </td>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate10"></div>
+                    <div class="championSlot" id="champion10"></div>
+                    <div class="championShapley" id="outputValue10"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div id="selectMenu" class="centered" loading="lazy">
+        {% for champion in champions %}
+            <img class="selectChampionImage" loading="lazy" id="{{champion}}" src="{{'static\\icons\\champions50px\\' ~ champion ~ '.jpg' }}">
+        {% endfor %}
+    </div>
+
+</body>
+<script>
+    var slotValues = [null, null, null, null, null, null, null, null, null, null];
+    var slotChampions = [null, null, null, null, null, null, null, null, null, null];
+    var shapleyValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var selectedChampion = null;
+    var selectedValue = null;
+
+    const slots = document.getElementsByClassName("championSlot");
+    const selectButtons = document.getElementsByClassName("selectChampionImage");
+    const championWinrateDivs = document.getElementsByClassName("championWinrate");
+    const championShapleyDivs = document.getElementsByClassName("championShapley");
+    const blueTeamWinrate = document.getElementById("blueTeamWinrate");                        
+    const redTeamWinrate = document.getElementById("redTeamWinrate");                        
+    
+    var passedToFlask = [],
+        mapping = [];
+
+    function displayShapley(passedToFlask, mapping, team) {
+        team -= 1;
+        passedToFlask = [];
+        mapping = [];
+
+        for (let i = team; i < 10; i += 2)
+            if (slotChampions[i] != null) {
+                passedToFlask.push(slotChampions[i]);
+                mapping.push(i);
+            }
+
+        for (let i = 0; i < 10; ++i) {
+            championWinrateDivs[i].textContent = "";
+            championShapleyDivs[i].textContent = "";
+        }
+
+        let previousShapley = shapleyValues;
+        for (let i = 0; i < passedToFlask.length; ++i) {
+            $.ajax({
+                url: '/shapley',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ 'value': passedToFlask , 'champion': i }),
+                success: function(response) {
+                    console.log(response.result[0])
+                    championWinrateDivs[mapping[i]].textContent = response.result[0] + "%";
+                    championShapleyDivs[mapping[i]].textContent = response.result[1] + "%";
+                    shapleyValues[mapping[i]] = response.result[1];
+
+                    let blueWinrate = 50;
+                    for (let j = 0; j < 5; ++j) {
+                        blueWinrate += shapleyValues[2 * j];
+                    }
+                    let redWinrate = 50;
+                    for (let j = 0; j < 5; ++j) {
+                        redWinrate += shapleyValues[2 * j + 1];
+                    }
+                    console.log(blueWinrate, redWinrate, mapping)
+
+                    let totalWinrate = blueWinrate + redWinrate;
+                    blueWinrate /= totalWinrate;
+                    redWinrate /= totalWinrate;
+
+                    blueTeamWinrate.textContent = Math.round(blueWinrate * 100) + '%';
+                    redTeamWinrate.textContent = Math.round(redWinrate * 100) + '%';
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    }
+
+    for (let index = 0; index < slots.length; ++index) {
+        slots[index].addEventListener("click", () => { 
+            if (selectedChampion != null) {
+                slots[index].innerHTML = `<img loading="lazy" src="static\\icons\\champions\\${selectedChampion}.jpg">`;
+                slotChampions[index] = selectedChampion;
+                slotValues[index] = selectedValue;
+                selectedChampion = null;
+                hideChampion(selectedValue);
+                unhighlightEmptySlots();
+                selectedValue = null;
+
+                displayShapley(passedToFlask, mapping, 1);
+                displayShapley(passedToFlask, mapping, 2);
+
+            } else if (slotValues[index] != null) {
+                slots[index].innerHTML = ``;
+                slotChampions[index] = null;
+                normalChampion(slotValues[index]);
+                slotValues[index] = null;
+
+                for (let j = 0; j < 10; ++j) {
+                    championWinrateDivs[j].textContent = "";
+                    championShapleyDivs[j].textContent = "";
+                    shapleyValues[j] = 0;
+                }
+                
+                displayShapley(passedToFlask, mapping, 1);
+                displayShapley(passedToFlask, mapping, 2);
+            }
+        });
+    }
+
+    function highlightEmptySlots() {
+        for (let index = 0; index < slots.length; ++index)
+            if (slotValues[index] == null)
+                slots[index].style.backgroundColor = "#606060";
+    }
+    function unhighlightEmptySlots() {
+        for (let index = 0; index < slots.length; ++index)
+            slots[index].style.backgroundColor = "#303030";
+    }
+
+    function highlightChampion(index) {
+        selectButtons[index].style.filter = "brightness(300%)";
+    }
+    function normalChampion(index) {
+        selectButtons[index].style.filter = "brightness(100%)";
+    }
+    function hideChampion(index) {
+        selectButtons[index].style.filter = "brightness(25%)";
+    }
+
+    for (let index = 0; index < selectButtons.length; ++index) {
+        selectButtons[index].addEventListener("click", () => { 
+            currentChampion = selectButtons[index].id;
+            if (slotValues.includes(currentChampion) == false) {
+                highlightChampion(index)
+                if (selectedValue != null)
+                    normalChampion(selectedValue)
+                highlightEmptySlots();
+                selectedValue = index;
+                selectedChampion = currentChampion;
+            }
+        });
+    }
+</script>
+</html>

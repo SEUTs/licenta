@@ -1,16 +1,8 @@
-import requests
-
-def isGood(content):
-    return not content.__contains__("NEXT_HTTP_ERROR_FALLBACK;404\\")
-
-goodLink = "https://op.gg/lol/summoners/eune/SasEUnTicnit-SEUTs"
-badLink = "https://op.gg/lol/summoners/eune/SasEUnTicnit2-SEUTs"
-
-goodRequest = str(requests.get(goodLink).content)
-badRequest = str(requests.get(badLink).content)
-
-print(isGood(goodRequest))
-print(isGood(badRequest))
-
-# if 'status' in requests.get(f'https://europe.api.riotgames.com/lol/match/v5/matches/50124?api_key={api_key}').json():
-#     raise Exception("INVALID API KEY")
+import json
+with open("samples\\sampleReduced.json", 'r') as f:
+    data = json.load(f)
+    f.close()
+    count = 0
+    for champ in data:
+        count += data[champ][0]['met'] + data[champ][1]['met'] + data[champ][2]['met']
+print(count // 10)

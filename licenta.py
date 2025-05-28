@@ -15,8 +15,8 @@ gamesFolder = "E:\\licenta\\games"
 # api_key = "RGAPI-7d5cc397-1c5f-41dc-ab01-39bf09e0e897"
 api_key = "RGAPI-f10a772f-6eb3-4447-b771-9eae485c9092"
 requests.get("https://www.google.com")
-if 'status' in requests.get(f'https://europe.api.riotgames.com/lol/match/v5/matches/50124?api_key={api_key}').json():
-    raise Exception("INVALID API KEY")
+# if 'status' in requests.get(f'https://europe.api.riotgames.com/lol/match/v5/matches/50124?api_key={api_key}').json():
+#     raise Exception("INVALID API KEY")
 
 outputDirectory = "output"
 
@@ -88,15 +88,25 @@ def getChampionNames(link: str):
 def getMatchTimeline(matchId: str):
     def aux(matchId: str):
         api_url = getMatchTimelineUrl(matchId)
+        print(api_url)
         try:
-            response = requests.get(api_url).json()
+            response = requests.get(api_url)
+            response = response.json()
             if response.get("status_code") != 403:
                 return response
             return {}
-        except ValueError as ne:
+        except ValueError as ve:  # JSON decode error
             with open("E:\\licenta\\exceptions\\exceptions.txt", "a") as f:
-                f.write(str(ne))
+                f.write(f"JSONDecodeError: {ve}\nURL: {api_url}\n")
             return {}
+        except requests.RequestException as re:  # Catch other request-related errors
+            with open("E:\\licenta\\exceptions\\exceptions.txt", "a") as f:
+                f.write(f"RequestException: {re}\nURL: {api_url}\n")
+            return {}
+        # except ValueError as ne:
+        #     with open("E:\\licenta\\exceptions\\exceptions.txt", "a") as f:
+        #         f.write(str(ne))
+        #     return {}
     
     sleepingTime = 2
     result = aux(matchId)

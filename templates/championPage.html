@@ -6,6 +6,12 @@
         top: 50px;
         transform: translateX(-50%);
     }
+    #championImage {
+        margin-top: 19.92px;
+    }
+    .plot {
+        padding-left: 31px;
+    }
     #championImage, .plot {
         transform: translateX(-50%);
         position: relative;
@@ -141,18 +147,25 @@
     .padded {
         padding: 2px;
     }
+    .timeImg {
+        width: 60px;
+        position: absolute;
+        margin-left: 45px;
+        top: 70px;
+    }
 </style>
 
 {% include 'header.html' %}
 <table id="bigTable">
     <tr class="spacingRow"></tr>
+    <tr class="spacingRow"></tr>
     <tr>
         <td>
-            <img id="championImage" src="{{'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ championName ~ '_OriginalSquare.png/70px- ~ championName ~_OriginalSquare.png?54659.png.webp' }}">
-            <h2>{{ championName }}</h2>
+            <img id="championImage" src="{{'static\\icons\\champions\\' ~ championName ~ '.jpg' }}">
+            <h2 stlye="margin-bottom: 0px;">{{ championName }}</h2>
         </td>
         <td>
-            <p>Winrate<br>Overall</p>
+            <p style="margin-top: 16px;">Winrate<br>Overall</p>
             {% if winrates[0] != -1 %}
                 <p>{{ winrates[0] }}%</p>
             {% else %}
@@ -160,6 +173,7 @@
             {% endif %}
         </td>
         <td>
+            <img class="timeImg" src="../static/icons/morning.png">
             <p>Winrate<br>00:00 - 08:00</p>
             {% if winrates[1] != -1 %}
                 <p>{{ winrates[1] }}%</p>
@@ -168,6 +182,7 @@
             {% endif %}
         </td>
         <td>
+            <img class="timeImg" src="../static/icons/afternoon.png">
             <p>Winrate<br>08:00 - 16:00</p>
             {% if winrates[2] != -1 %}
                 <p>{{ winrates[2] }}%</p>
@@ -176,6 +191,7 @@
             {% endif %}
         </td>
         <td>
+            <img class="timeImg" src="../static/icons/night.png">
             <p>Winrate<br>16:00 - 00:00</p>
             {% if winrates[3] != -1 %}
                 <p>{{ winrates[3] }}%</p>
