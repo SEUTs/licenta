@@ -1,8 +1,6 @@
-import json
-with open("samples\\sampleReduced.json", 'r') as f:
-    data = json.load(f)
+from os import listdir
+files = listdir("E:\\licenta\\games")
+with open("C:\\Users\\SasEUnTicnit\\Desktop\\text.txt", 'x') as f:
+    for file in files:
+        f.write(file + '\n')
     f.close()
-    count = 0
-    for champ in data:
-        count += data[champ][0]['met'] + data[champ][1]['met'] + data[champ][2]['met']
-print(count // 10)

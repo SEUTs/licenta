@@ -89,7 +89,6 @@ def byHoursReduced(part, total, displayProgress = False):
         with open("samples\\sampleReduced" + str(part) + ".json", "x") as outfile:
             outfile.write(json_object)
 
-
 def byTeammates(part, total, displayProgress = False):
     result = {}
     scanned = 0
@@ -183,43 +182,49 @@ def byTeammatesReduced(part, total, displayProgress = False):
         with open("samples\\sampleTeammatesReduced" + str(part) + ".json", "x") as outfile:
             outfile.write(json_object)
 
-def useThreads():
-    t1 = threading.Thread(target=byTeammates, args=(1,8,True))
-    t2 = threading.Thread(target=byTeammates, args=(2,8,))
-    t3 = threading.Thread(target=byTeammates, args=(3,8,))
-    t4 = threading.Thread(target=byTeammates, args=(4,8,))
-    t5 = threading.Thread(target=byTeammates, args=(5,8,))
-    t6 = threading.Thread(target=byTeammates, args=(6,8,))
-    t7 = threading.Thread(target=byTeammates, args=(7,8,))
-    t8 = threading.Thread(target=byTeammates, args=(8,8,))
+def byEnemiesReduced(part, total, displayProgress = False):
+    print("Thread" + str(part) + " started")
+    result = {}
+    scanned = 0
+    files = os.listdir("E:\\licenta\\reducedGames")
+    toScan = len(files) // total
+    files = files[(part - 1) * toScan : part * toScan]
+    for file in files:
+        with open('E:\\licenta\\reducedGames\\' + file, 'r') as f:
+            reducedData = json.load(f)
+            f.close()
 
-    t1.daemon = True
-    t2.daemon = True
-    t3.daemon = True
-    t4.daemon = True
-    t5.daemon = True
-    t6.daemon = True
-    t7.daemon = True
-    t8.daemon = True
+            scanned += 1
 
-    t1.start()
-    t2.start()
-    t3.start()
-    t4.start()
-    t5.start()
-    t6.start()
-    t7.start()
-    t8.start()
+            for champ in reducedData["winners"]:
+                championStats = result.get(champ, {})
+                for enemy in reducedData["losers"]:
+                    enemyStats = championStats.get(enemy, {"wins": 0, "met": 0})
+                    enemyStats.update({"wins": enemyStats["wins"] + 1, "met": enemyStats["met"] + 1})
+                    championStats.update({enemy: enemyStats})
+                result.update({champ: championStats})
 
-    t1.join()
-    t2.join()
-    t3.join()
-    t4.join()
-    t5.join()
-    t6.join()
-    t7.join()
-    t8.join()
-def useThreadsReduced(target):
+            for champ in reducedData["losers"]:
+                championStats = result.get(champ, {})
+                for enemy in reducedData["winners"]:
+                    enemyStats = championStats.get(enemy, {"wins": 0, "met": 0})
+                    enemyStats.update({"met": enemyStats["met"] + 1})
+                    championStats.update({enemy: enemyStats})
+                result.update({champ: championStats})
+
+        if displayProgress:
+            print(f"{scanned} / {toScan}")
+    
+    json_object = json.dumps(result, indent=4)
+    
+    if os.path.isfile("samples\\sampleEnemiesReduced" + str(part) + ".json"):
+        with open("samples\\sampleEnemiesReduced" + str(part) + ".json", "w") as outfile:
+            outfile.write(json_object)
+    else:
+        with open("samples\\sampleEnemiesReduced" + str(part) + ".json", "x") as outfile:
+            outfile.write(json_object)
+
+def useThreads(target):
     t1 = threading.Thread(target=target, args=(1,8,True))
     t2 = threading.Thread(target=target, args=(2,8,))
     t3 = threading.Thread(target=target, args=(3,8,))
@@ -256,16 +261,16 @@ def useThreadsReduced(target):
     t7.join()
     t8.join()
 
-def combineResults(forTeammates = False, forReduced = True):
-    teammates = "Teammates" if forTeammates else ""
+def combineResults(forTeammates = False, forEnemies = False, forReduced = True):
+    others = "Teammates" if forTeammates else "Enemies" if forEnemies else ""
     reduced = "Reduced" if forReduced else ""
 
-    fileTemplate = "samples\\sample" + teammates + reduced
+    fileTemplate = "samples\\sample" + others + reduced
     with open(f"{fileTemplate}1.json", 'r') as f:
         result = json.load(f)
         f.close()
 
-    if forTeammates:
+    if forTeammates or forEnemies:
         for part in range(1, 9):
             with open(f"{fileTemplate}{part}.json", 'r') as f:
                 data = json.load(f)
@@ -303,6 +308,17 @@ def combineResults(forTeammates = False, forReduced = True):
         f.close()
     print("Done!")
 
+def hourButton():
+    useThreads(target=byHoursReduced)
+    combineResults(forTeammates=False, forEnemies=False, forReduced=True)
+def teammatesButton():
+    useThreads(target=byTeammatesReduced)
+    combineResults(forTeammates=True, forEnemies=False, forReduced=True)
+def enemiesButton():
+    useThreads(target=byEnemiesReduced)
+    combineResults(forTeammates=False, forEnemies=True, forReduced=True)
+
 if __name__ == "__main__":
-    useThreadsReduced(target=byHoursReduced)
-    combineResults(forTeammates=False, forReduced=True)
+    hourButton()
+    teammatesButton()
+    enemiesButton()

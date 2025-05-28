@@ -370,9 +370,15 @@ def run_script3():
 @app.route('/shapley', methods=['POST'])
 def shapley():
     data = request.get_json()
-    result = data['value']
-    champion = data['champion']
-    return jsonify(result=myShapley.shapley_value(result[champion], result))
+    team = data['team']
+    enemies = data['enemies']
+    championIndex = data['championIndex']
+    return jsonify(
+        solo = round(myShapley.soloWinrate(team[championIndex]) * 100, 2),
+        versus = round(myShapley.versusWinrate([team[championIndex], enemies[championIndex]]) * 100, 2) if len(enemies) == 5 else "",
+        team = myShapley.shapley_value_team(team[championIndex], team),
+        enemies = myShapley.shapley_value_enemies(team[championIndex], enemies)
+        )
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')

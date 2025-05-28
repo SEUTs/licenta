@@ -160,7 +160,8 @@
 <script>
     var slotValues = [null, null, null, null, null, null, null, null, null, null];
     var slotChampions = [null, null, null, null, null, null, null, null, null, null];
-    var shapleyValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var shapleyTeammateValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var shapleyEnemiesValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     var selectedChampion = null;
     var selectedValue = null;
 
@@ -171,17 +172,26 @@
     const blueTeamWinrate = document.getElementById("blueTeamWinrate");                        
     const redTeamWinrate = document.getElementById("redTeamWinrate");                        
     
-    var passedToFlask = [],
+    var flaskTeammates = [],
+        flaskEnemies = [],
         mapping = [];
 
-    function displayShapley(passedToFlask, mapping, team) {
-        team -= 1;
-        passedToFlask = [];
+    function displayShapley(flaskTeammates, flaskEnemies, mapping, belongingToTeam) {
+        teamEnemiesStart = [0, 1]
+        if (belongingToTeam == 2)
+            teamEnemiesStart = [1, 0]
+        flaskTeammates = [];
+        flaskEnemies = [];
         mapping = [];
 
-        for (let i = team; i < 10; i += 2)
+        for (let i = teamEnemiesStart[0]; i < 10; i += 2)
             if (slotChampions[i] != null) {
-                passedToFlask.push(slotChampions[i]);
+                flaskTeammates.push(slotChampions[i]);
+                mapping.push(i);
+            }
+        for (let i = teamEnemiesStart[1]; i < 10; i += 2)
+            if (slotChampions[i] != null) {
+                flaskEnemies.push(slotChampions[i]);
                 mapping.push(i);
             }
 
@@ -190,28 +200,28 @@
             championShapleyDivs[i].textContent = "";
         }
 
-        let previousShapley = shapleyValues;
-        for (let i = 0; i < passedToFlask.length; ++i) {
+        for (let i = 0; i < flaskTeammates.length; ++i) {
             $.ajax({
                 url: '/shapley',
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ 'value': passedToFlask , 'champion': i }),
+                data: JSON.stringify({ 'team': flaskTeammates, 'enemies': flaskEnemies, 'championIndex': i }),
                 success: function(response) {
-                    console.log(response.result[0])
-                    championWinrateDivs[mapping[i]].textContent = response.result[0] + "%";
-                    championShapleyDivs[mapping[i]].textContent = response.result[1] + "%";
-                    shapleyValues[mapping[i]] = response.result[1];
+                    championWinrateDivs[mapping[i]].textContent = response.solo + "%";
+                    championShapleyDivs[mapping[i]].textContent = response.team + "%\n" + response.versus + '%\n' + response.enemies + "%";
+                    shapleyTeammateValues[mapping[i]] = response.team;
+                    shapleyEnemiesValues[mapping[i]] = response.enemies;
 
                     let blueWinrate = 50;
                     for (let j = 0; j < 5; ++j) {
-                        blueWinrate += shapleyValues[2 * j];
+                        blueWinrate += shapleyTeammateValues[2 * j];
+                        blueWinrate += shapleyEnemiesValues[2 * j];
                     }
                     let redWinrate = 50;
                     for (let j = 0; j < 5; ++j) {
-                        redWinrate += shapleyValues[2 * j + 1];
+                        redWinrate += shapleyTeammateValues[2 * j + 1];
+                        redWinrate += shapleyEnemiesValues[2 * j + 1];
                     }
-                    console.log(blueWinrate, redWinrate, mapping)
 
                     let totalWinrate = blueWinrate + redWinrate;
                     blueWinrate /= totalWinrate;
@@ -238,8 +248,8 @@
                 unhighlightEmptySlots();
                 selectedValue = null;
 
-                displayShapley(passedToFlask, mapping, 1);
-                displayShapley(passedToFlask, mapping, 2);
+                displayShapley(flaskTeammates, flaskEnemies, mapping, 1);
+                displayShapley(flaskTeammates, flaskEnemies, mapping, 2);
 
             } else if (slotValues[index] != null) {
                 slots[index].innerHTML = ``;
@@ -250,11 +260,12 @@
                 for (let j = 0; j < 10; ++j) {
                     championWinrateDivs[j].textContent = "";
                     championShapleyDivs[j].textContent = "";
-                    shapleyValues[j] = 0;
+                    shapleyTeammateValues[j] = 0;
+                    shapleyEnemiesValues[j] = 0;
                 }
                 
-                displayShapley(passedToFlask, mapping, 1);
-                displayShapley(passedToFlask, mapping, 2);
+                displayShapley(flaskTeammates, flaskEnemies, mapping, 1);
+                displayShapley(flaskTeammates, flaskEnemies, mapping, 2);
             }
         });
     }
