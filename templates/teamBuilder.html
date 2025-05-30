@@ -9,6 +9,8 @@
         #selectMenu {
             position: relative;
             width: 97vw;
+            display: flex;
+            flex-wrap: wrap;
         }
         td {
             width: 200px;
@@ -52,10 +54,128 @@
             transform: translateY(-50%);
             top: 35px;
         }
+        .championSelectDiv {
+            width: 50px;
+            height: 50px;
+        }
+        
+        #roleSelector {
+            position: absolute;
+            left: 5vw;
+            top: 15vh;
+        }
+        .centering {
+            text-align: center;
+        }
+
+        .selectChampionDiv {
+            width: 50px;
+        }
+
+        #loadingChampionsBanner {
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 20px;
+            width: 100%;
+            height: 100%;
+            background-color: #303030;
+
+            position: absolute;
+        }
+        #loadingChampionsText {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #recommendations {
+            left: 2vw;
+            position: absolute;
+            top: 25vh;
+            width: 30vw;
+            height: 30vh;
+        }
+        #recommendationResults {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .recommendedChampDiv {
+            width: 34px;
+        }
+        .recommendedChampDiv img {
+            z-index: 3;
+        }
+
+        #recommendationInfo {
+            width: 500px;
+            height: 200px;
+            background-color: #303030;
+            margin-top: 20px; 
+            display: flex;
+            position: absolute;
+            top: 250px;
+        }
+        #recommendationFront {
+            position: relative;
+            transform: translateY(-50%);
+            top: 50%;
+            left: 10px;
+            width: 100px;
+            height: max-content;
+        }
+        #recommendationIcon {
+            width: 70px;
+            height: 70px;
+        }
+        #recommendationName {
+            height: 20px;
+            font-weight: bold;
+        }
+        #recommendationDescription {
+            transform: translateY(-50%);
+            position: absolute;
+            left: 80px;
+            top: 50%;
+            height: max-content;
+        }
+        ul {
+            margin: 0px;
+        }
+        li span {
+            font-weight: bold;
+        }
+        .noDecorationListItem {
+            list-style: none;
+        }
+
+        #recommendationSliders {
+            width: 150px;
+            display: grid;
+            position: absolute;
+            left: 350px;
+        }
+        #recommendationSliders h3 {
+            margin: 10px 20px 10px 0px;
+        }
+        .slider {
+            width: 20px;
+        }
     </style>
 </head>
 <body>
     {% include 'header.html' %}
+    <div id="roleSelector">
+        <div class="centering">Select your role</div>
+        <select id="myRole" class="centered" name="role">
+            <option class=centering value="Top">Top</option>
+            <option class=centering value="Jungle">Jungle</option>
+            <option class=centering value="Mid">Mid</option>
+            <option class=centering value="Bot">Bot</option>
+            <option class=centering value="Support">Support</option>
+            <option value="" selected disabled hidden></option>
+        </select>
+    </div>
     <table class="centered">
         <tr>
             <th>
@@ -150,9 +270,58 @@
             </td>
         </tr>
     </table>
+
+    <div id="recommendations" loading="lazy">
+        <div id="loadingChampionsBanner">
+            <div id="loadingChampionsText">Loading champions</div>
+        </div>
+        <h1>Recommendations</h1>
+        <div id="recommendationResults"></div>
+        <div id="recommendationInfo">
+            <div id="recommendationFront">
+                <div id="recommendationIcon" class="centered centering">
+                    <img id="recommendationIconImg">
+                </div>
+                <div id="recommendationName" class="centering"></div>
+            </div>
+            <div id="recommendationDescription">
+                <ul>
+                    <li class="noDecorationListItem">General Winrate: <span id="winSpan"></span></li>
+                    <li class="noDecorationListItem">Team potential: <span id="teamSpan"></span></li>
+                    <li class="noDecorationListItem">Lane Winrate: <span id="lanerSpan"></span> <span id="lanerDifference"></span></li>
+                    <li class="noDecorationListItem">Enemy potential: <span id="enemySpan"></span></li>
+                    <li class="noDecorationListItem">
+                        Roles:
+                        <ul>
+                            <li><span id="teamSpan">First engager</span></li>
+                            <li><span id="teamSpan">Bruiser</span></li>
+                            <li><span id="teamSpan">AOE damage</span></li>
+                            <li><span id="teamSpan">Tank</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="recommendationSliders" class="centering">
+                <h3 class="centered">Parameters</h3>
+                <span>Team potential</span>
+                <input type="range" min="1" max="3" value="2" class="slider centered" id="TeamSynergySlider">
+                <span>Laner potential</span>
+                <input type="range" min="1" max="3" value="2" class="slider centered" id="LanerCounterSlider">
+                <span>Enemy potential</span>
+                <input type="range" min="1" max="3" value="2" class="slider centered" id="EnemyCounterSlider">
+                <span>&nbsp;</span>
+            </div>
+        </div>
+    </div>
+
     <div id="selectMenu" class="centered" loading="lazy">
+        <div id="loadingChampionsBanner">
+            <div id="loadingChampionsText">Loading champions</div>
+        </div>
         {% for champion in champions %}
-            <img class="selectChampionImage" loading="lazy" id="{{champion}}" src="{{'static\\icons\\champions50px\\' ~ champion ~ '.jpg' }}">
+            <div class="selectChampionDiv">
+                <img class="selectChampionImage" loading="lazy" id="{{champion}}" src="{{'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ champion ~ '_OriginalSquare.png/50px-' ~ champion ~ '_OriginalSquare.png?54659.png.webp' }}">
+            </div>
         {% endfor %}
     </div>
 
@@ -169,12 +338,17 @@
     const selectButtons = document.getElementsByClassName("selectChampionImage");
     const championWinrateDivs = document.getElementsByClassName("championWinrate");
     const championShapleyDivs = document.getElementsByClassName("championShapley");
-    const blueTeamWinrate = document.getElementById("blueTeamWinrate");                        
-    const redTeamWinrate = document.getElementById("redTeamWinrate");                        
-    
+    const blueTeamWinrate = document.getElementById("blueTeamWinrate");
+    const redTeamWinrate = document.getElementById("redTeamWinrate");
+
     var flaskTeammates = [],
         flaskEnemies = [],
         mapping = [];
+
+    document.getElementById("loadingChampionsBanner").remove();
+    setTimeout(() => {
+        document.getElementById("loadingChampionsBanner").remove();
+    }, 1000);
 
     function displayShapley(flaskTeammates, flaskEnemies, mapping, belongingToTeam) {
         teamEnemiesStart = [0, 1]
@@ -205,10 +379,10 @@
                 url: '/shapley',
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ 'team': flaskTeammates, 'enemies': flaskEnemies, 'championIndex': i }),
+                data: JSON.stringify({ 'team': flaskTeammates, 'enemies': flaskEnemies, 'champion': flaskTeammates[i], 'championIndex': i }),
                 success: function(response) {
                     championWinrateDivs[mapping[i]].textContent = response.solo + "%";
-                    championShapleyDivs[mapping[i]].textContent = response.team + "%\n" + response.versus + '%\n' + response.enemies + "%";
+                    championShapleyDivs[mapping[i]].textContent = response.team + "%\n" + response.versus + '\n' + response.enemies + "%";
                     shapleyTeammateValues[mapping[i]] = response.team;
                     shapleyEnemiesValues[mapping[i]] = response.enemies;
 
@@ -303,5 +477,92 @@
             }
         });
     }
+    
+    const recommendationResults = document.getElementById("recommendationResults");
+    const recommendationIconImg = document.getElementById("recommendationIconImg");
+    const recommendationName = document.getElementById("recommendationName");
+    const winSpan = document.getElementById("winSpan");
+    const teamSpan = document.getElementById("teamSpan");
+    const lanerSpan = document.getElementById("lanerSpan");
+    const lanerDifference = document.getElementById("lanerDifference");
+    const enemySpan = document.getElementById("enemySpan");
+
+    function selectRecommendation(champion) {
+        recommendationIconImg.src = `https://wiki.leagueoflegends.com/en-us/images/thumb/${champion}_OriginalSquare.png/70px-${champion}_OriginalSquare.png?54659.png.webp`;
+        recommendationName.textContent = champion;
+
+        flaskTeammates = [];
+        flaskEnemies = [];
+        mapping = [];
+
+        for (let i = 0; i < 10; i += 2) {
+            if (slotChampions[i] != null) {
+                flaskTeammates.push(slotChampions[i]);
+                mapping.push(i);
+            } else {
+                flaskTeammates.push("Cappa");
+            }
+        }
+        console.log(flaskTeammates)
+        for (let i = 1; i < 10; i += 2) {
+            if (slotChampions[i] != null) {
+                flaskEnemies.push(slotChampions[i]);
+                mapping.push(i);
+            } else {
+                flaskEnemies.push("Cappa");
+            }
+        }
+
+        $.ajax({
+            url: '/shapley',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ 'team': flaskTeammates, 'enemies': flaskEnemies, 'champion': champion, 'championIndex': myRoleSelect.selectedIndex }),
+            success: function(response) {
+                winSpan.textContent = response.solo + "%";
+                teamSpan.textContent = response.team + "%";
+                lanerSpan.textContent = response.versus + "%";
+                lanerDifference.textContent = '(' + (response.versus - response.solo).toFixed(2) + "%)";
+                enemySpan.textContent = response.enemies + "%";
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+    function getRecommendations(role) {
+        $.ajax({
+            url: '/getRecommendations',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ 'role': role }),
+            success: function(response) {
+                recommendationResults.innerHTML = "";
+                response.recommendations.forEach(element => {
+                    recommendationResults.innerHTML += 
+`<div class="recommendedChampDiv">
+    <img class="recommendedChampIcons" loading="lazy" id="recommended${element}" src="https://wiki.leagueoflegends.com/en-us/images/thumb/${element}_OriginalSquare.png/30px-${element}_OriginalSquare.png?54659.png.webp">
+</div>`;
+                });
+                response.recommendations.forEach(element => {
+                    document.getElementById(`recommended${element}`).addEventListener("click", () => { selectRecommendation(element); });
+                });
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    const myRoleSelect = document.getElementById("myRole")
+    var lastRoleElement = null;
+    myRoleSelect.addEventListener("change", () => {
+        if (lastRoleElement != null)
+            lastRoleElement.style = "";
+        lastRoleElement = slots[2 * myRoleSelect.selectedIndex].parentElement;
+        lastRoleElement.style.backgroundColor = "#00a0a0";
+        getRecommendations(myRoleSelect.selectedIndex);
+    });
+
 </script>
 </html>

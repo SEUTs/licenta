@@ -338,16 +338,18 @@ def teamBuilder():
         data = json.load(f)
         f.close()
         for champ in data:
-            print(champ)
+            # print(champ)
             champions.append(champ)
     
     champions = sorted(champions)
     champions.remove("Cappa")
     champions.remove("SRU_KrugMiniMini")
 
+    # print(champions)
+
     return render_template(
         "teamBuilder.html",
-        champions=champions
+        champions=champions,
     )
 
 # Route to run script1
@@ -367,18 +369,30 @@ def run_script3():
     subprocess.run(['python', 'deathLocations.py'])
     return "deathLocations.py has been executed!"
 
+@app.route('/getRecommendations', methods=['POST'])
+def getRecommendations():
+    data = request.get_json()
+    role = data['role']
+    result = myShapley.getChampions(role)
+    # print(result)
+    return jsonify(
+        recommendations = result
+    )
+
 @app.route('/shapley', methods=['POST'])
 def shapley():
     data = request.get_json()
     team = data['team']
     enemies = data['enemies']
+    champion = data['champion']
     championIndex = data['championIndex']
+    print(data)
     return jsonify(
-        solo = round(myShapley.soloWinrate(team[championIndex]) * 100, 2),
-        versus = round(myShapley.versusWinrate([team[championIndex], enemies[championIndex]]) * 100, 2) if len(enemies) == 5 else "",
-        team = myShapley.shapley_value_team(team[championIndex], team),
-        enemies = myShapley.shapley_value_enemies(team[championIndex], enemies)
-        )
+        solo = round(myShapley.soloWinrate(champion) * 100, 2),
+        versus = round(myShapley.versusWinrate([champion, enemies[championIndex]]) * 100, 2),
+        team = myShapley.shapley_value_team(champion, team),
+        enemies = myShapley.shapley_value_enemies(champion, enemies)
+    )
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')

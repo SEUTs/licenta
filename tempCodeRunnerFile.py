@@ -1,6 +1,6 @@
-from os import listdir
-files = listdir("E:\\licenta\\games")
-with open("C:\\Users\\SasEUnTicnit\\Desktop\\text.txt", 'x') as f:
-    for file in files:
-        f.write(file + '\n')
-    f.close()
+champions = []
+with open("C:\\Users\\teata\\OneDrive\\Desktop\\toplaners.txt", 'r') as f:
+    lines = f.readlines()
+    for line in lines:
+        champions.append(line[:-1])
+print(champions)

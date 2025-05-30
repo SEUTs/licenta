@@ -256,7 +256,7 @@ def extractUsefulMatchData(match):
     matchTimestamp = getTimeOfMatch(match)
     result = []
     for index in range(10):
-        if championNamesAndKda[0][index] is not "":
+        if championNamesAndKda[0][index] != "":
             result.append([
                 championNamesAndKda[0][index], 
                 didIndexWin(index, match), 
@@ -353,7 +353,7 @@ def extractDataFromJsonToCSV(i, writerObject):
                 writerObject.writerow(entry)
             print(f"Data extracter for all champions from match {matchIndex + 1}/{len(data)}")
         else:
-            if usefulData.get("champion") is not "":
+            if usefulData.get("champion") != "":
                 writerObject.writerow(usefulData.values())
                 print(f"Data extracted from match {matchIndex + 1}/{len(data)}")
             else:
