@@ -32,7 +32,7 @@ def duoWinrate(pair):
 
 def versusWinrate(pair):
     if pair[1] == "Cappa":
-        return None
+        return 0.5
     if versusData.get(pair[0], {}).get(pair[1]) is not None:
         wins = versusData[pair[0]][pair[1]]["wins"]
         met = versusData[pair[0]][pair[1]]["met"]
@@ -72,7 +72,7 @@ def shapley_value_team(champion, team):
             continue
 
         marginal_contribs.append(with_champion - without)
-    print(marginal_contribs)
+    # print(marginal_contribs)
     return round(np.mean(marginal_contribs) * 100, 2)
 
 def shapley_value_enemies(champion, team):
@@ -94,7 +94,7 @@ def shapley_value_enemies(champion, team):
             continue
 
         marginal_contribs.append(with_champion - without)
-    print(marginal_contribs)
+    # print(marginal_contribs)
     return round(np.mean(marginal_contribs) * 100, 2)
 
 
@@ -113,8 +113,38 @@ def getChampions(role):
 
 
 
+def getBestChampions(role, team, enemies, ratios):
+    shapleyDict = {}
+    divider = sum(ratios)
+    if divider == 0:
+        return
+
+    pool = championPools[role]
+    for champion in pool:
+        if champion in enemies:
+            continue 
+
+        shapleyScore = 0
+        if ratios[0] != 0:
+            teamShapley = shapley_value_team(champion, team).item()
+            shapleyScore += teamShapley * ratios[0]
+        if ratios[1] != 0:
+            # print(champion, enemies[role])
+            lanerShapley = round((versusWinrate([champion, enemies[role]]) - soloWinrate(champion)) * 100, 2)
+            shapleyScore += lanerShapley * ratios[1]
+        if ratios[2] != 0:
+            enemyShapley = shapley_value_enemies(champion, enemies).item()
+            shapleyScore += enemyShapley * ratios[2]
+        if shapleyScore >= 0:
+            shapleyScore /= divider
+            # print(f"{champion}: {teamShapley, lanerShapley, enemyShapley, shapleyScore}")
+            shapleyDict.update({champion: round(shapleyScore, 2)})
+    
+    return sorted(shapleyDict.items(), key=lambda item: -item[1])
 
 
 if __name__ == "__main__":
-    team = ['Dr._Mundo', 'Warwick', 'Syndra', 'Ezreal', 'Yuumi']
-    print(shapley_value_team("Dr._Mundo", team))
+    # team = ['Dr._Mundo', 'Warwick', 'Syndra', 'Ezreal', 'Yuumi']
+    team = ["Cappa", "Jax", "Annie", "Ashe", "Blitzcrank"]
+    enemies = ["Cho'Gath", "Nidalee", "Syndra", "Jhin", "Pyke"]
+    print(getBestChampions(0, team, enemies, (1, 1, 1)))

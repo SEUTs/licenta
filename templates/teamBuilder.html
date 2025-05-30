@@ -161,20 +161,28 @@
         .slider {
             width: 20px;
         }
+        #recommendationsButton {
+            width: 130px;
+        }
     </style>
 </head>
 <body>
     {% include 'header.html' %}
     <div id="roleSelector">
-        <div class="centering">Select your role</div>
-        <select id="myRole" class="centered" name="role">
-            <option class=centering value="Top">Top</option>
-            <option class=centering value="Jungle">Jungle</option>
-            <option class=centering value="Mid">Mid</option>
-            <option class=centering value="Bot">Bot</option>
-            <option class=centering value="Support">Support</option>
-            <option value="" selected disabled hidden></option>
-        </select>
+        <div>
+            <div class="centering">Select your role</div>
+            <select id="myRole" class="centered" name="role">
+                <option class=centering value="Top">Top</option>
+                <option class=centering value="Jungle">Jungle</option>
+                <option class=centering value="Mid">Mid</option>
+                <option class=centering value="Bot">Bot</option>
+                <option class=centering value="Support">Support</option>
+                <option value="" selected disabled hidden></option>
+            </select>
+        </div>
+        <div>
+            <button id="recommendationsButton" onclick="recommendationFunction()">Get Recommendations</button>
+        </div>
     </div>
     <table class="centered">
         <tr>
@@ -303,13 +311,14 @@
             </div>
             <div id="recommendationSliders" class="centering">
                 <h3 class="centered">Parameters</h3>
-                <span>Team potential</span>
-                <input type="range" min="1" max="3" value="2" class="slider centered" id="TeamSynergySlider">
-                <span>Laner potential</span>
-                <input type="range" min="1" max="3" value="2" class="slider centered" id="LanerCounterSlider">
-                <span>Enemy potential</span>
-                <input type="range" min="1" max="3" value="2" class="slider centered" id="EnemyCounterSlider">
-                <span>&nbsp;</span>
+                <span>Team synergy</span>
+                <input type="range" min="0" max="2" value="2" class="slider centered" id="TeamSynergySlider">
+                <span>Laner counter</span>
+                <input type="range" min="0" max="2" value="2" class="slider centered" id="LanerCounterSlider">
+                <span>Enemy counter</span>
+                <input type="range" min="0" max="2" value="2" class="slider centered" id="EnemyCounterSlider">
+                <span>Personal Experience</span>
+                <input type="range" min="0" max="2" value="2" class="slider centered" id="PersonalExperienceSlider">
             </div>
         </div>
     </div>
@@ -362,11 +371,15 @@
             if (slotChampions[i] != null) {
                 flaskTeammates.push(slotChampions[i]);
                 mapping.push(i);
+            } else {
+                flaskTeammates.push("Cappa");
             }
         for (let i = teamEnemiesStart[1]; i < 10; i += 2)
             if (slotChampions[i] != null) {
                 flaskEnemies.push(slotChampions[i]);
                 mapping.push(i);
+            } else {
+                flaskEnemies.push("Cappa");
             }
 
         for (let i = 0; i < 10; ++i) {
@@ -374,47 +387,51 @@
             championShapleyDivs[i].textContent = "";
         }
 
-        for (let i = 0; i < flaskTeammates.length; ++i) {
-            $.ajax({
-                url: '/shapley',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ 'team': flaskTeammates, 'enemies': flaskEnemies, 'champion': flaskTeammates[i], 'championIndex': i }),
-                success: function(response) {
-                    championWinrateDivs[mapping[i]].textContent = response.solo + "%";
-                    championShapleyDivs[mapping[i]].textContent = response.team + "%\n" + response.versus + '\n' + response.enemies + "%";
-                    shapleyTeammateValues[mapping[i]] = response.team;
-                    shapleyEnemiesValues[mapping[i]] = response.enemies;
+        for (let i = teamEnemiesStart[0]; i < 10; i += 2) {
+            console.log(slotChampions[i])
+            if (slotChampions[i] != null) {
+                $.ajax({
+                    url: '/shapley',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ 'team': flaskTeammates, 'enemies': flaskEnemies, 'champion': slotChampions[i], 'championIndex': Math.floor(i / 2) }),
+                    success: function(response) {
+                        championWinrateDivs[i].textContent = response.solo + "%";
+                        championShapleyDivs[i].textContent = response.team + "%\n" + response.versus + '\n' + response.enemies + "%";
+                        shapleyTeammateValues[i] = response.team;
+                        shapleyEnemiesValues[i] = response.enemies;
 
-                    let blueWinrate = 50;
-                    for (let j = 0; j < 5; ++j) {
-                        blueWinrate += shapleyTeammateValues[2 * j];
-                        blueWinrate += shapleyEnemiesValues[2 * j];
+                        let blueWinrate = 50;
+                        for (let j = 0; j < 5; ++j) {
+                            blueWinrate += shapleyTeammateValues[2 * j];
+                            blueWinrate += shapleyEnemiesValues[2 * j];
+                        }
+                        let redWinrate = 50;
+                        for (let j = 0; j < 5; ++j) {
+                            redWinrate += shapleyTeammateValues[2 * j + 1];
+                            redWinrate += shapleyEnemiesValues[2 * j + 1];
+                        }
+
+                        let totalWinrate = blueWinrate + redWinrate;
+                        blueWinrate /= totalWinrate;
+                        redWinrate /= totalWinrate;
+
+                        blueTeamWinrate.textContent = Math.round(blueWinrate * 100) + '%';
+                        redTeamWinrate.textContent = Math.round(redWinrate * 100) + '%';
+                    },
+                    error: function(error) {
+                        console.log(error);
                     }
-                    let redWinrate = 50;
-                    for (let j = 0; j < 5; ++j) {
-                        redWinrate += shapleyTeammateValues[2 * j + 1];
-                        redWinrate += shapleyEnemiesValues[2 * j + 1];
-                    }
-
-                    let totalWinrate = blueWinrate + redWinrate;
-                    blueWinrate /= totalWinrate;
-                    redWinrate /= totalWinrate;
-
-                    blueTeamWinrate.textContent = Math.round(blueWinrate * 100) + '%';
-                    redTeamWinrate.textContent = Math.round(redWinrate * 100) + '%';
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
+                });
+            }
         }
     }
 
     for (let index = 0; index < slots.length; ++index) {
         slots[index].addEventListener("click", () => { 
             if (selectedChampion != null) {
-                slots[index].innerHTML = `<img loading="lazy" src="static\\icons\\champions\\${selectedChampion}.jpg">`;
+                slots[index].innerHTML = `<img src="https://wiki.leagueoflegends.com/en-us/images/thumb/${selectedChampion}_OriginalSquare.png/70px-${selectedChampion}_OriginalSquare.png?54659.png.webp">`;
+                // slots[index].innerHTML = `<img loading="lazy" src="static\\icons\\champions\\${selectedChampion}.jpg">`;
                 slotChampions[index] = selectedChampion;
                 slotValues[index] = selectedValue;
                 selectedChampion = null;
@@ -503,7 +520,6 @@
                 flaskTeammates.push("Cappa");
             }
         }
-        console.log(flaskTeammates)
         for (let i = 1; i < 10; i += 2) {
             if (slotChampions[i] != null) {
                 flaskEnemies.push(slotChampions[i]);
@@ -530,23 +546,32 @@
             }
         });
     }
-    function getRecommendations(role) {
+
+    const teamSlider = document.getElementById("TeamSynergySlider");
+    const lanerSlider = document.getElementById("LanerCounterSlider");
+    const enemySlider = document.getElementById("EnemyCounterSlider");
+    const expSlider = document.getElementById("PersonalExperienceSlider");
+
+    function getRecommendations(role, flaskTeammates, flaskEnemies) {
         $.ajax({
             url: '/getRecommendations',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ 'role': role }),
+            data: JSON.stringify({ 'role': role, 'ratios': [teamSlider.value, lanerSlider.value, enemySlider.value, expSlider.value], 'team': flaskTeammates, 'enemies': flaskEnemies}),
             success: function(response) {
                 recommendationResults.innerHTML = "";
-                response.recommendations.forEach(element => {
-                    recommendationResults.innerHTML += 
+                if (response.recommendations != null) {
+                    response.recommendations.forEach(element => {
+                        recommendationResults.innerHTML += 
 `<div class="recommendedChampDiv">
-    <img class="recommendedChampIcons" loading="lazy" id="recommended${element}" src="https://wiki.leagueoflegends.com/en-us/images/thumb/${element}_OriginalSquare.png/30px-${element}_OriginalSquare.png?54659.png.webp">
+    <img class="recommendedChampIcons" loading="lazy" id="recommended${element[0]}" src="https://wiki.leagueoflegends.com/en-us/images/thumb/${element[0]}_OriginalSquare.png/30px-${element[0]}_OriginalSquare.png?54659.png.webp">
 </div>`;
-                });
-                response.recommendations.forEach(element => {
-                    document.getElementById(`recommended${element}`).addEventListener("click", () => { selectRecommendation(element); });
-                });
+                    
+                    });
+                    response.recommendations.forEach(element => {
+                        document.getElementById(`recommended${element[0]}`).addEventListener("click", () => { selectRecommendation(element[0]); });
+                    });
+                }
             },
             error: function(error) {
                 console.log(error);
@@ -556,13 +581,37 @@
 
     const myRoleSelect = document.getElementById("myRole")
     var lastRoleElement = null;
-    myRoleSelect.addEventListener("change", () => {
+    function recommendationFunction() {
         if (lastRoleElement != null)
             lastRoleElement.style = "";
+        if (myRoleSelect.selectedIndex == 5)
+            return;
         lastRoleElement = slots[2 * myRoleSelect.selectedIndex].parentElement;
         lastRoleElement.style.backgroundColor = "#00a0a0";
-        getRecommendations(myRoleSelect.selectedIndex);
-    });
+
+        flaskTeammates = [];
+        flaskEnemies = [];
+        mapping = [];
+
+        for (let i = 0; i < 10; i += 2) {
+            if (slotChampions[i] != null) {
+                flaskTeammates.push(slotChampions[i]);
+                mapping.push(i);
+            } else {
+                flaskTeammates.push("Cappa");
+            }
+        }
+        for (let i = 1; i < 10; i += 2) {
+            if (slotChampions[i] != null) {
+                flaskEnemies.push(slotChampions[i]);
+                mapping.push(i);
+            } else {
+                flaskEnemies.push("Cappa");
+            }
+        }
+
+        getRecommendations(myRoleSelect.selectedIndex, flaskTeammates, flaskEnemies);
+    }
 
 </script>
 </html>

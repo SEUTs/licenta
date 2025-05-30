@@ -373,7 +373,10 @@ def run_script3():
 def getRecommendations():
     data = request.get_json()
     role = data['role']
-    result = myShapley.getChampions(role)
+    team = data['team']
+    enemies = data['enemies']
+    ratios = [int(x) for x in data['ratios']]
+    result = myShapley.getBestChampions(role, team, enemies, ratios)
     # print(result)
     return jsonify(
         recommendations = result
@@ -382,9 +385,9 @@ def getRecommendations():
 @app.route('/shapley', methods=['POST'])
 def shapley():
     data = request.get_json()
+    champion = data['champion']
     team = data['team']
     enemies = data['enemies']
-    champion = data['champion']
     championIndex = data['championIndex']
     print(data)
     return jsonify(

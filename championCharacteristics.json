@@ -1,0 +1,65 @@
+{
+    "Aatrox": {
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": "melee",
+        "damage": {
+            "type": "phyiscal",
+            "duration": "DPS",
+            "target": "multiple",
+            "value": 5
+        },
+        "resistance": {
+            "type": "sustained",
+            "value": 5
+        },
+        "control": {
+            "target": "single",
+            "value": 2
+        },
+        "mobility": {
+            "type": "continuous",
+            "value": 3
+        },
+        "utility": {
+            "value": 2
+        }
+    },
+    "Aatrox": {
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": "melee",
+        "range": "ranged",
+        "damage": {
+            "type": "phyiscal",
+            "type": "magic",
+            "type": "mixed",
+            "duration": "burst",
+            "duration": "DPS",
+            "target": "single",
+            "target": "multiple",
+            "value": 
+        },
+        "resistance": {
+            "type": "burst",
+            "type": "sustained",
+            "value": 
+        },
+        "control": {
+            "target": "single",
+            "target": "multiple",
+            "target": "mixed",
+            "value": 
+        },
+        "mobility": {
+            "type": "burst",
+            "type": "sustained",
+            "value": 
+        },
+        "utility": {
+            "value": 
+        }
+    }
+}
