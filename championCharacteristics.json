@@ -1,65 +1,5634 @@
 {
-    "Aatrox": {
+    "Tahm_Kench": {
+        "difficulty": "1",
+        "playstyle": "65",
+        "classes": [
+            "Warden"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Nocturne": {
+        "difficulty": "1",
+        "playstyle": "30",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Viktor": {
+        "difficulty": "3",
+        "playstyle": "90",
+        "classes": [
+            "Battlemage"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Aphelios": {
+        "difficulty": "3",
+        "playstyle": "20",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Xerath": {
+        "difficulty": "2",
+        "playstyle": "90",
+        "classes": [
+            "Artillery"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "0",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Darius": {
+        "difficulty": "2",
+        "playstyle": "55",
         "classes": [
             "Juggernaut"
         ],
-        "range": "melee",
-        "damage": {
-            "type": "phyiscal",
-            "duration": "DPS",
-            "target": "multiple",
-            "value": 5
-        },
-        "resistance": {
-            "type": "sustained",
-            "value": 5
-        },
-        "control": {
-            "target": "single",
-            "value": 2
-        },
-        "mobility": {
-            "type": "continuous",
-            "value": 3
-        },
-        "utility": {
-            "value": 2
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Jarvan_IV": {
+        "difficulty": "1",
+        "playstyle": "55",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Fizz": {
+        "difficulty": "2",
+        "playstyle": "90",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Miss_Fortune": {
+        "difficulty": "1",
+        "playstyle": "30",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Hybrid",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Alistar": {
+        "difficulty": "1",
+        "playstyle": "65",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Nasus": {
+        "difficulty": "1",
+        "playstyle": "20",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Master_Yi": {
+        "difficulty": "1",
+        "playstyle": "10",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Ezreal": {
+        "difficulty": "1",
+        "playstyle": "45",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Hybrid",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "0",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Blitzcrank": {
+        "difficulty": "1",
+        "playstyle": "90",
+        "classes": [
+            "Catcher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Volibear": {
+        "difficulty": "1",
+        "playstyle": "30",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Hybrid",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Diana": {
+        "difficulty": "1",
+        "playstyle": "65",
+        "classes": [
+            "Assassin",
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Katarina": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Hybrid",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Nilah": {
+        "difficulty": "3",
+        "playstyle": "25",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Leona": {
+        "difficulty": "1",
+        "playstyle": "90",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Teemo": {
+        "difficulty": "1",
+        "playstyle": "30",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Hecarim": {
+        "difficulty": "2",
+        "playstyle": "65",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Annie": {
+        "difficulty": "1",
+        "playstyle": "100",
+        "classes": [
+            "Burst"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Lulu": {
+        "difficulty": "2",
+        "playstyle": "80",
+        "classes": [
+            "Enchanter"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Kha'Zix": {
+        "difficulty": "2",
+        "playstyle": "55",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Fiddlesticks": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Kog'Maw": {
+        "difficulty": "2",
+        "playstyle": "10",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Hybrid",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "0",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Amumu": {
+        "difficulty": "1",
+        "playstyle": "90",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Veigar": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Burst"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "0",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Lucian": {
+        "difficulty": "2",
+        "playstyle": "30",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "0",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Nami": {
+        "difficulty": "2",
+        "playstyle": "90",
+        "classes": [
+            "Enchanter"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Jax": {
+        "difficulty": "1",
+        "playstyle": "10",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Hybrid",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Karthus": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Battlemage"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Rakan": {
+        "difficulty": "2",
+        "playstyle": "90",
+        "classes": [
+            "Catcher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Sejuani": {
+        "difficulty": "2",
+        "playstyle": "75",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Malzahar": {
+        "difficulty": "1",
+        "playstyle": "100",
+        "classes": [
+            "Battlemage"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Jinx": {
+        "difficulty": "2",
+        "playstyle": "10",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Soraka": {
+        "difficulty": "1",
+        "playstyle": "100",
+        "classes": [
+            "Enchanter"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Ahri": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Burst"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Kalista": {
+        "difficulty": "3",
+        "playstyle": "10",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Gwen": {
+        "difficulty": "2",
+        "playstyle": "50",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Garen": {
+        "difficulty": "1",
+        "playstyle": "75",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Akshan": {
+        "difficulty": "3",
+        "playstyle": "1",
+        "classes": [
+            "Marksman",
+            "Assassin"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Yasuo": {
+        "difficulty": "3",
+        "playstyle": "20",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Lux": {
+        "difficulty": "1",
+        "playstyle": "90",
+        "classes": [
+            "Burst",
+            "Artillery"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Senna": {
+        "difficulty": "2",
+        "playstyle": "30",
+        "classes": [
+            "Marksman",
+            "Enchanter"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Kayle": {
+        "difficulty": "2",
+        "playstyle": "20",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Hybrid",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Syndra": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Burst"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Zeri": {
+        "difficulty": "2",
+        "playstyle": "35",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "0"
+            }
+        }
+    },
+    "Lee_Sin": {
+        "difficulty": "2",
+        "playstyle": "55",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Irelia": {
+        "difficulty": "2",
+        "playstyle": "30",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Vayne": {
+        "difficulty": "2",
+        "playstyle": "0",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Morgana": {
+        "difficulty": "1",
+        "playstyle": "100",
+        "classes": [
+            "Catcher"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Warwick": {
+        "difficulty": "1",
+        "playstyle": "30",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Hybrid",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Varus": {
+        "difficulty": "2",
+        "playstyle": "20",
+        "classes": [
+            "Marksman",
+            "Artillery"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Ashe": {
+        "difficulty": "1",
+        "playstyle": "20",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Tryndamere": {
+        "difficulty": "1",
+        "playstyle": "10",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Trundle": {
+        "difficulty": "1",
+        "playstyle": "20",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Caitlyn": {
+        "difficulty": "1",
+        "playstyle": "10",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Shen": {
+        "difficulty": "2",
+        "playstyle": "45",
+        "classes": [
+            "Warden"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Hybrid",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Rammus": {
+        "difficulty": "1",
+        "playstyle": "65",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Fiora": {
+        "difficulty": "2",
+        "playstyle": "20",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Kindred": {
+        "difficulty": "3",
+        "playstyle": "20",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Orianna": {
+        "difficulty": "2",
+        "playstyle": "90",
+        "classes": [
+            "Burst"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Xayah": {
+        "difficulty": "2",
+        "playstyle": "30",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type2": "sustained",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Bard": {
+        "difficulty": "3",
+        "playstyle": "65",
+        "classes": [
+            "Catcher"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Yone": {
+        "difficulty": "3",
+        "playstyle": "45",
+        "classes": [
+            "Assassin",
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Nidalee": {
+        "difficulty": "2",
+        "playstyle": "75",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Zoe": {
+        "difficulty": "3",
+        "playstyle": "100",
+        "classes": [
+            "Burst"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Draven": {
+        "difficulty": "3",
+        "playstyle": "10",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Karma": {
+        "difficulty": "1",
+        "playstyle": "100",
+        "classes": [
+            "Burst",
+            "Enchanter"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Camille": {
+        "difficulty": "3",
+        "playstyle": "40",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Taliyah": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Battlemage"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type2": "sustained",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Pyke": {
+        "difficulty": "2",
+        "playstyle": "50",
+        "classes": [
+            "Assassin",
+            "Catcher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Ivern": {
+        "difficulty": "3",
+        "playstyle": "10",
+        "classes": [
+            "Catcher"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Xin_Zhao": {
+        "difficulty": "1",
+        "playstyle": "35",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Rengar": {
+        "difficulty": "2",
+        "playstyle": "30",
+        "classes": [
+            "Assassin",
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Kai'Sa": {
+        "difficulty": "2",
+        "playstyle": "10",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "0",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Dr._Mundo": {
+        "difficulty": "1",
+        "playstyle": "55",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Sylas": {
+        "difficulty": "3",
+        "playstyle": "70",
+        "classes": [
+            "Burst",
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Ornn": {
+        "difficulty": "2",
+        "playstyle": "60",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Janna": {
+        "difficulty": "1",
+        "playstyle": "100",
+        "classes": [
+            "Enchanter"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Olaf": {
+        "difficulty": "1",
+        "playstyle": "30",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Vex": {
+        "difficulty": "2",
+        "playstyle": "90",
+        "classes": [
+            "Burst"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Yuumi": {
+        "difficulty": "1",
+        "playstyle": "100",
+        "classes": [
+            "Enchanter"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Shaco": {
+        "difficulty": "2",
+        "playstyle": "45",
+        "classes": [
+            "Specialist",
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Hybrid",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Kled": {
+        "difficulty": "2",
+        "playstyle": "30",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Sion": {
+        "difficulty": "1",
+        "playstyle": "65",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Lillia": {
+        "difficulty": "3",
+        "playstyle": "80",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Pantheon": {
+        "difficulty": "1",
+        "playstyle": "75",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Qiyana": {
+        "difficulty": "3",
+        "playstyle": "70",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Sona": {
+        "difficulty": "1",
+        "playstyle": "90",
+        "classes": [
+            "Enchanter"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Kayn": {
+        "difficulty": "2",
+        "playstyle": "0",
+        "classes": [
+            "Skirmisher",
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "1",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Galio": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Warden"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Malphite": {
+        "difficulty": "1",
+        "playstyle": "75",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Renekton": {
+        "difficulty": "1",
+        "playstyle": "45",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Mordekaiser": {
+        "difficulty": "2",
+        "playstyle": "80",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Tristana": {
+        "difficulty": "1",
+        "playstyle": "20",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Talon": {
+        "difficulty": "2",
+        "playstyle": "65",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Ekko": {
+        "difficulty": "3",
+        "playstyle": "75",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Rek'Sai": {
+        "difficulty": "2",
+        "playstyle": "30",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Thresh": {
+        "difficulty": "3",
+        "playstyle": "75",
+        "classes": [
+            "Catcher"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Azir": {
+        "difficulty": "3",
+        "playstyle": "45",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Vladimir": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Battlemage"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Twitch": {
+        "difficulty": "2",
+        "playstyle": "0",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "1",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Nautilus": {
+        "difficulty": "2",
+        "playstyle": "80",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Illaoi": {
+        "difficulty": "2",
+        "playstyle": "65",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "1",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Vi": {
+        "difficulty": "1",
+        "playstyle": "55",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "LeBlanc": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Burst"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Jhin": {
+        "difficulty": "2",
+        "playstyle": "20",
+        "classes": [
+            "Marksman",
+            "Catcher"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Gragas": {
+        "difficulty": "2",
+        "playstyle": "90",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Graves": {
+        "difficulty": "2",
+        "playstyle": "20",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Rumble": {
+        "difficulty": "2",
+        "playstyle": "90",
+        "classes": [
+            "Battlemage"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Sivir": {
+        "difficulty": "2",
+        "playstyle": "10",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "0",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Milio": {
+        "difficulty": "1",
+        "playstyle": "80",
+        "classes": [
+            "Enchanter"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Gangplank": {
+        "difficulty": "3",
+        "playstyle": "75",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Swain": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Battlemage"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Samira": {
+        "difficulty": "2",
+        "playstyle": "0",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Taric": {
+        "difficulty": "2",
+        "playstyle": "75",
+        "classes": [
+            "Enchanter",
+            "Warden"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Udyr": {
+        "difficulty": "1",
+        "playstyle": "35",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Hybrid",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Evelynn": {
+        "difficulty": "2",
+        "playstyle": "75",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Riven": {
+        "difficulty": "2",
+        "playstyle": "75",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Heimerdinger": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Bel'Veth": {
+        "difficulty": "2",
+        "playstyle": "0",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
         }
     },
     "Aatrox": {
+        "difficulty": "2",
+        "playstyle": "20",
         "classes": [
             "Juggernaut"
         ],
-        "range": "melee",
-        "range": "ranged",
-        "damage": {
-            "type": "phyiscal",
-            "type": "magic",
-            "type": "mixed",
-            "duration": "burst",
-            "duration": "DPS",
-            "target": "single",
-            "target": "multiple",
-            "value": 
-        },
-        "resistance": {
-            "type": "burst",
-            "type": "sustained",
-            "value": 
-        },
-        "control": {
-            "target": "single",
-            "target": "multiple",
-            "target": "mixed",
-            "value": 
-        },
-        "mobility": {
-            "type": "burst",
-            "type": "sustained",
-            "value": 
-        },
-        "utility": {
-            "value": 
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Poppy": {
+        "difficulty": "2",
+        "playstyle": "75",
+        "classes": [
+            "Warden"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Jayce": {
+        "difficulty": "2",
+        "playstyle": "45",
+        "classes": [
+            "Artillery"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Zilean": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "3"
+            }
+        }
+    },
+    "Quinn": {
+        "difficulty": "2",
+        "playstyle": "20",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Naafiri": {
+        "difficulty": "1",
+        "playstyle": "70",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Seraphine": {
+        "difficulty": "1",
+        "playstyle": "100",
+        "classes": [
+            "Burst",
+            "Enchanter"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Lissandra": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Burst"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Shyvana": {
+        "difficulty": "1",
+        "playstyle": "55",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Hybrid",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Sett": {
+        "difficulty": "2",
+        "playstyle": "40",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Neeko": {
+        "difficulty": "1",
+        "playstyle": "80",
+        "classes": [
+            "Burst",
+            "Catcher"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Zyra": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Catcher"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Brand": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Burst"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Aurelion_Sol": {
+        "difficulty": "3",
+        "playstyle": "100",
+        "classes": [
+            "Battlemage"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Maokai": {
+        "difficulty": "1",
+        "playstyle": "75",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "K'Sante": {
+        "difficulty": "3",
+        "playstyle": "30",
+        "classes": [
+            "Warden",
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Cho'Gath": {
+        "difficulty": "1",
+        "playstyle": "65",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Renata_Glasc": {
+        "difficulty": "2",
+        "playstyle": "80",
+        "classes": [
+            "Enchanter"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Zac": {
+        "difficulty": "1",
+        "playstyle": "100",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Akali": {
+        "difficulty": "2",
+        "playstyle": "65",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Zed": {
+        "difficulty": "3",
+        "playstyle": "55",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Urgot": {
+        "difficulty": "2",
+        "playstyle": "55",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Anivia": {
+        "difficulty": "3",
+        "playstyle": "100",
+        "classes": [
+            "Battlemage"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Cassiopeia": {
+        "difficulty": "3",
+        "playstyle": "100",
+        "classes": [
+            "Battlemage"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Gnar": {
+        "difficulty": "3",
+        "playstyle": "45",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Rell": {
+        "difficulty": "2",
+        "playstyle": "85",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Skarner": {
+        "difficulty": "2",
+        "playstyle": "45",
+        "classes": [
+            "Vanguard",
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Elise": {
+        "difficulty": "2",
+        "playstyle": "65",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Viego": {
+        "difficulty": "3",
+        "playstyle": "20",
+        "classes": [
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Wukong": {
+        "difficulty": "1",
+        "playstyle": "55",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Vel'Koz": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Artillery"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Ziggs": {
+        "difficulty": "2",
+        "playstyle": "90",
+        "classes": [
+            "Artillery"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Nunu": {
+        "difficulty": "1",
+        "playstyle": "80",
+        "classes": [
+            "Vanguard"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Ryze": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Battlemage"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Braum": {
+        "difficulty": "2",
+        "playstyle": "90",
+        "classes": [
+            "Warden"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "1",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Corki": {
+        "difficulty": "2",
+        "playstyle": "45",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Kassadin": {
+        "difficulty": "2",
+        "playstyle": "90",
+        "classes": [
+            "Assassin"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Kennen": {
+        "difficulty": "2",
+        "playstyle": "65",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "multiple"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Briar": {
+        "difficulty": "2",
+        "playstyle": "10",
+        "classes": [
+            "Diver"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Yorick": {
+        "difficulty": "2",
+        "playstyle": "55",
+        "classes": [
+            "Juggernaut"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "single"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Singed": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Specialist"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "2",
+                "type": "Magic",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Twisted_Fate": {
+        "difficulty": "2",
+        "playstyle": "65",
+        "classes": [
+            "Burst"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Hwei": {
+        "difficulty": "3",
+        "playstyle": "90",
+        "classes": [
+            "Artillery"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "3",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "2"
+            }
+        }
+    },
+    "Smolder": {
+        "difficulty": "2",
+        "playstyle": "10",
+        "classes": [
+            "Marksman"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "DPS",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "sustained"
+            },
+            "control": {
+                "value": "1",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Aurora": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Burst",
+            "Assassin"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "1",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "mixed"
+            },
+            "mobility": {
+                "value": "2",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Ambessa": {
+        "difficulty": "3",
+        "playstyle": "55",
+        "classes": [
+            "Diver",
+            "Skirmisher"
+        ],
+        "range": [
+            "Melee"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Physical",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "1",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "3",
+                "type": "sustained"
+            },
+            "utility": {
+                "value": "1"
+            }
+        }
+    },
+    "Mel": {
+        "difficulty": "2",
+        "playstyle": "100",
+        "classes": [
+            "Artillery"
+        ],
+        "range": [
+            "Ranged"
+        ],
+        "values": {
+            "damage": {
+                "value": "3",
+                "type": "Magic",
+                "duration": "burst",
+                "target": "multiple"
+            },
+            "toughness": {
+                "value": "2",
+                "type": "burst"
+            },
+            "control": {
+                "value": "2",
+                "target": "single"
+            },
+            "mobility": {
+                "value": "1",
+                "type": "burst"
+            },
+            "utility": {
+                "value": "1"
+            }
         }
     }
 }

@@ -52,6 +52,25 @@ def getMatchStatsUrl(matchId: int):
     return f'https://europe.api.riotgames.com/lol/match/v5/matches/{matchId}?api_key={api_key}'
 def getMatchTimelineUrl(matchId: int):
     return f'https://europe.api.riotgames.com/lol/match/v5/matches/{matchId}/timeline?api_key={api_key}'
+def getChampionMastery(puuid):
+    def getChampionMasteryUrl(puuid):
+        return f'https://eun1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}?api_key={api_key}'
+    api_url = getChampionMasteryUrl(puuid)
+    def aux():
+        return requests.get(api_url).json()
+    
+    sleepingTime = 2
+    championMasteries = aux()
+    retries = 0
+    return championMasteries
+    while not isinstance(championMasteries, list):
+        retries += 1
+        print(championMasteries)
+        print(f"[STATUS]: [ChampionMastery]: Limit exceeded. Waiting {sleepingTime} seconds ({retries}/{120 // sleepingTime})")
+        time.sleep(sleepingTime)
+        championMasteries = aux()
+    return championMasteries
+
 def GetMatchIds(puuid, start: int = 0, count: int = 20):
     def aux(puuid: str, start, count):
         api_url = getMatchHistoryUrl(puuid, start, count)
