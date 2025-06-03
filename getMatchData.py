@@ -6,7 +6,7 @@ import time
 import deathLocations
 
 def saveMatchToFile(matchId):
-    matchFile = "E:\\licenta\\games\\Match_" + matchId + ".json"
+    matchFile = "games\\Match_" + matchId + ".json"
     isFile = os.path.isfile(matchFile)
     if not (isFile):
         print(f"FILE {matchFile} ADDED!\n")

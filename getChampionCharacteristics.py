@@ -35,9 +35,10 @@ def getRange(functionSoup):
 def getDamageType(functionSoup):
     return functionSoup.find_all('div')[-1].find_all('a')[-1].contents
 def getWheelValues(functionSoup):
-    wheel = soup.find(class_='infobox-section-cell').find("tbody")
+    wheel = functionSoup.find(class_='infobox-section-cell').find("tbody")
     tds = wheel.find_all("td")
     values = {}
+    wheelNames = ["damage", "toughness", "control", "mobility", "utility"]
     for i in range(len(tds)):
         values.update({wheelNames[i]: tds[i].contents[0]})
     return values
@@ -54,7 +55,6 @@ def getWheelValues(functionSoup):
 
 
 def extractData(champs):
-    wheelNames = ["damage", "toughness", "control", "mobility", "utility"]
     result = {}
     increment = 0
     for champion in champs:
@@ -129,7 +129,7 @@ def resetJson():
             f.write(json_object)
             f.close()
 
-def finishJsonFormatting():
+def fintermediateJsonFormatting():
     with open("championCharacteristics.json", 'r') as f:
         data = json.load(f)
         f.close()
@@ -179,7 +179,34 @@ def finishJsonFormatting():
     with open("championCharacteristics.json", 'w') as f:
         f.write(json_object)
         f.close()    
+
+def finishJsonFormatting():
+    with open("championCharacteristics.json", 'r') as f:
+        data = json.load(f)
+        f.close()
+    champs = [champ for champ in data]
+    for champ in champs:
+        values = data[champ]["values"]
+
+        values["damage"].update({"damageType": values["damage"]["type"]})
+        values["damage"].pop("type")
+        values["damage"].update({"damageTarget": values["damage"]["target"]})
+        values["damage"].pop("target")
             
+        values["toughness"].update({"toughnessType": values["toughness"]["type"]})
+        values["toughness"].pop("type")
+
+        values["control"].update({"controlTarget": values["control"]["target"]})
+        values["control"].pop("target")
+            
+        values["mobility"].update({"mobilityType": values["mobility"]["type"]})
+        values["mobility"].pop("type")
+
+    json_object = json.dumps(data, indent=4)
+    with open("championCharacteristics.json", 'w') as f:
+        f.write(json_object)
+        f.close()    
+    
 if __name__ == "__main__":
     finishJsonFormatting()
         

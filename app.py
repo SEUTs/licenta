@@ -12,6 +12,7 @@ import credentialsValidity
 import processingData
 import getStatistics
 import myShapley
+import getMastery
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Change this!
@@ -396,6 +397,14 @@ def shapley():
         team = myShapley.shapley_value_team(champion, team),
         enemies = myShapley.shapley_value_enemies(champion, enemies)
     )
+
+@app.route('/userProfile')
+def userProfile():
+    username = request.args.get("username")
+    tagLine = request.args.get("tag")
+    skills = getMastery.getSkills(username, tagLine)
+    top5 = getMastery.getTop5Champs(username, tagLine)
+    return render_template("userProfile.html", skills=skills, username=username, tagLine=tagLine, top5=top5)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')

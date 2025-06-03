@@ -303,7 +303,7 @@ def insertMatchesIntoFiles():
         outputFile = open (f'{outputDirectory}/matchHistory{username}.json', 'w')
         outputFile.write('[')
 
-        myLast20MatchesIds = getMatchIds(myPuuid, 0, 100)
+        myLast20MatchesIds = GetMatchIds(myPuuid, 0, 100)
         for matchIdIndex in range(len(myLast20MatchesIds)):
             timeline = getMatchTimeline(myLast20MatchesIds[matchIdIndex])
             json.dump(timeline, outputFile)
