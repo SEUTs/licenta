@@ -29,6 +29,7 @@ romans = {1: 'I', 2: 'II', 3: 'III', 4: 'IV'}
 
 
 def getPuuid(gameName: str, tagLine: str):
+    print("getting Puuid")
     def getPuuidUrl(gameName: str, tagLine: str):
         return f'https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}?api_key={api_key}'
 
@@ -37,33 +38,35 @@ def getPuuid(gameName: str, tagLine: str):
         return requests.get(api_url).json().get("puuid")
     
     sleepingTime = 2
-    matchIds = aux(gameName, tagLine)
+    puuid = aux(gameName, tagLine)
+    print(getPuuidUrl(gameName, tagLine))
     retries = 0
 
-    while "status" in matchIds:
+    while "status" in puuid:
         retries += 1
         print(f"[STATUS]: [PUUID]: Limit exceeded. Waiting {sleepingTime} seconds ({retries}/{120 // sleepingTime})")
         time.sleep(sleepingTime)
-    matchIds = aux(gameName, tagLine)
-    return matchIds   
+    puuid = aux(gameName, tagLine)
+    return puuid   
 def getMatchHistoryUrl(puuid: str, start: int = 0, count: int = 20): 
     return f'https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?queue=420&start={start}&count={count}&api_key={api_key}'
 def getMatchStatsUrl(matchId: int):
     return f'https://europe.api.riotgames.com/lol/match/v5/matches/{matchId}?api_key={api_key}'
 def getMatchTimelineUrl(matchId: int):
     return f'https://europe.api.riotgames.com/lol/match/v5/matches/{matchId}/timeline?api_key={api_key}'
-def getChampionMastery(puuid):
-    def getChampionMasteryUrl(puuid):
-        return f'https://eun1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}?api_key={api_key}'
-    api_url = getChampionMasteryUrl(puuid)
+def getChampionMastery(puuid, region):
+    print(puuid)
+    def getChampionMasteryUrl(puuid, region):
+        return f'https://{region}1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}?api_key={api_key}'
+    api_url = getChampionMasteryUrl(puuid, region)
     def aux():
-        return requests.get(api_url).json()
+        response = requests.get(api_url)
+        return response.json()
     
     sleepingTime = 2
     championMasteries = aux()
     retries = 0
-    return championMasteries
-    while not isinstance(championMasteries, list):
+    while "status" in championMasteries:
         retries += 1
         print(championMasteries)
         print(f"[STATUS]: [ChampionMastery]: Limit exceeded. Waiting {sleepingTime} seconds ({retries}/{120 // sleepingTime})")
@@ -378,7 +381,7 @@ if __name__ == "__main__":
     myPuuid = '0eVFsOl4yyzV538TUwDUo9qLISJ4fKosKDlpi0f8M_NoXluWsVF1hk-YSt21YjgV2C3GPXfjV1lwfw'
     username = "Naayil"
     tag = "666"
-    myPuuid = getPuuid(username, tag)
+    myPuuid = getPuuid(username, tag, "euw")
 
     insertMatchesIntoFiles()
     # info -> participants[] -> championName

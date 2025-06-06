@@ -301,10 +301,10 @@
                     <li class="noDecorationListItem">
                         Roles:
                         <ul>
-                            <li><span id="teamSpan">First engager</span></li>
-                            <li><span id="teamSpan">Bruiser</span></li>
-                            <li><span id="teamSpan">AOE damage</span></li>
-                            <li><span id="teamSpan">Tank</span></li>
+                            <li><span class="recommendationDetails">First engager</span></li>
+                            <li><span class="recommendationDetails">Bruiser</span></li>
+                            <li><span class="recommendationDetails">AOE damage</span></li>
+                            <li><span class="recommendationDetails">Tank</span></li>
                         </ul>
                     </li>
                 </ul>
@@ -498,6 +498,7 @@
     const recommendationResults = document.getElementById("recommendationResults");
     const recommendationIconImg = document.getElementById("recommendationIconImg");
     const recommendationName = document.getElementById("recommendationName");
+    const recommendationDetails = document.getElementsByClassName("recommendationDetails");
     const winSpan = document.getElementById("winSpan");
     const teamSpan = document.getElementById("teamSpan");
     const lanerSpan = document.getElementById("lanerSpan");
@@ -540,6 +541,23 @@
                 lanerSpan.textContent = response.versus + "%";
                 lanerDifference.textContent = '(' + (response.versus - response.solo).toFixed(2) + "%)";
                 enemySpan.textContent = response.enemies + "%";
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        $.ajax({
+            url: '/getChampionDetails',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ 'champion': champion }),
+            success: function(response) { /*
+                
+                winSpan.textContent = response.solo + "%";
+                teamSpan.textContent = response.team + "%";
+                lanerSpan.textContent = response.versus + "%";
+                lanerDifference.textContent = '(' + (response.versus - response.solo).toFixed(2) + "%)";
+                enemySpan.textContent = response.enemies + "%"; */
             },
             error: function(error) {
                 console.log(error);

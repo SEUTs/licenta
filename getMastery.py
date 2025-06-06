@@ -2,64 +2,154 @@ import json
 import licenta
 from time import time
 import matplotlib.pyplot as plt
+from os.path import isfile
 
-def getMasteries(username = "saseunticnit", tagLine="seuts"):
-    def getUserTime(user):
-        with open("samples\\masteries\\storedFor.json", 'r') as f:
-            data = json.load(f)
+def getMasteries(credentials, region):
+    def getUsefulMasteriesFormat(rawMasteryData):
+        with open("champions.json", 'r') as f:
+            championNames = json.load(f)
             f.close()
-        return data.get(user)
-
-    def addUserTime(user):
-        with open("samples\\masteries\\storedFor.json", 'r') as f:
-            data = json.load(f)
-            f.close()
-        with open("samples\\masteries\\storedFor.json", 'w') as f:
-            userTime = int(time())
-            data.update({user: userTime})
-            json_object = json.dumps(data, indent=4)
-            f.write(json_object)
-            f.close()
-
-    def getUsefulMasteryData(rawMasteryData):
+            
         usefulMasteryData = {}
         for champion in rawMasteryData:
             usefulMasteryData.update({championNames[str(champion["championId"])]: champion["championPoints"]})
         return usefulMasteryData
-
-    username = username.lower()
-    tagLine = tagLine.lower()
-    user = f"{username}#{tagLine}"
-    with open("puuids.json", 'r') as f:
-        data = json.load(f)
-        f.close()
-        puuid = data.get(user)
-        if puuid is None:
-            puuid = licenta.getPuuid(username, tagLine)
-
-    userTime = getUserTime(user)
-    if userTime is not None:
-        if time() - userTime < 864000: # 10 days
-            with open("samples\\masteries\\" + user + ".json", 'r') as g:
-                usefulMasteryData = json.load(g)
-                g.close()
-                return usefulMasteryData
-        else:
-            operation = 'w'
+    
+    if type(credentials) == list:
+        with open("puuids.json", 'r') as f:
+            puuidData = json.load(f)
+            f.close()
+            puuid = puuidData.get(credentials[0] + '#' + credentials[1])
+            if puuid is None:
+                puuid = licenta.getPuuid(credentials[0], credentials[1])
     else:
-        operation = 'x'
-
-    with open("samples\\masteries\\" + user + ".json", operation) as f:
-        rawMasteryData = licenta.getChampionMastery(puuid)
-        usefulMasteryData = getUsefulMasteryData(rawMasteryData)
-        json_object = json.dumps(usefulMasteryData, indent=4)
+        puuid = credentials
+        
+    filePath = "samples\\masteries\\" + puuid + ".json"
+    currTime = int(time())
+    
+    if isfile(filePath):
+        with open(filePath, 'r') as f:
+            data = json.load(f)
+            f.close()
+        
+        if currTime - data["timestamp"] < 864000: # 10 days
+            return data["masteries"]
+        
+    newMasteries = getUsefulMasteriesFormat(licenta.getChampionMastery(puuid, region))
+    json_object = json.dumps({"timestamp" : currTime, "masteries": newMasteries})
+    with open(filePath, 'w+') as f:
         f.write(json_object)
         f.close()
-    addUserTime(user)
-    return usefulMasteryData
+    return newMasteries
 
-def getTop5Champs(username, tagLine):
-    masteries = getMasteries(username, tagLine)
+# def getMasteries(username = "saseunticnit", tagLine="seuts", region="eun"):
+#     def getUserTime(user):
+#         with open("storedFor.json", 'r') as f:
+#             data = json.load(f)
+#             f.close()
+#         return data.get(user)
+
+#     def addUserTime(user):
+#         with open("storedFor.json", 'r') as f:
+#             data = json.load(f)
+#             f.close()
+#         with open("storedFor.json", 'w') as f:
+#             userTime = int(time())
+#             data.update({user: userTime})
+#             json_object = json.dumps(data, indent=4)
+#             f.write(json_object)
+#             f.close()
+
+    
+
+#     username = username.lower()
+#     tagLine = tagLine.lower()
+#     user = f"{username}#{tagLine}"
+#     with open("puuids.json", 'r') as f:
+#         data = json.load(f)
+#         f.close()
+#         puuid = data.get(user)
+#         if puuid is None:
+#             puuid = licenta.getPuuid(username, tagLine)
+#             data.update({user: puuid})
+#             json_object = json.dumps(data, indent=4)
+#             with open("puuids.json", 'w') as f:
+#                 f.write(json_object)
+#                 f.close()
+
+#     userTime = getUserTime(user)
+#     if userTime is not None:
+#         if time() - userTime < 864000: # 10 days
+#             with open("samples\\masteries\\" + user + ".json", 'r') as g:
+#                 usefulMasteryData = json.load(g)
+#                 g.close()
+#                 return usefulMasteryData
+#         else:
+#             operation = 'w'
+#     else:
+#         operation = 'x'
+
+#     with open("samples\\masteries\\" + user + ".json", operation) as f:
+#         rawMasteryData = licenta.getChampionMastery(puuid, region)
+#         usefulMasteryData = getUsefulMasteryData(rawMasteryData)
+#         json_object = json.dumps(usefulMasteryData, indent=4)
+#         f.write(json_object)
+#         f.close()
+#     addUserTime(user)
+#     return usefulMasteryData
+
+# def getMasteriesWithPuuid(puuid, region="eun"):
+#     def getUserTime(puuid):
+#         with open("storedFor.json", 'r') as f:
+#             data = json.load(f)
+#             f.close()
+#         return data.get(puuid)
+
+#     def addUserTime(puuid):
+#         with open("storedFor.json", 'r') as f:
+#             data = json.load(f)
+#             f.close()
+#         with open("storedFor.json", 'w') as f:
+#             userTime = int(time())
+#             data.update({puuid: userTime})
+#             json_object = json.dumps(data, indent=4)
+#             f.write(json_object)
+#             f.close()
+
+#     def getUsefulMasteryData(rawMasteryData):
+#         with open("champions.json", 'r') as f:
+#             championNames = json.load(f)
+#             f.close()
+            
+#         usefulMasteryData = {}
+#         for champion in rawMasteryData:
+#             usefulMasteryData.update({championNames[str(champion["championId"])]: champion["championPoints"]})
+#         return usefulMasteryData
+
+#     userTime = getUserTime(puuid)
+#     if userTime is not None:
+#         if time() - userTime < 864000: # 10 days
+#             with open("samples\\masteries\\" + puuid + ".json", 'r') as g:
+#                 usefulMasteryData = json.load(g)
+#                 g.close()
+#                 return usefulMasteryData
+#         else:
+#             operation = 'w'
+#     else:
+#         operation = 'x'
+
+#     with open("samples\\masteries\\" + puuid + ".json", operation) as f:
+#         rawMasteryData = licenta.getChampionMastery(puuid, region)
+#         usefulMasteryData = getUsefulMasteryData(rawMasteryData)
+#         json_object = json.dumps(usefulMasteryData, indent=4)
+#         f.write(json_object)
+#         f.close()
+#     addUserTime(puuid)
+#     return usefulMasteryData
+
+def getTop5Champs(credentials, region):
+    masteries = getMasteries(credentials, region)
     result = []
     i = 0
     for champ in masteries:
@@ -68,8 +158,8 @@ def getTop5Champs(username, tagLine):
         if i == 5:
             return result
 
-def getSkills(username, tagLine):
-    masteries = getMasteries(username, tagLine)
+def getSkills(credentials, region):
+    masteries = getMasteries(credentials, region)
     skills = {}
     with open("championCharacteristics.json", 'r') as f:
         championData = json.load(f)
@@ -159,10 +249,7 @@ def getSkills(username, tagLine):
     return skills
 
 if __name__ == "__main__":
-    with open("champions.json", 'r') as f:
-        championNames = json.load(f)
-        f.close()
-    skills = getSkills("bianca", "nya")
+    skills = getSkills(["bianca", "nya"], "eun")
     print(skills)
 
     plt.rcParams['font.size'] = 8

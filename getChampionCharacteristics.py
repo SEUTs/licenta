@@ -207,8 +207,15 @@ def finishJsonFormatting():
         f.write(json_object)
         f.close()    
     
+def getChampionDetails(champion):
+    with open("championCharacteristics.json", 'r') as f:
+        data = json.load(f)
+        f.close()
+    return data[champion]
+    
 if __name__ == "__main__":
-    finishJsonFormatting()
+    # finishJsonFormatting()
+    a = 3
         
 
 """

@@ -72,6 +72,13 @@
             Password: <br>
             <input type="password" name="password" id="passwordInput"><br>
             <input type="checkbox" onclick="showPassword()">Show Password <br><br>
+            Region:
+            <select name="region" id="region">
+                <option value="eun">EUNE</option>
+                <option value="euw">EUW</option>
+                <option value="na">NA</option>
+                <option value="kr">KR</option>
+            </select><br><br>
             <input type="submit" value="Login">
         </form>
         <p>Don't have an account? <br><a href="{{ url_for('register') }}">Register now!</a></p>

@@ -228,19 +228,19 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
                             builds[event["participantId"] - 1].remove(event["itemId"])
                         if event["itemId"] in healthPotAndControl and event["itemId"] in builds[event["participantId"] - 1]:
                             builds[event["participantId"] - 1].remove(event["itemId"])
-                        elif event["itemId"] == 3003: #Archangel's Staff
+                        elif event["itemId"] == 3003 and event["itemId"] in builds[event["participantId"] - 1]: #Archangel's Staff
                             builds[event["participantId"] - 1].remove(event["itemId"])
                             builds[event["participantId"] - 1].append(3040) #Seraph's Embrace
                             timestampsOfPurchases.add(event["timestamp"])
-                        elif event["itemId"] == 3119: #Winter's approach
+                        elif event["itemId"] == 3119 and event["itemId"] in builds[event["participantId"] - 1]: #Winter's approach
                             builds[event["participantId"] - 1].remove(event["itemId"])
                             builds[event["participantId"] - 1].append(3121) #Fimbulwinter
                             timestampsOfPurchases.add(event["timestamp"])
-                        elif event["itemId"] == 3042: #Manamune
+                        elif event["itemId"] == 3042 and event["itemId"] in builds[event["participantId"] - 1]: #Manamune
                             builds[event["participantId"] - 1].remove(event["itemId"])
                             builds[event["participantId"] - 1].append(3004) #Muramana
                             timestampsOfPurchases.add(event["timestamp"])
-                        elif event["itemId"] == 2420 and event["timestamp"] not in timestampsOfPurchases: #Seeker's Armguard
+                        elif event["itemId"] == 2420 and event["timestamp"] not in timestampsOfPurchases and event["itemId"] in builds[event["participantId"] - 1]: #Seeker's Armguard
                             builds[event["participantId"] - 1].remove(event["itemId"])
                             builds[event["participantId"] - 1].append(2421) #Shattered Armguard
                         elif event["itemId"] not in wards and event["itemId"] not in runeItems and event["itemId"] not in otherItems and event["itemId"] not in elixirs:

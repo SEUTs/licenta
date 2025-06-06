@@ -96,11 +96,69 @@
             font-weight: bolder;
             font-size: 20px;
         }
+        #alsoPlayedWith {
+            position: absolute;
+            background-color: #181864;
+            font-weight: bold;
+            font-family: Helvetica;
+            top: 1030px;
+            transform: translateX(-50%);
+            left: 270px;
+
+        }
+        #alsoPlayedWithTitle {
+            text-align: center;
+            font-size: 30px;
+            margin: 20px;
+        }
+        #alsoPlayedWithLists {
+            display: flex;
+        }
+        .lane {
+            margin: 5px;
+            width: 80px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     {% include 'header.html' %}
 
+    <div id="alsoPlayedWith">
+        <div id="alsoPlayedWithTitle">{{ championName }} mains also play</div>
+        <div id="alsoPlayedWithLists">
+            <div class="lane">
+                <div>Top</div>
+                {% for champ in alsoPlayedWith[0] %}
+                    <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/{{champ}}_OriginalSquare.png/50px-{{champ}}_OriginalSquare.png?54659.png.webp"><br>{{alsoPlayedWith[0][champ]}}%<br><br>
+                {% endfor %}
+            </div>
+            <div class="lane">
+                <div>Jungle</div>
+                {% for champ in alsoPlayedWith[1] %}
+                    <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/{{champ}}_OriginalSquare.png/50px-{{champ}}_OriginalSquare.png?54659.png.webp"><br>{{alsoPlayedWith[1][champ]}}%<br><br>
+                {% endfor %}
+            </div>
+            <div class="lane">
+                <div>Mid</div>
+                {% for champ in alsoPlayedWith[2] %}
+                    <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/{{champ}}_OriginalSquare.png/50px-{{champ}}_OriginalSquare.png?54659.png.webp"><br>{{alsoPlayedWith[2][champ]}}%<br><br>
+                {% endfor %}
+            </div>
+            <div class="lane">
+                <div>Bottom</div>
+                {% for champ in alsoPlayedWith[3] %}
+                    <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/{{champ}}_OriginalSquare.png/50px-{{champ}}_OriginalSquare.png?54659.png.webp"><br>{{alsoPlayedWith[3][champ]}}%<br><br>
+                {% endfor %}
+            </div>
+            <div class="lane">
+                <div>Support</div>
+                {% for champ in alsoPlayedWith[4] %}
+                    <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/{{champ}}_OriginalSquare.png/50px-{{champ}}_OriginalSquare.png?54659.png.webp"><br>{{alsoPlayedWith[4][champ]}}%<br><br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
     <table id="bigTable">
         <tr>
             <td colspan="6">

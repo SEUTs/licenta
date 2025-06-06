@@ -13,6 +13,8 @@ import processingData
 import getStatistics
 import myShapley
 import getMastery
+import getChampionCharacteristics
+import tempCodeRunnerFile
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Change this!
@@ -21,7 +23,7 @@ app.secret_key = 'your_secret_key'  # Change this!
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template('index.html', username=session['username'])
+        return render_template('index.html', username=session['username'], tag=session['tagLine'], region=session['region'])
     else:
         return render_template('index.html')
 
@@ -40,6 +42,7 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         tag = request.form['riotTag']
+        region = request.form['region']
         usernameTag = (username + "#" + tag).lower()
         password = request.form['password']
         
@@ -71,10 +74,13 @@ def register():
                 f.write(puuids_json)
                 f.close()
                 
-            session['username'] = usernameTag
+            session['user'] = usernameTag
+            session['username'] = username
+            session['tagLine'] = tag
+            session['region'] = region
             return redirect(url_for('index'))
         else:
-            flash('Invalid username or password')
+            flash('Username not available')
 
     return render_template('register.html')
 
@@ -85,7 +91,10 @@ def needToLogin():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = (request.form['username'] + "#" + request.form['riotTag']).lower()
+        username = request.form['username']
+        tagLine = request.form['riotTag']
+        user = (username + "#" + tagLine).lower()
+        region = request.form['region']
         password = request.form['password']
         
         users = {}
@@ -93,9 +102,12 @@ def login():
             users = json.load(f)
             f.close()
 
-        user_password_hash = users.get(username)
+        user_password_hash = users.get(user)
         if user_password_hash and check_password_hash(user_password_hash, password):
+            session['user'] = user
             session['username'] = username
+            session['tagLine'] = tagLine
+            session['region'] = region
             return redirect(url_for('index'))
         elif user_password_hash:
             flash('Invalid password')
@@ -115,6 +127,9 @@ def dashboard():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
+    session.pop('tagLine', None)
+    session.pop('region', None)
+    session.pop('user', None)
     flash('Logged out successfully.')
     return redirect(url_for('index'))
 
@@ -127,7 +142,7 @@ def lastGames():
     with open("puuids.json", 'r') as f:
         puuids = json.load(f)
         f.close()
-        credentials = session['username']
+        credentials = session['user']
         puuid = puuids.get(credentials)
         print("Getting matches for " + puuid)
         if puuid is None:
@@ -324,12 +339,13 @@ def championStatistics():
 
     winrates = getStatistics.winrates(championName)
     stats = getStatistics.forTeammates(championName)
-
+    alsoPlayedWith = tempCodeRunnerFile.getAlsoPlayed(championName)
     return render_template(
         'championStatistics.html',
         championName=championName,
         winrates=winrates,
-        stats=stats
+        stats=stats,
+        alsoPlayedWith=alsoPlayedWith
     )
 
 @app.route('/teamBuilder')
@@ -382,6 +398,16 @@ def getRecommendations():
     return jsonify(
         recommendations = result
     )
+    
+@app.route('/getChampionDetails', methods=['POST'])
+def getChampionDetails():
+    data = request.get_json()
+    champion = data['champion']
+    result = getChampionCharacteristics.getChampionDetails(champion)
+    # print(result)
+    return jsonify(
+        result = result
+    )
 
 @app.route('/shapley', methods=['POST'])
 def shapley():
@@ -390,7 +416,6 @@ def shapley():
     team = data['team']
     enemies = data['enemies']
     championIndex = data['championIndex']
-    print(data)
     return jsonify(
         solo = round(myShapley.soloWinrate(champion) * 100, 2),
         versus = round(myShapley.versusWinrate([champion, enemies[championIndex]]) * 100, 2),
@@ -402,8 +427,13 @@ def shapley():
 def userProfile():
     username = request.args.get("username")
     tagLine = request.args.get("tag")
-    skills = getMastery.getSkills(username, tagLine)
-    top5 = getMastery.getTop5Champs(username, tagLine)
+    region = request.args.get("region")
+    if username == None or tagLine == None or region == None:
+        return redirect(url_for('index'))
+    skills = getMastery.getSkills([username, tagLine], region)
+    if skills == None:
+        return redirect(url_for('index'))
+    top5 = getMastery.getTop5Champs([username, tagLine], region)
     return render_template("userProfile.html", skills=skills, username=username, tagLine=tagLine, top5=top5)
 
 if __name__ == '__main__':

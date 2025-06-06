@@ -127,7 +127,7 @@
         "difficulty": "2",
         "playstyle": "90",
         "classes": [
-            "Artillery"
+            "Artillery Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -655,7 +655,7 @@
         "difficulty": "1",
         "playstyle": "100",
         "classes": [
-            "Burst"
+            "Burst Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -841,7 +841,7 @@
         "difficulty": "2",
         "playstyle": "100",
         "classes": [
-            "Burst"
+            "Burst Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -1151,7 +1151,7 @@
         "difficulty": "2",
         "playstyle": "100",
         "classes": [
-            "Burst"
+            "Burst Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -1338,8 +1338,8 @@
         "difficulty": "1",
         "playstyle": "90",
         "classes": [
-            "Burst",
-            "Artillery"
+            "Burst Mage",
+            "Artillery Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -1433,7 +1433,7 @@
         "difficulty": "2",
         "playstyle": "100",
         "classes": [
-            "Burst"
+            "Burst Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -1651,7 +1651,7 @@
         "playstyle": "20",
         "classes": [
             "Marksman",
-            "Artillery"
+            "Artillery Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -1930,7 +1930,7 @@
         "difficulty": "2",
         "playstyle": "90",
         "classes": [
-            "Burst"
+            "Burst Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -2087,7 +2087,7 @@
         "difficulty": "3",
         "playstyle": "100",
         "classes": [
-            "Burst"
+            "Burst Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -2149,7 +2149,7 @@
         "difficulty": "1",
         "playstyle": "100",
         "classes": [
-            "Burst",
+            "Burst Mage",
             "Enchanter"
         ],
         "range": "Ranged",
@@ -2432,7 +2432,7 @@
         "difficulty": "3",
         "playstyle": "70",
         "classes": [
-            "Burst",
+            "Burst Mage",
             "Skirmisher"
         ],
         "range": "Melee",
@@ -2557,7 +2557,7 @@
         "difficulty": "2",
         "playstyle": "90",
         "classes": [
-            "Burst"
+            "Burst Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -3334,7 +3334,7 @@
         "difficulty": "2",
         "playstyle": "100",
         "classes": [
-            "Burst"
+            "Burst Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -3894,7 +3894,7 @@
         "difficulty": "2",
         "playstyle": "45",
         "classes": [
-            "Artillery"
+            "Artillery Mage"
         ],
         "range": "Melee",
         "values": {
@@ -4018,7 +4018,7 @@
         "difficulty": "1",
         "playstyle": "100",
         "classes": [
-            "Burst",
+            "Burst Mage",
             "Enchanter"
         ],
         "range": "Ranged",
@@ -4050,7 +4050,7 @@
         "difficulty": "2",
         "playstyle": "100",
         "classes": [
-            "Burst"
+            "Burst Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -4143,7 +4143,7 @@
         "difficulty": "1",
         "playstyle": "80",
         "classes": [
-            "Burst",
+            "Burst Mage",
             "Catcher"
         ],
         "range": "Ranged",
@@ -4206,7 +4206,7 @@
         "difficulty": "2",
         "playstyle": "100",
         "classes": [
-            "Burst"
+            "Burst Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -4766,7 +4766,7 @@
         "difficulty": "2",
         "playstyle": "100",
         "classes": [
-            "Artillery"
+            "Artillery Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -4797,7 +4797,7 @@
         "difficulty": "2",
         "playstyle": "90",
         "classes": [
-            "Artillery"
+            "Artillery Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -5107,7 +5107,7 @@
         "difficulty": "2",
         "playstyle": "65",
         "classes": [
-            "Burst"
+            "Burst Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -5138,7 +5138,7 @@
         "difficulty": "3",
         "playstyle": "90",
         "classes": [
-            "Artillery"
+            "Artillery Mage"
         ],
         "range": "Ranged",
         "values": {
@@ -5200,7 +5200,7 @@
         "difficulty": "2",
         "playstyle": "100",
         "classes": [
-            "Burst",
+            "Burst Mage",
             "Assassin"
         ],
         "range": "Ranged",
@@ -5264,7 +5264,7 @@
         "difficulty": "2",
         "playstyle": "100",
         "classes": [
-            "Artillery"
+            "Artillery Mage"
         ],
         "range": "Ranged",
         "values": {

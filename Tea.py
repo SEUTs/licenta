@@ -1,25 +1,20 @@
-animals = [
-    "chicken", "cow", "pig", "sheep", "rabbit"
-]
-meatTypes = [
-    "breast", "leg", "wing"
-]
+# api_url = ""
+# response = requests.get(api_url).json()
 
-def getCategory(userInput):
-    firstKeyWord = ""
-    secondKeyWord = ""
-    for word in userInput.split(' '):
-        for i in range(len(animals)):
-            if word.lower() == animals[i]:
-                firstKeyWord = animals[i]
-        for i in range(len(meatTypes)):
-            if word.lower() == meatTypes[i]:
-                secondKeyWord = meatTypes[i]
+teaDict = {
+    "foods": [
+        {
+            "description": "a, b, c"
+        },
+        {
+            "description": "a, b, c, d"
+        },
+        {
+            "description": "a, b"
+        }
+    ]
+}
 
-    if firstKeyWord == "" or secondKeyWord == "":
-        return "Not found"
-    else:
-        return firstKeyWord + " " + secondKeyWord
-    
-
-print(getCategory("Agricola Chicken Breast"))
+newFoods = sorted(teaDict["foods"], key=lambda d: len(d['description'].split(', ')))
+print(newFoods)
+print(newFoods[0])

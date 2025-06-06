@@ -64,6 +64,16 @@
                 Search for a match by id
             </div>
         </a>
+        <a href="{{ url_for('teamBuilder') }}" class="bigButtonLink">
+            <div class="myButton centered">
+                Team Builder
+            </div>
+        </a>
+        <a href="{{ url_for('userProfile') }}?username={{username}}&tag={{tag}}&region={{region}}" class="bigButtonLink">
+            <div class="myButton centered">
+                User profile
+            </div>
+        </a>
     </div>
     <!-- <button onclick="window.location.href='/run_script1'">Run licenta.py</button>
     <button onclick="window.location.href='/run_script2'">Run deathLocations.py</button> -->

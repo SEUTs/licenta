@@ -9,6 +9,7 @@
             padding-top: 100px;
             padding-bottom: 100px;
             margin-bottom: 200px;
+            border-radius: 20px;
             background-color: #181864;
             position: relative;
             left: 50%;
@@ -47,314 +48,337 @@
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
+{% if top5 == None %}
 <body>
     {% include 'header.html' %}
-    <div id="main">
-        <div id="userFullName" class="centering">{{ username }}#{{ tagLine }}</div>
-        <div id="totalMP" class="centering"></div>
-        <div class="flexy centered">
-            {% for i in range(5) %}
-                <div class="spacer centering">
-                    {{ top5[i][0] }}<br>{{ top5[i][1] }}
-                </div>
-            {% endfor %}
-        </div>
-        <div class="spacer"></div>
-        <div class="centering centered titleDiv">General Info</div>
-
-        <div class="flexy centered">
-            <canvas id="chart1" height="300" style="max-width:320px"></canvas>
-            <div class="spacer"></div>
-            <canvas id="chart2" height="300" style="max-width:320px"></canvas>
-        </div>
-        <div class="flexy centered">
-            <canvas id="chart3" height="300" style="max-width:320px"></canvas>
-            <div class="spacer"></div>
-            <canvas id="chart4" height="300" style="max-width:320px"></canvas>
-        </div>
-
-        <div class="spacer"></div>
-        <div class="titleDiv centering centered">Damage Stats</div>
-
-        <div class="flexy centered">
-            <canvas id="chart5" height="300" style="max-width:320px"></canvas>
-            <div class="spacer"></div>
-            <canvas id="chart6" height="300" style="max-width:320px"></canvas>
-        </div>
-        <div class="flexy centered">
-            <canvas id="chart7" height="300" style="max-width:320px"></canvas>
-            <div class="spacer"></div>
-            <canvas id="chart8" height="300" style="max-width:320px"></canvas>
-        </div>
-
-        <div class="spacer"></div>
-        <div class="titleDiv centering centered">Toughness Stats</div>
-
-        <div class="flexy centered">
-            <canvas id="chart9" height="300" style="max-width:320px"></canvas>
-            <div class="spacer"></div>
-            <canvas id="chart10" height="300" style="max-width:320px"></canvas>
-        </div>
-
-        <div class="spacer"></div>
-        <div class="titleDiv centering centered">Crowd Control Stats</div>
-
-        <div class="flexy centered">
-            <canvas id="chart11" height="300" style="max-width:320px"></canvas>
-            <div class="spacer"></div>
-            <canvas id="chart12" height="300" style="max-width:320px"></canvas>
-        </div>
-
-        <div class="spacer"></div>
-        <div class="titleDiv centering centered">Mobility Stats</div>
-
-        <div class="flexy centered">
-            <canvas id="chart13" height="300" style="max-width:320px"></canvas>
-            <div class="spacer"></div>
-            <canvas id="chart14" height="300" style="max-width:320px"></canvas>
-        </div>
-
-        <div class="spacer"></div>
-        <div class="titleDiv centering centered">Utility Stats</div>
-
-        <div class="flexy centered">
-            <canvas id="chart15" height="300" style="max-width:320px"></canvas>
-        </div>
+    <div id="main" class="centering">
+        No champion experience
     </div>
 </body>
-<script>
-    const skills = {{ skills | safe }}
+{% else %}
+    <body>
+    {% include 'header.html' %}
+        <div id="main">
+            <div id="userFullName" class="centering">{{ username }}#{{ tagLine }}</div>
+            <div id="totalMP" class="centering"></div>
+            <div class="flexy centered">
+                {% if top5|length > 5 %}
+                    {% set top5Range = 5 %}
+                {% else %}
+                    {% set top5Range = top5|length %}
+                {% endif %}
+                {% for i in range(top5Range) %}
+                    <div class="spacer centering">
+                        {{ top5[i][0] }}<br>{{ top5[i][1] }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="spacer"></div>
+            <div class="centering centered titleDiv">General Info</div>
 
-    function stringify(originalNumber) {
-        if (originalNumber > 999999)
-            return parseInt(originalNumber / 1000000) + "," + parseInt(originalNumber / 1000) % 1000 + ',' +  originalNumber % 1000;
+            <div class="flexy centered">
+                <canvas id="chart1" height="300" style="max-width:320px"></canvas>
+                <div class="spacer"></div>
+                <canvas id="chart2" height="300" style="max-width:320px"></canvas>
+            </div>
+            <div class="flexy centered">
+                <canvas id="chart3" height="300" style="max-width:320px"></canvas>
+                <div class="spacer"></div>
+                <canvas id="chart4" height="300" style="max-width:320px"></canvas>
+            </div>
 
-        if (thisValue > 999)
-            return parseInt(originalNumber / 1000) % 1000 + ',' +  originalNumber % 1000;
+            <div class="spacer"></div>
+            <div class="titleDiv centering centered">Damage Stats</div>
 
-        return originalNumber % 1000;
-    }
+            <div class="flexy centered">
+                <canvas id="chart5" height="300" style="max-width:320px"></canvas>
+                <div class="spacer"></div>
+                <canvas id="chart6" height="300" style="max-width:320px"></canvas>
+            </div>
+            <div class="flexy centered">
+                <canvas id="chart7" height="300" style="max-width:320px"></canvas>
+                <div class="spacer"></div>
+                <canvas id="chart8" height="300" style="max-width:320px"></canvas>
+            </div>
 
-    document.getElementById("totalMP").textContent = stringify(skills["ranges"]["Melee"] + skills["ranges"]["Ranged"]) + " Total Mastery Poitns!";
+            <div class="spacer"></div>
+            <div class="titleDiv centering centered">Toughness Stats</div>
 
-    function makeChart(chartName, labels, datapoints, colors, title, display) {
-        return new Chart(chartName, {
-            type: "pie",
-            data: {
-                labels: labels,
-                datasets: [{
-                backgroundColor: colors,
-                data: datapoints
-                }]
-            },
-            options: {
-                legend: {
-                    labels: {
-                        fontColor: "#FFFFFF",
-                        fontSize: 13
+            <div class="flexy centered">
+                <canvas id="chart9" height="300" style="max-width:320px"></canvas>
+                <div class="spacer"></div>
+                <canvas id="chart10" height="300" style="max-width:320px"></canvas>
+            </div>
+
+            <div class="spacer"></div>
+            <div class="titleDiv centering centered">Crowd Control Stats</div>
+
+            <div class="flexy centered">
+                <canvas id="chart11" height="300" style="max-width:320px"></canvas>
+                <div class="spacer"></div>
+                <canvas id="chart12" height="300" style="max-width:320px"></canvas>
+            </div>
+
+            <div class="spacer"></div>
+            <div class="titleDiv centering centered">Mobility Stats</div>
+
+            <div class="flexy centered">
+                <canvas id="chart13" height="300" style="max-width:320px"></canvas>
+                <div class="spacer"></div>
+                <canvas id="chart14" height="300" style="max-width:320px"></canvas>
+            </div>
+
+            <div class="spacer"></div>
+            <div class="titleDiv centering centered">Utility Stats</div>
+
+            <div class="flexy centered">
+                <canvas id="chart15" height="300" style="max-width:320px"></canvas>
+            </div>
+        </div>
+    </body>
+    <script>
+        const skills = {{ skills | safe }}
+
+        function stringify(originalNumber) {
+            if (originalNumber > 999999) {
+                let millions = parseInt(originalNumber / 1000000),
+                    thousands = String(parseInt(originalNumber / 1000) % 1000),
+                    units = originalNumber % 1000;
+                while (thousands.length < 3)
+                    thousands = '0' + thousands;
+                return millions + ',' + thousands + ',' + units
+            }
+            if (originalNumber > 999) {
+                let thousands = String(parseInt(originalNumber / 1000) % 1000),
+                    units = originalNumber % 1000;
+                while (thousands.length < 3)
+                    thousands = '0' + thousands;
+                return thousands + ',' + units
+            }
+            return originalNumber % 1000;
+        }
+
+        document.getElementById("totalMP").textContent = stringify(skills["ranges"]["Melee"] + skills["ranges"]["Ranged"]) + " Total Mastery Points!";
+
+        function makeChart(chartName, labels, datapoints, colors, title, display) {
+            return new Chart(chartName, {
+                type: "pie",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                    backgroundColor: colors,
+                    data: datapoints
+                    }]
+                },
+                options: {
+                    legend: {
+                        labels: {
+                            fontColor: "#FFFFFF",
+                            fontSize: 13
+                        },
+                        display: display
                     },
-                    display: display
-                },
-                title: {
-                    display: true,
-                    fontColor: "#FFFFFF",
-                    fontSize: 16,
-                    text: title
-                },
-                tooltips: {
-                    enabled: true,
-                    mode: 'single',
-                    callbacks: {
-                        label: function (tooltipItems, data) {
-                            var i = tooltipItems.index;
-                            let transformedValue = stringify(data.datasets[0].data[i]);
-                            return data.labels[i] + ": " + transformedValue + " Mastery Points";
+                    title: {
+                        display: true,
+                        fontColor: "#FFFFFF",
+                        fontSize: 16,
+                        text: title
+                    },
+                    tooltips: {
+                        enabled: true,
+                        mode: 'single',
+                        callbacks: {
+                            label: function (tooltipItems, data) {
+                                var i = tooltipItems.index;
+                                let transformedValue = stringify(data.datasets[0].data[i]);
+                                return data.labels[i] + ": " + transformedValue + " Mastery Points";
+                            }
                         }
                     }
                 }
-            }
-        });
-    }
-    standardColors = ["#60FF60", "#FFB040", "#FF4040", "#4040FF", "#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145", "#4d03eb", "#f49461", "#3057af", "#07eed3"]
-    standardLabels = ["Low", "Medium", "High"]
+            });
+        }
+        standardColors = ["#60FF60", "#FFB040", "#FF4040", "#4040FF", "#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145", "#4d03eb", "#f49461", "#3057af", "#07eed3"]
+        standardLabels = ["Low", "Medium", "High"]
 
-    makeChart(
-        "chart1", 
-        ["Easy", "Medium", "Difficult"], 
-        Object.values(skills["difficulties"]), 
-        standardColors, 
-        "Champion difficulties",
-        true
-    )
-    makeChart(
-        "chart2", 
-        Object.keys(skills["playstyles"]), 
-        Object.values(skills["playstyles"]), 
-        standardColors, 
-        "Champion playstyles",
-        true
-    )
-    makeChart(
-        "chart3", 
-        Object.keys(skills["classes"]),
-        Object.values(skills["classes"]), 
-        standardColors, 
-        "Classes played",
-        false
-    )
-    makeChart(
-        "chart4", 
-        Object.keys(skills["ranges"]),
-        Object.values(skills["ranges"]), 
-        standardColors, 
-        "Ranges played",
-        true
-    )
-
-
-
-    makeChart(
-        "chart5", 
-        standardLabels, 
-        Object.values(skills["values"]["damage"]["values"]), 
-        standardColors, 
-        "Champion damage values",
-        true
-    )
-    makeChart(
-        "chart6", 
-        Object.keys(skills["values"]["damage"]["duration"]), 
-        Object.values(skills["values"]["damage"]["duration"]), 
-        standardColors, 
-        "Champion damage styles",
-        true
-    )
-    makeChart(
-        "chart7", 
-        Object.keys(skills["values"]["damage"]["damageType"]), 
-        Object.values(skills["values"]["damage"]["damageType"]), 
-        standardColors, 
-        "Champion damage types",
-        true
-    )
-    makeChart(
-        "chart8", 
-        Object.keys(skills["values"]["damage"]["damageTarget"]), 
-        Object.values(skills["values"]["damage"]["damageTarget"]), 
-        standardColors, 
-        "Champion damage targetting",
-        true
-    )
+        makeChart(
+            "chart1", 
+            ["Easy", "Medium", "Difficult"], 
+            Object.values(skills["difficulties"]), 
+            standardColors, 
+            "Champion difficulties",
+            true
+        )
+        makeChart(
+            "chart2", 
+            Object.keys(skills["playstyles"]), 
+            Object.values(skills["playstyles"]), 
+            standardColors, 
+            "Champion playstyles",
+            true
+        )
+        makeChart(
+            "chart3", 
+            Object.keys(skills["classes"]),
+            Object.values(skills["classes"]), 
+            standardColors, 
+            "Classes played",
+            false
+        )
+        makeChart(
+            "chart4", 
+            Object.keys(skills["ranges"]),
+            Object.values(skills["ranges"]), 
+            standardColors, 
+            "Ranges played",
+            true
+        )
 
 
 
-    makeChart(
-        "chart9", 
-        standardLabels, 
-        Object.values(skills["values"]["toughness"]["values"]), 
-        standardColors, 
-        "Champion toughness values",
-        true
-    )
-    makeChart(
-        "chart10", 
-        Object.keys(skills["values"]["toughness"]["toughnessType"]), 
-        Object.values(skills["values"]["toughness"]["toughnessType"]), 
-        standardColors, 
-        "Champion toughness types",
-        true
-    )
+        makeChart(
+            "chart5", 
+            standardLabels, 
+            Object.values(skills["values"]["damage"]["values"]), 
+            standardColors, 
+            "Champion damage values",
+            true
+        )
+        makeChart(
+            "chart6", 
+            Object.keys(skills["values"]["damage"]["duration"]), 
+            Object.values(skills["values"]["damage"]["duration"]), 
+            standardColors, 
+            "Champion damage styles",
+            true
+        )
+        makeChart(
+            "chart7", 
+            Object.keys(skills["values"]["damage"]["damageType"]), 
+            Object.values(skills["values"]["damage"]["damageType"]), 
+            standardColors, 
+            "Champion damage types",
+            true
+        )
+        makeChart(
+            "chart8", 
+            Object.keys(skills["values"]["damage"]["damageTarget"]), 
+            Object.values(skills["values"]["damage"]["damageTarget"]), 
+            standardColors, 
+            "Champion damage targetting",
+            true
+        )
 
 
 
-    makeChart(
-        "chart11", 
-        ["No CC", "Low CC", "Moderate CC", "High CC"], 
-        Object.values(skills["values"]["control"]["values"]), 
-        standardColors, 
-        "CC Strength of Champions",
-        true
-    )
-    makeChart(
-        "chart12", 
-        Object.keys(skills["values"]["control"]["controlTarget"]), 
-        Object.values(skills["values"]["control"]["controlTarget"]), 
-        standardColors, 
-        "CC affected targets",
-        true
-    )
+        makeChart(
+            "chart9", 
+            standardLabels, 
+            Object.values(skills["values"]["toughness"]["values"]), 
+            standardColors, 
+            "Champion toughness values",
+            true
+        )
+        makeChart(
+            "chart10", 
+            Object.keys(skills["values"]["toughness"]["toughnessType"]), 
+            Object.values(skills["values"]["toughness"]["toughnessType"]), 
+            standardColors, 
+            "Champion toughness types",
+            true
+        )
 
 
 
-    makeChart(
-        "chart13", 
-        ["No Mobility", "Low Mobility", "Moderate Mobility", "High Mobility"], 
-        Object.values(skills["values"]["mobility"]["values"]), 
-        standardColors, 
-        "Champion mobility values",
-        true
-    )
-    makeChart(
-        "chart14", 
-        Object.keys(skills["values"]["mobility"]["mobilityType"]), 
-        Object.values(skills["values"]["mobility"]["mobilityType"]), 
-        standardColors, 
-        "Champion mobility types",
-        true
-    )
+        makeChart(
+            "chart11", 
+            ["No CC", "Low CC", "Moderate CC", "High CC"], 
+            Object.values(skills["values"]["control"]["values"]), 
+            standardColors, 
+            "CC Strength of Champions",
+            true
+        )
+        makeChart(
+            "chart12", 
+            Object.keys(skills["values"]["control"]["controlTarget"]), 
+            Object.values(skills["values"]["control"]["controlTarget"]), 
+            standardColors, 
+            "CC affected targets",
+            true
+        )
 
 
 
-    makeChart(
-        "chart15", 
-        ["No Utility", "Low Utility", "Moderate Utility", "High Utility"],  
-        Object.values(skills["values"]["utility"]["values"]), 
-        standardColors, 
-        "Utility of champions",
-        true
-    )
+        makeChart(
+            "chart13", 
+            ["No Mobility", "Low Mobility", "Moderate Mobility", "High Mobility"], 
+            Object.values(skills["values"]["mobility"]["values"]), 
+            standardColors, 
+            "Champion mobility values",
+            true
+        )
+        makeChart(
+            "chart14", 
+            Object.keys(skills["values"]["mobility"]["mobilityType"]), 
+            Object.values(skills["values"]["mobility"]["mobilityType"]), 
+            standardColors, 
+            "Champion mobility types",
+            true
+        )
 
-    /*
-    plt.title("Champion playstyles", fontsize=10)
-    plt.pie(skills["playstyles"].values(), labels=skills["playstyles"].keys())
-    
-    plt.title("Champion classes", fontsize=10)
-    plt.pie(skills["classes"].values(), labels=skills["classes"].keys())
-    
-    plt.title("Champion ranges", fontsize=10)
-    plt.pie(skills["ranges"].values(), labels=skills["ranges"].keys())
-    
-    plt.title("Champion damage", fontsize=10)
-    plt.pie(skills["values"]["damage"]["values"].values(), labels=["low", "medium", "high"])
-    
-    plt.title("Champion damage", fontsize=10)
-    plt.pie(skills["values"]["damage"]["duration"].values(), labels=skills["values"]["damage"]["duration"].keys())
-    
-    plt.title("Champion damage", fontsize=10)
-    plt.pie(skills["values"]["damage"]["damageType"].values(), labels=skills["values"]["damage"]["damageType"].keys())
-    
-    plt.title("Damage targets", fontsize=10)
-    plt.pie(skills["values"]["damage"]["damageTarget"].values(), labels=skills["values"]["damage"]["damageTarget"].keys())
-    
-    plt.title("Champion tankiness", fontsize=10)
-    plt.pie(skills["values"]["toughness"]["values"].values(), labels=skills["values"]["toughness"]["values"].keys())
-    
-    plt.title("Champion tankiness types", fontsize=10)
-    plt.pie(skills["values"]["toughness"]["toughnessType"].values(), labels=skills["values"]["toughness"]["toughnessType"].keys())
-    
-    plt.title("Champion cc", fontsize=10)
-    plt.pie(skills["values"]["control"]["values"].values(), labels=["none", "low", "medium", "high"])
-    
-    plt.title("Champion cc target", fontsize=10)
-    plt.pie(skills["values"]["control"]["controlTarget"].values(), labels=skills["values"]["control"]["controlTarget"].keys())
-    
-    plt.title("Champion mobility", fontsize=10)
-    plt.pie(skills["values"]["mobility"]["values"].values(), labels=["none", "low", "medium", "high"])
-    
-    plt.title("Champion mobility", fontsize=10)
-    plt.pie(skills["values"]["mobility"]["mobilityType"].values(), labels=skills["values"]["mobility"]["mobilityType"].keys())
-    
-    plt.title("Champion utility", fontsize=10)
-    plt.pie(skills["values"]["utility"]["values"].values(), labels=["none", "low", "medium", "high"]) */
-</script>
+
+
+        makeChart(
+            "chart15", 
+            ["No Utility", "Low Utility", "Moderate Utility", "High Utility"],  
+            Object.values(skills["values"]["utility"]["values"]), 
+            standardColors, 
+            "Utility of champions",
+            true
+        )
+
+        /*
+        plt.title("Champion playstyles", fontsize=10)
+        plt.pie(skills["playstyles"].values(), labels=skills["playstyles"].keys())
+        
+        plt.title("Champion classes", fontsize=10)
+        plt.pie(skills["classes"].values(), labels=skills["classes"].keys())
+        
+        plt.title("Champion ranges", fontsize=10)
+        plt.pie(skills["ranges"].values(), labels=skills["ranges"].keys())
+        
+        plt.title("Champion damage", fontsize=10)
+        plt.pie(skills["values"]["damage"]["values"].values(), labels=["low", "medium", "high"])
+        
+        plt.title("Champion damage", fontsize=10)
+        plt.pie(skills["values"]["damage"]["duration"].values(), labels=skills["values"]["damage"]["duration"].keys())
+        
+        plt.title("Champion damage", fontsize=10)
+        plt.pie(skills["values"]["damage"]["damageType"].values(), labels=skills["values"]["damage"]["damageType"].keys())
+        
+        plt.title("Damage targets", fontsize=10)
+        plt.pie(skills["values"]["damage"]["damageTarget"].values(), labels=skills["values"]["damage"]["damageTarget"].keys())
+        
+        plt.title("Champion tankiness", fontsize=10)
+        plt.pie(skills["values"]["toughness"]["values"].values(), labels=skills["values"]["toughness"]["values"].keys())
+        
+        plt.title("Champion tankiness types", fontsize=10)
+        plt.pie(skills["values"]["toughness"]["toughnessType"].values(), labels=skills["values"]["toughness"]["toughnessType"].keys())
+        
+        plt.title("Champion cc", fontsize=10)
+        plt.pie(skills["values"]["control"]["values"].values(), labels=["none", "low", "medium", "high"])
+        
+        plt.title("Champion cc target", fontsize=10)
+        plt.pie(skills["values"]["control"]["controlTarget"].values(), labels=skills["values"]["control"]["controlTarget"].keys())
+        
+        plt.title("Champion mobility", fontsize=10)
+        plt.pie(skills["values"]["mobility"]["values"].values(), labels=["none", "low", "medium", "high"])
+        
+        plt.title("Champion mobility", fontsize=10)
+        plt.pie(skills["values"]["mobility"]["mobilityType"].values(), labels=skills["values"]["mobility"]["mobilityType"].keys())
+        
+        plt.title("Champion utility", fontsize=10)
+        plt.pie(skills["values"]["utility"]["values"].values(), labels=["none", "low", "medium", "high"]) */
+    </script>
+{% endif %}
 </html>

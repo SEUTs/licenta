@@ -1,11 +1,46 @@
+<html>
+<head>
+    <title>Register</title>
+    <style>
+        .centered {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            width: max-content;
+        }
+    </style>
+</head>
 {% include 'header.html' %}
-<h2>Register</h2>
-<form method="POST">
-    Username: <input name="username"><br>
-    Tag: <input name="riotTag"><br>
-    Password: <input type="password" name="password"><br>
+<div class="centered">
+    <h2 class="centering">Register</h2>
+    <div class="centered">
+        <form method="POST">
+            <table>
+                <tr>
+                    <td>Username</td>
+                    <td></td>
+                    <td>Tag</td>
+                </tr>
+                <tr>
+                    <td><input name="username"></td>
+                    <td>#</td>
+                    <td><input name="riotTag" size="5"></td>
+                </tr>
+            </table>
+            
+            Region:
+            <select name="region" id="region">
+                <option value="eun">EUNE</option>
+                <option value="euw">EUW</option>
+                <option value="na">NA</option>
+                <option value="kr">KR</option>
+            </select><br><br>
+            Password:&nbsp;
+            <input type="password" name="password"><br><br>
+            <input type="submit" value="Login" class="centered"><br>
+        </form>
+    </div>
     (The password doesn't have to be<br>
-     the one used for your League account)<br>
-    <input type="submit" value="Login">
-</form>
-<p>{{ get_flashed_messages()[0] if get_flashed_messages() else '' }}</p>
+    the one used for your League account)<br>
+    <p>{{ get_flashed_messages()[0] if get_flashed_messages() else '' }}</p>
+</div>
