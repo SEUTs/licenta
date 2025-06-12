@@ -14,7 +14,8 @@
         }
         td {
             width: 200px;
-            background-color: #303030;
+            background-color: #606060;
+            /*#303030*/
         }
         .flexy {
             display: flex;
@@ -37,8 +38,16 @@
             text-align: center;
             padding: 30px;
         }
+        .positiveChange {
+            color: #00f000;
+            font-weight: bold;
+        }
+        .negativeChange {
+            color: #ff7070;
+            font-weight: bold;
+        }
         .red {
-            color: #ff7070
+            color: #ff7070;
         }
         .blue {
             color: #7070ff
@@ -48,7 +57,8 @@
         }
         .championWinrate,
         .championShapley {
-            width: 60px;
+            width: 65px;
+            font-weight: bold;
             height: min-content;
             position: relative;
             transform: translateY(-50%);
@@ -78,7 +88,8 @@
             font-size: 20px;
             width: 100%;
             height: 100%;
-            background-color: #303030;
+            background-color: #606060;
+            /*#303030*/
 
             position: absolute;
         }
@@ -135,7 +146,7 @@
         #recommendationDescription {
             transform: translateY(-50%);
             position: absolute;
-            left: 80px;
+            left: 70px;
             top: 50%;
             height: max-content;
         }
@@ -163,6 +174,53 @@
         }
         #recommendationsButton {
             width: 130px;
+        }
+
+        #demo {
+            position: absolute;
+            top: 48%;
+            right: 1%;
+        }
+        #demo img {
+            height: 136px;
+        }
+        
+        .demoLine {
+            margin: 6px 0px 6px 0px;
+            font-weight: bold;
+            font-size: 12px;
+            max-width: 90px;
+            position: relative;
+            top: 2px;
+        }
+
+        .verticalCentering {
+            position: relative;
+            top: 42%;
+            transform: translateY(-50%);
+        }
+
+        #demoTitle {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .square {
+            width: 80px;
+            height: 50px;
+            position: relative;
+            transform: translate(-50%);
+            left: 50%;
+        }
+        #slotSquare {
+            background-color: #606060;
+        }
+        #selectedSquare {
+            background-color: #007070;
+        }
+        .slotDemo {
+            margin: 10px 30px 10px 30px;
         }
     </style>
 </head>
@@ -334,6 +392,32 @@
         {% endfor %}
     </div>
 
+    <div id="demo">
+        <div id="demoTitle" class="centering">
+            Meaning of scores
+        </div>
+        <div class="flexy">
+            <div>
+                <div class="demoLine centering verticalCentering">Champion winrate</div>
+            </div>
+            <img src="https://i.ibb.co/wZvhTz42/image-2025-06-10-231520576.png">
+            <div style="margin-left: 5px">
+                <div class="demoLine centering negativeChange">Team synergy score</div>
+                <div class="demoLine centering">Winrate against enemy laner</div>
+                <div class="demoLine centering positiveChange">Enemy team counter score</div>
+            </div>
+        </div>
+        <div class="flexy centered">
+            <div class="slotDemo">
+                <div class="square" id="slotSquare"></div>
+                <div>Normal slot</div>
+            </div>
+            <div class="slotDemo">
+                <div class="square" id="selectedSquare"></div>
+                <div>Selected slot</div>
+            </div>
+        </div>
+    </div>
 </body>
 <script>
     var slotValues = [null, null, null, null, null, null, null, null, null, null];
@@ -396,8 +480,19 @@
                     contentType: 'application/json',
                     data: JSON.stringify({ 'team': flaskTeammates, 'enemies': flaskEnemies, 'champion': slotChampions[i], 'championIndex': Math.floor(i / 2) }),
                     success: function(response) {
-                        championWinrateDivs[i].textContent = response.solo + "%";
-                        championShapleyDivs[i].textContent = response.team + "%\n" + response.versus + '\n' + response.enemies + "%";
+                        let teamSynergy, enemyPotential;
+                        if(response.team > 0)
+                            teamSynergy = `<div class="positiveChange">+${response.team}%</div>`;
+                        else
+                            teamSynergy = `<div class="negativeChange">${response.team}%</div>`;
+                        if(response.enemies > 0)
+                            enemyPotential = `<div class="positiveChange">+${response.enemies}%</div>`;
+                        else
+                            enemyPotential = `<div class="negativeChange">${response.enemies}%</div>`;
+                        championWinrateDivs[i].innerHTML  = response.solo + "%";
+                        championShapleyDivs[i].innerHTML  = teamSynergy;
+                        championShapleyDivs[i].innerHTML += response.versus + '%';
+                        championShapleyDivs[i].innerHTML += enemyPotential;
                         shapleyTeammateValues[i] = response.team;
                         shapleyEnemiesValues[i] = response.enemies;
 
@@ -464,11 +559,11 @@
     function highlightEmptySlots() {
         for (let index = 0; index < slots.length; ++index)
             if (slotValues[index] == null)
-                slots[index].style.backgroundColor = "#606060";
+                slots[index].style.backgroundColor = "#D0D0D0";
     }
     function unhighlightEmptySlots() {
         for (let index = 0; index < slots.length; ++index)
-            slots[index].style.backgroundColor = "#303030";
+            slots[index].style.backgroundColor = ""; //#606060
     }
 
     function highlightChampion(index) {
@@ -605,7 +700,7 @@
         if (myRoleSelect.selectedIndex == 5)
             return;
         lastRoleElement = slots[2 * myRoleSelect.selectedIndex].parentElement;
-        lastRoleElement.style.backgroundColor = "#00a0a0";
+        lastRoleElement.style.backgroundColor = "#007070";
 
         flaskTeammates = [];
         flaskEnemies = [];

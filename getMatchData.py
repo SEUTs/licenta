@@ -258,7 +258,8 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
                     elif type[5] == "S" and event["itemId"] not in runeItems and event["itemId"] not in otherItems: #ITEM_SOLD
                         pass
                         # print(event["timestamp"], items[str(event['itemId'])], event['itemId'], builds[event["participantId"] - 1])
-                        builds[event["participantId"] - 1].remove(event["itemId"])
+                        if event["itemId"] in builds[event["participantId"] - 1]:
+                            builds[event["participantId"] - 1].remove(event["itemId"])
 
                     elif type[5] == "U": #ITEM_UNDO
                         if event["afterId"] in wards:
