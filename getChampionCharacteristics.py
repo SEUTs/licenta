@@ -129,7 +129,7 @@ def resetJson():
             f.write(json_object)
             f.close()
 
-def fintermediateJsonFormatting():
+def fintermediateJsonFormatting():  
     with open("championCharacteristics.json", 'r') as f:
         data = json.load(f)
         f.close()

@@ -96,22 +96,27 @@
             font-weight: bolder;
             font-size: 20px;
         }
-        #alsoPlayedWith {
+        #alsoPlayedWith1,
+        #alsoPlayedWith2 {
             position: absolute;
             background-color: #181864;
             font-weight: bold;
             font-family: Helvetica;
             top: 1030px;
             transform: translateX(-50%);
-            left: 270px;
-
         }
-        #alsoPlayedWithTitle {
+        #alsoPlayedWith1 {
+            left: 12%;
+        }
+        #alsoPlayedWith2 {
+            right: -5%;
+        }
+        .alsoPlayedWithTitle {
             text-align: center;
-            font-size: 30px;
+            font-size: 20px;
             margin: 20px;
         }
-        #alsoPlayedWithLists {
+        .alsoPlayedWithLists {
             display: flex;
         }
         .lane {
@@ -124,9 +129,9 @@
 <body>
     {% include 'header.html' %}
 
-    <div id="alsoPlayedWith">
-        <div id="alsoPlayedWithTitle">{{ championName }} mains also play</div>
-        <div id="alsoPlayedWithLists">
+    <div id="alsoPlayedWith1">
+        <div class="alsoPlayedWithTitle">{{ championName }} mains also play</div>
+        <div class="alsoPlayedWithLists centered">
             <div class="lane">
                 <div>Top</div>
                 {% for champ in alsoPlayedWith[0] %}
@@ -145,6 +150,11 @@
                     <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/{{champ}}_OriginalSquare.png/50px-{{champ}}_OriginalSquare.png?54659.png.webp"><br>{{alsoPlayedWith[2][champ]}}%<br><br>
                 {% endfor %}
             </div>
+        </div>
+    </div>
+    <div id="alsoPlayedWith2">
+        <div class="alsoPlayedWithTitle">{{ championName }} mains also play</div>
+        <div class="alsoPlayedWithLists centered">
             <div class="lane">
                 <div>Bottom</div>
                 {% for champ in alsoPlayedWith[3] %}
@@ -227,7 +237,7 @@
                         <tr>
                             <td class="winrateCell ascending">
                                 <a href="championStatistics?champion={{stats[index][0]}}">
-                                    <img class="championImage" src="{{'static\\icons\\champions\\' ~ stats[index][0] ~ '.jpg' }}">
+                                    <img class="championImage" src="{{ 'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ stats[index][0] ~ '_OriginalSquare.png/70px-'~ stats[index][0] ~'_OriginalSquare.png?54659.png.webp' }} }}">
                                 </a>
                                 <div class="centering wideDiv">
                                     <div>
@@ -241,17 +251,18 @@
                                 </div>
                             </td>
                             <td class="winrateCell descending">
-                                <a href="championStatistics?champion={{stats[total-index][0]}}">
-                                    <img class="championImage" src="{{'static\\icons\\champions\\' ~ stats[total-index][0] ~ '.jpg' }}">
+                                {% set otherIndex = total - index %}
+                                <a href="championStatistics?champion={{stats[otherIndex][0]}}">
+                                    <img class="championImage" src="{{ 'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ stats[otherIndex][0] ~ '_OriginalSquare.png/70px-'~ stats[otherIndex][0] ~'_OriginalSquare.png?54659.png.webp' }}">
                                 </a>
                                 <div class="centering wideDiv">
                                     <div>
-                                        {{ stats[total-index][0] }}
+                                        {{ stats[otherIndex][0] }}
                                     </div>
                                     <div>
-                                        {{ (stats[total-index][1]["wins"] / stats[total-index][1]["met"] * 100)|round(2) }}%
+                                        {{ (stats[otherIndex][1]["wins"] / stats[otherIndex][1]["met"] * 100)|round(2) }}%
                                         <br>
-                                        {{ stats[total-index][1]["met"] }}
+                                        {{ stats[otherIndex][1]["met"] }}
                                     </div>
                                 </div>
                             </td>

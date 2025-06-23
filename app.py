@@ -5,20 +5,19 @@ import getMatchData
 import extractData
 import licenta
 import json
-import matplotlib.pyplot as plt
-import io
-import base64
+# import matplotlib.pyplot as plt
+# import io
+# import base64
 import credentialsValidity
 import processingData
 import getStatistics
 import myShapley
 import getMastery
 import getChampionCharacteristics
-import tempCodeRunnerFile
+import getAlsoPlayed
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Change this!
-
+app.secret_key = "MyKeyAHAha"
 # Route for the main page with buttons
 @app.route('/')
 def index():
@@ -339,7 +338,7 @@ def championStatistics():
 
     winrates = getStatistics.winrates(championName)
     stats = getStatistics.forTeammates(championName)
-    alsoPlayedWith = tempCodeRunnerFile.getAlsoPlayed(championName)
+    alsoPlayedWith = getAlsoPlayed.getAlsoPlayed(championName)
     return render_template(
         'championStatistics.html',
         championName=championName,

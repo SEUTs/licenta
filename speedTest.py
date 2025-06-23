@@ -1,8 +1,6 @@
 import json
 import os
-import extractData
 import time
-import matplotlib as plt
 import getMatchData
 
 dir_path = r'E:\\licenta\\games'

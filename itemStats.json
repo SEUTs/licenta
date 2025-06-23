@@ -887,5 +887,17 @@
     "Zhonya's Hourglass": {
         "ability power": 105,
         "armor": 50
+    }, "test":
+
+    {
+        "basic": false,
+        "magicDamage": 72,
+        "name": "Ambessa",
+        "participantId": 2,
+        "physicalDamage": 0,
+        "spellName": "rengarw",
+        "spellSlot": 1,
+        "trueDamage": 0,
+        "type": "OTHER"
     }
 }

@@ -107,6 +107,7 @@ def getChampionNames(link: str):
         time.sleep(sleepingTime)
         result = aux(link)
     return result
+
 def getMatchTimeline(matchId: str):
     def aux(matchId: str):
         api_url = getMatchTimelineUrl(matchId)

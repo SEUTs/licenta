@@ -18,6 +18,11 @@ def getAlsoPlayed(champion):
 
     alsoPlayed = []
     for pool in championPools:
-        alsoPlayed.append(dict([[x, round(output[x][1] / found * 100, 2)] for x in output if x in pool and output[x][1] / found > 0.75]))
+        newDict = dict([[x, round(output[x][1] / found * output[x][0], 2)] for x in output if x in pool]) # and output[x][1] / found > 0.75
+        newDict = dict(sorted(newDict.items(), key=lambda item: -item[1]))
+        alsoPlayed.append(newDict)
+    print(alsoPlayed)
     return alsoPlayed
-getAlsoPlayed("Yone")
+
+if __name__ == "__main__":
+    getAlsoPlayed("Yone")
