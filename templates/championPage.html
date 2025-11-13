@@ -162,7 +162,7 @@
     <tr>
         <td>
             <!-- <img id="championImage" src="{{'static\\icons\\champions\\' ~ championName ~ '.jpg' }}"> -->
-             <img id="championImage" src="{{ 'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~champ ~ '_OriginalSquare.png/70px-'~ champ ~'_OriginalSquare.png?54659.png.webp' }}">
+             <img id="championImage" src="{{ 'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ championName ~ '_OriginalSquare.png/70px-'~ championName ~'_OriginalSquare.png?54659.png.webp' }}">
             <h2 stlye="margin-bottom: 0px;">{{ championName }}</h2>
         </td>
         <td>
@@ -347,7 +347,6 @@
     {% for stats in enemyChampionStats[-1] %}
         {% set ns.omnivamp = ns.omnivamp + enemyChampionStats[-1][stats]["omnivamp"] %}
     {% endfor %}
-    {{ ns.omnivamp }}
     {% if ns.omnivamp > 20 %}
         <tr><td colspan="5"><h1 class="centered">Recommendations:</h1></td></tr>
         <tr>

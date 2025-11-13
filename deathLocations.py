@@ -3,8 +3,6 @@ import json
 from matplotlib import pyplot as plt
 import math
 
-# api_key = "RGAPI-7d5cc397-1c5f-41dc-ab01-39bf09e0e897"
-# api_key = "RGAPI-f10a772f-6eb3-4447-b771-9eae485c9092"
 # if 'status' in requests.get(f'https://europe.api.riotgames.com/lol/match/v5/matches/50124?api_key={api_key}').json():
 #     raise Exception("INVALID API KEY")
 

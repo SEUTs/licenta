@@ -3,8 +3,8 @@ import os
 import extractData
 
 def storeChampionsAndKills():
-    existingFiles = os.listdir("E:\\licenta\\reducedGames")
-    files = os.listdir("E:\\licenta\\games")
+    existingFiles = os.listdir("D:\\licenta\\reducedGames")
+    files = os.listdir("D:\\licenta\\games")
     current = 0
     total = len(files)
     for file in files:
@@ -15,10 +15,13 @@ def storeChampionsAndKills():
         
         won = []
         lost = []
-        with open("E:\\licenta\\games\\" + file, 'r') as f:
+        with open("D:\\licenta\\games\\" + file, 'r') as f:
             data = json.load(f)
             f.close()
 
+            if "info" not in data:
+                continue 
+            
             if data["info"]["frames"][-1]["timestamp"] < 240000:
                 continue
             
@@ -26,12 +29,11 @@ def storeChampionsAndKills():
             if winningTeam not in [1, 2]:
                 continue
 
-            names = extractData.getChampionNames(data["info"]["frames"])
-            
+            namesAndKdas = extractData.getChampionNamesAndKda(data["info"]["frames"])
             for i in range((winningTeam-1) * 5, winningTeam * 5):
-                won.append(names[i])
+                won.append({"name": namesAndKdas[0][i], "kda": [namesAndKdas[1][0][i], namesAndKdas[1][1][i], namesAndKdas[1][2][i]]})
             for i in range(10 - winningTeam * 5, 10 - (winningTeam-1) * 5):
-                lost.append(names[i])
+                lost.append({"name": namesAndKdas[0][i], "kda": [namesAndKdas[1][0][i], namesAndKdas[1][1][i], namesAndKdas[1][2][i]]})
             
             output = {
                 "timestamp": data["info"]["frames"][0]["events"][0]["realTimestamp"],
@@ -40,7 +42,8 @@ def storeChampionsAndKills():
             }
 
             json_object = json.dumps(output, indent=4)
-            with open("E:\\licenta\\reducedGames\\" + file, 'x') as g:
+            
+            with open("D:\\licenta\\reducedGames\\" + file, 'x') as g:
                 g.write(json_object)
         
 storeChampionsAndKills()

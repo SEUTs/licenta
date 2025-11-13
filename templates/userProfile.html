@@ -25,6 +25,20 @@
             width: 80px;
             height: 100px;
         }
+        .top5 {
+            width: 140px;
+        }
+        .championDetails {
+            width: 100px;
+        }
+        .championName {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .championMP {
+            font-size: 18px;
+        }
+
         .titleDiv {
             font-size: 30px;
             background-color: rgb(244, 250, 255);
@@ -68,8 +82,14 @@
                     {% set top5Range = top5|length %}
                 {% endif %}
                 {% for i in range(top5Range) %}
-                    <div class="spacer centering">
-                        {{ top5[i][0] }}<br>{{ top5[i][1] }}
+                    <div class="spacer centering top5">
+                        <div>
+                            <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/{{top5[i][0]}}_OriginalSquare.png/100px-{{top5[i][0]}}_OriginalSquare.png?54659.png.webp">
+                        </div>
+                        <div class="championDetails centered">
+                            <div class="championName">{{ top5[i][0] }}</div>
+                            <div class="championMP">{{ top5[i][1] }} MP</div>
+                        </div>
                     </div>
                 {% endfor %}
             </div>

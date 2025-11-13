@@ -9,10 +9,6 @@ import numpy
 
 gamesFolder = "E:\\licenta\\games"
 
-# api_key = "RGAPI-6977ba4c-8a65-41f1-8766-d94feaf633d9"
-# api_key = "RGAPI-231f39d7-da32-4266-a2fc-9c35f9d534be"
-# api_key = "RGAPI-489a4027-3176-457e-ac43-fd5744ba5466"
-# api_key = "RGAPI-7d5cc397-1c5f-41dc-ab01-39bf09e0e897"
 api_key = "RGAPI-f10a772f-6eb3-4447-b771-9eae485c9092"
 requests.get("https://www.google.com")
 # if 'status' in requests.get(f'https://europe.api.riotgames.com/lol/match/v5/matches/50124?api_key={api_key}').json():
@@ -57,8 +53,9 @@ def getMatchTimelineUrl(matchId: int):
 def getChampionMastery(puuid, region):
     print(puuid)
     def getChampionMasteryUrl(puuid, region):
-        return f'https://{region}1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}?api_key={api_key}'
+        return f'https://{region[:3]}1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}?api_key={api_key}'
     api_url = getChampionMasteryUrl(puuid, region)
+    print("URL = " + api_url)
     def aux():
         response = requests.get(api_url)
         return response.json()

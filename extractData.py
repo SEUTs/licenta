@@ -133,7 +133,7 @@ def getChampionNamesAndKda(frames):
         else:
             championNames[i] = max(set(championNames[i]), key=championNames[i].count)
             championNames[i] = correctedChampionNames.get(championNames[i], championNames[i])
-    print(championNames)
+    # print(championNames)
         
     championKdas = (championKills[1:], championDeaths[1:], championAssists[1:])
     return (championNames, championKdas)
@@ -235,7 +235,7 @@ def didPuuidWin(puuid, match):
     return didIndexWin(index, match)
 
  
-api_key = "RGAPI-f10a772f-6eb3-4447-b771-9eae485c9092"
+api_key = ""
 jsonFileName = "output/matchHistorySas.json"
 csvFileName = "output/league_data.csv"
 puuid = "j-TN5AM2Sx7KmVpJS0rmGH5Mmg94SpNuZNKWktS2tISOsjWe5ZM8xIkeZTJHwapP_0bAqvZQFyiEfQ"

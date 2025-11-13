@@ -336,6 +336,9 @@ def championStatistics():
                     championName = champ
                     break
 
+    if found is False:
+        return redirect(url_for('index'))
+    
     winrates = getStatistics.winrates(championName)
     stats = getStatistics.forTeammates(championName)
     alsoPlayedWith = getAlsoPlayed.getAlsoPlayed(championName)

@@ -36,7 +36,8 @@
                 <option value="kr">KR</option>
             </select><br><br>
             Password:&nbsp;
-            <input type="password" name="password"><br><br>
+            <input id="passwordInput" type="password" name="password"><br>
+            <input type="checkbox" onclick="showPassword()">Show Password <br><br>
             <input type="submit" value="Login" class="centered"><br>
         </form>
     </div>
@@ -44,3 +45,13 @@
     the one used for your League account)<br>
     <p>{{ get_flashed_messages()[0] if get_flashed_messages() else '' }}</p>
 </div>
+
+<script>
+    function showPassword() {
+        var element = document.getElementById("passwordInput");
+        if (element.type === "password")
+            element.type = "text";
+        else
+            element.type = "password";
+    } 
+</script>

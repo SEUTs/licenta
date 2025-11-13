@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        #selectMenu {
+            position: relative;
+            width: 97vw;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        td {
+            width: 200px;
+            background-color: #606060;
+            /*#303030*/
+        }
+        .flexy {
+            display: flex;
+        }
+        .championSlot {
+            width: 80px;
+            height: 80px;
+        }
+        .championSlot img {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        th {
+            font-size: 20px;
+            font-family: Helvetica;
+            font-weight: bold;
+        }
+        table {
+            text-align: center;
+            padding: 30px;
+        }
+        .positiveChange {
+            color: #00f000;
+            font-weight: bold;
+        }
+        .negativeChange {
+            color: #ff7070;
+            font-weight: bold;
+        }
+        .red {
+            color: #ff7070;
+        }
+        .blue {
+            color: #7070ff
+        }
+        .selectChampionImage {
+            cursor: pointer;
+        }
+        .championWinrate,
+        .championShapley {
+            width: 65px;
+            font-weight: bold;
+            height: min-content;
+            position: relative;
+            transform: translateY(-50%);
+            top: 35px;
+        }
+        .championSelectDiv {
+            width: 50px;
+            height: 50px;
+        }
+        
+        #roleSelector {
+            position: absolute;
+            left: 5vw;
+            top: 15vh;
+        }
+        .centering {
+            text-align: center;
+        }
+
+        .selectChampionDiv {
+            width: 50px;
+        }
+
+        #loadingChampionsBanner {
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 20px;
+            width: 100%;
+            height: 100%;
+            background-color: #606060;
+            /*#303030*/
+
+            position: absolute;
+        }
+        #loadingChampionsText {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #recommendations {
+            left: 2vw;
+            position: absolute;
+            top: 25vh;
+            width: 30vw;
+            height: 30vh;
+        }
+        #recommendationResults {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .recommendedChampDiv {
+            width: 34px;
+        }
+        .recommendedChampDiv img {
+            z-index: 3;
+        }
+
+        #recommendationInfo {
+            width: 500px;
+            height: 200px;
+            background-color: #303030;
+            margin-top: 20px; 
+            display: flex;
+            position: absolute;
+            top: 250px;
+        }
+        #recommendationFront {
+            position: relative;
+            transform: translateY(-50%);
+            top: 50%;
+            left: 10px;
+            width: 100px;
+            height: max-content;
+        }
+        #recommendationIcon {
+            width: 70px;
+            height: 70px;
+        }
+        #recommendationName {
+            height: 20px;
+            font-weight: bold;
+        }
+        #recommendationDescription {
+            transform: translateY(-50%);
+            position: absolute;
+            left: 70px;
+            top: 50%;
+            height: max-content;
+        }
+        ul {
+            margin: 0px;
+        }
+        li span {
+            font-weight: bold;
+        }
+        .noDecorationListItem {
+            list-style: none;
+        }
+
+        #recommendationSliders {
+            width: 150px;
+            display: grid;
+            position: absolute;
+            left: 350px;
+        }
+        #recommendationSliders h3 {
+            margin: 10px 20px 10px 0px;
+        }
+        .slider {
+            width: 20px;
+        }
+        #recommendationsButton {
+            width: 130px;
+        }
+
+        #demo {
+            position: absolute;
+            top: 48%;
+            right: 1%;
+        }
+        #demo img {
+            height: 136px;
+        }
+        
+        .demoLine {
+            margin: 6px 0px 6px 0px;
+            font-weight: bold;
+            font-size: 12px;
+            max-width: 90px;
+            position: relative;
+            top: 2px;
+        }
+
+        .verticalCentering {
+            position: relative;
+            top: 42%;
+            transform: translateY(-50%);
+        }
+
+        #demoTitle {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .square {
+            width: 80px;
+            height: 50px;
+            position: relative;
+            transform: translate(-50%);
+            left: 50%;
+        }
+        #slotSquare {
+            background-color: #606060;
+        }
+        #selectedSquare {
+            background-color: #007070;
+        }
+        .slotDemo {
+            margin: 10px 30px 10px 30px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div id="roleSelector">
+        <div>
+            <div class="centering">Select your role</div>
+            <select id="myRole" class="centered" name="role">
+                <option class=centering value="Top">Top</option>
+                <option class=centering value="Jungle">Jungle</option>
+                <option class=centering value="Mid">Mid</option>
+                <option class=centering value="Bot">Bot</option>
+                <option class=centering value="Support">Support</option>
+                <option value="" selected disabled hidden></option>
+            </select>
+        </div>
+        <div>
+            <button id="recommendationsButton" onclick="recommendationFunction()">Get Recommendations</button>
+        </div>
+    </div>
+    <table class="centered">
+        <tr>
+            <th>
+                <span class="blue">Your Team</span>
+                <br>
+                <div id="blueTeamWinrate">50%</div>
+            </th>
+            <th>
+                <span class="red">Enemy Team</span>
+                <br>
+                <div id="redTeamWinrate">50%</div>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate1"></div>
+                    <div class="championSlot" id="champion1"></div>
+                    <div class="championShapley" id="outputValue1"></div>
+                </div>
+            </td>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate2"></div>
+                    <div class="championSlot" id="champion2"></div>
+                    <div class="championShapley" id="outputValue2"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate3"></div>
+                    <div class="championSlot" id="champion3"></div>
+                    <div class="championShapley" id="outputValue3"></div>
+                </div>
+            </td>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate4"></div>
+                    <div class="championSlot" id="champion4"></div>
+                    <div class="championShapley" id="outputValue4"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate5"></div>
+                    <div class="championSlot" id="champion5"></div>
+                    <div class="championShapley" id="outputValue5"></div>
+                </div>
+            </td>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate6"></div>
+                    <div class="championSlot" id="champion7"></div>
+                    <div class="championShapley" id="outputValue6"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate7"></div>
+                    <div class="championSlot" id="champion7"></div>
+                    <div class="championShapley" id="outputValue7"></div>
+                </div>
+            </td>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate8"></div>
+                    <div class="championSlot" id="champion8"></div>
+                    <div class="championShapley" id="outputValue8"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate9"></div>
+                    <div class="championSlot" id="champion9"></div>
+                    <div class="championShapley" id="outputValue9"></div>
+                </div>
+            </td>
+            <td>
+                <div class="flexy">
+                    <div class="championWinrate" id="outputWinrate10"></div>
+                    <div class="championSlot" id="champion10"></div>
+                    <div class="championShapley" id="outputValue10"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div id="recommendations" loading="lazy">
+        <div id="loadingChampionsBanner">
+            <div id="loadingChampionsText">Loading champions</div>
+        </div>
+        <h1>Recommendations</h1>
+        <div id="recommendationResults"></div>
+        <div id="recommendationInfo">
+            <div id="recommendationFront">
+                <div id="recommendationIcon" class="centered centering">
+                    <img id="recommendationIconImg">
+                </div>
+                <div id="recommendationName" class="centering"></div>
+            </div>
+            <div id="recommendationDescription">
+                <ul>
+                    <li class="noDecorationListItem">General Winrate: <span id="winSpan"></span></li>
+                    <li class="noDecorationListItem">Team potential: <span id="teamSpan"></span></li>
+                    <li class="noDecorationListItem">Lane Winrate: <span id="lanerSpan"></span> <span id="lanerDifference"></span></li>
+                    <li class="noDecorationListItem">Enemy potential: <span id="enemySpan"></span></li>
+                    <li class="noDecorationListItem">
+                        Roles:
+                        <ul>
+                            <li><span class="recommendationDetails">First engager</span></li>
+                            <li><span class="recommendationDetails">Bruiser</span></li>
+                            <li><span class="recommendationDetails">AOE damage</span></li>
+                            <li><span class="recommendationDetails">Tank</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="recommendationSliders" class="centering">
+                <h3 class="centered">Parameters</h3>
+                <span>Team synergy</span>
+                <input type="range" min="0" max="2" value="2" class="slider centered" id="TeamSynergySlider">
+                <span>Laner counter</span>
+                <input type="range" min="0" max="2" value="2" class="slider centered" id="LanerCounterSlider">
+                <span>Enemy counter</span>
+                <input type="range" min="0" max="2" value="2" class="slider centered" id="EnemyCounterSlider">
+                <span>Personal Experience</span>
+                <input type="range" min="0" max="2" value="2" class="slider centered" id="PersonalExperienceSlider">
+            </div>
+        </div>
+    </div>
+
+    <div id="selectMenu" class="centered" loading="lazy">
+        <div id="loadingChampionsBanner">
+            <div id="loadingChampionsText">Loading champions</div>
+        </div>
+        {% for champion in champions %}
+            <div class="selectChampionDiv">
+                <img class="selectChampionImage" loading="lazy" id="{{champion}}" src="{{'https://wiki.leagueoflegends.com/en-us/images/thumb/' ~ champion ~ '_OriginalSquare.png/50px-' ~ champion ~ '_OriginalSquare.png?54659.png.webp' }}">
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="demo">
+        <div id="demoTitle" class="centering">
+            Meaning of scores
+        </div>
+        <div class="flexy">
+            <div>
+                <div class="demoLine centering verticalCentering">Champion winrate</div>
+            </div>
+            <img src="https://i.ibb.co/wZvhTz42/image-2025-06-10-231520576.png">
+            <div style="margin-left: 5px">
+                <div class="demoLine centering negativeChange">Team synergy score</div>
+                <div class="demoLine centering">Winrate against enemy laner</div>
+                <div class="demoLine centering positiveChange">Enemy team counter score</div>
+            </div>
+        </div>
+        <div class="flexy centered">
+            <div class="slotDemo">
+                <div class="square" id="slotSquare"></div>
+                <div>Normal slot</div>
+            </div>
+            <div class="slotDemo">
+                <div class="square" id="selectedSquare"></div>
+                <div>Selected slot</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var slotValues = [null, null, null, null, null, null, null, null, null, null];
+    var slotChampions = [null, null, null, null, null, null, null, null, null, null];
+
+    const slots = document.getElementsByClassName("championSlot");
+    const selectButtons = document.getElementsByClassName("selectChampionImage");
+
+    var flaskTeammates = [],
+        flaskEnemies = [],
+        mapping = [];
+
+    document.getElementById("loadingChampionsBanner").remove();
+    setTimeout(() => {
+        document.getElementById("loadingChampionsBanner").remove();
+    }, 1000);
+
+    function displayShapley(flaskTeammates, flaskEnemies, mapping, belongingToTeam) {
+        teamEnemiesStart = [0, 1]
+        if (belongingToTeam == 2)
+            teamEnemiesStart = [1, 0]
+        flaskTeammates = [];
+        flaskEnemies = [];
+        mapping = [];
+
+        for (let i = teamEnemiesStart[0]; i < 10; i += 2)
+            if (slotChampions[i] != null) {
+                flaskTeammates.push(slotChampions[i]);
+                mapping.push(i);
+            } else {
+                flaskTeammates.push("Cappa");
+            }
+        for (let i = teamEnemiesStart[1]; i < 10; i += 2)
+            if (slotChampions[i] != null) {
+                flaskEnemies.push(slotChampions[i]);
+                mapping.push(i);
+            } else {
+                flaskEnemies.push("Cappa");
+            }
+
+        for (let i = 0; i < 10; ++i) {
+            championWinrateDivs[i].textContent = "";
+            championShapleyDivs[i].textContent = "";
+        }
+
+        for (let i = teamEnemiesStart[0]; i < 10; i += 2) {
+            console.log(slotChampions[i])
+            if (slotChampions[i] != null) {
+                $.ajax({
+                    url: '/shapley',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ 'team': flaskTeammates, 'enemies': flaskEnemies, 'champion': slotChampions[i], 'championIndex': Math.floor(i / 2) }),
+                    success: function(response) {
+                        let teamSynergy, enemyPotential;
+                        if(response.team > 0)
+                            teamSynergy = `<div class="positiveChange">+${response.team}%</div>`;
+                        else
+                            teamSynergy = `<div class="negativeChange">${response.team}%</div>`;
+                        if(response.enemies > 0)
+                            enemyPotential = `<div class="positiveChange">+${response.enemies}%</div>`;
+                        else
+                            enemyPotential = `<div class="negativeChange">${response.enemies}%</div>`;
+                        championWinrateDivs[i].innerHTML  = response.solo + "%";
+                        championShapleyDivs[i].innerHTML  = teamSynergy;
+                        championShapleyDivs[i].innerHTML += response.versus + '%';
+                        championShapleyDivs[i].innerHTML += enemyPotential;
+                        shapleyTeammateValues[i] = response.team;
+                        shapleyEnemiesValues[i] = response.enemies;
+
+                        let blueWinrate = 50;
+                        for (let j = 0; j < 5; ++j) {
+                            blueWinrate += shapleyTeammateValues[2 * j];
+                            blueWinrate += shapleyEnemiesValues[2 * j];
+                        }
+                        let redWinrate = 50;
+                        for (let j = 0; j < 5; ++j) {
+                            redWinrate += shapleyTeammateValues[2 * j + 1];
+                            redWinrate += shapleyEnemiesValues[2 * j + 1];
+                        }
+
+                        let totalWinrate = blueWinrate + redWinrate;
+                        blueWinrate /= totalWinrate;
+                        redWinrate /= totalWinrate;
+
+                        blueTeamWinrate.textContent = Math.round(blueWinrate * 100) + '%';
+                        redTeamWinrate.textContent = Math.round(redWinrate * 100) + '%';
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        }
+    }
+
+    for (let index = 0; index < slots.length; ++index) {
+        slots[index].addEventListener("click", () => { 
+            if (selectedChampion != null) {
+                slots[index].innerHTML = `<img src="https://wiki.leagueoflegends.com/en-us/images/thumb/${selectedChampion}_OriginalSquare.png/70px-${selectedChampion}_OriginalSquare.png?54659.png.webp">`;
+                // slots[index].innerHTML = `<img loading="lazy" src="static\\icons\\champions\\${selectedChampion}.jpg">`;
+                slotChampions[index] = selectedChampion;
+                slotValues[index] = selectedValue;
+                selectedChampion = null;
+                hideChampion(selectedValue);
+                unhighlightEmptySlots();
+                selectedValue = null;
+
+                displayShapley(flaskTeammates, flaskEnemies, mapping, 1);
+                displayShapley(flaskTeammates, flaskEnemies, mapping, 2);
+
+            } else if (slotValues[index] != null) {
+                slots[index].innerHTML = ``;
+                slotChampions[index] = null;
+                normalChampion(slotValues[index]);
+                slotValues[index] = null;
+
+                for (let j = 0; j < 10; ++j) {
+                    championWinrateDivs[j].textContent = "";
+                    championShapleyDivs[j].textContent = "";
+                    shapleyTeammateValues[j] = 0;
+                    shapleyEnemiesValues[j] = 0;
+                }
+                
+                displayShapley(flaskTeammates, flaskEnemies, mapping, 1);
+                displayShapley(flaskTeammates, flaskEnemies, mapping, 2);
+            }
+        });
+    }
+
+    function highlightEmptySlots() {
+        for (let index = 0; index < slots.length; ++index)
+            if (slotValues[index] == null)
+                slots[index].style.backgroundColor = "#D0D0D0";
+    }
+    function unhighlightEmptySlots() {
+        for (let index = 0; index < slots.length; ++index)
+            slots[index].style.backgroundColor = ""; //#606060
+    }
+
+    function highlightChampion(index) {
+        selectButtons[index].style.filter = "brightness(300%)";
+    }
+    function normalChampion(index) {
+        selectButtons[index].style.filter = "brightness(100%)";
+    }
+    function hideChampion(index) {
+        selectButtons[index].style.filter = "brightness(25%)";
+    }
+
+    for (let index = 0; index < selectButtons.length; ++index) {
+        selectButtons[index].addEventListener("click", () => { 
+            currentChampion = selectButtons[index].id;
+            if (slotValues.includes(currentChampion) == false) {
+                highlightChampion(index)
+                if (selectedValue != null)
+                    normalChampion(selectedValue)
+                highlightEmptySlots();
+                selectedValue = index;
+                selectedChampion = currentChampion;
+            }
+        });
+    }
+    
+
+    const myRoleSelect = document.getElementById("myRole")
+    var lastRoleElement = null;
+    function recommendationFunction() {
+        if (lastRoleElement != null)
+            lastRoleElement.style = "";
+        if (myRoleSelect.selectedIndex == 5)
+            return;
+        lastRoleElement = slots[2 * myRoleSelect.selectedIndex].parentElement;
+        lastRoleElement.style.backgroundColor = "#007070";
+
+        flaskTeammates = [];
+        flaskEnemies = [];
+        mapping = [];
+
+        for (let i = 0; i < 10; i += 2) {
+            if (slotChampions[i] != null) {
+                flaskTeammates.push(slotChampions[i]);
+                mapping.push(i);
+            } else {
+                flaskTeammates.push("Cappa");
+            }
+        }
+        for (let i = 1; i < 10; i += 2) {
+            if (slotChampions[i] != null) {
+                flaskEnemies.push(slotChampions[i]);
+                mapping.push(i);
+            } else {
+                flaskEnemies.push("Cappa");
+            }
+        }
+
+        getRecommendations(myRoleSelect.selectedIndex, flaskTeammates, flaskEnemies);
+    }
+
+</script>
+</html>

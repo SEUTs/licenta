@@ -24,7 +24,7 @@
         transform: translate(-50%, -50%);
     }
     #home {
-        left: 2.5vw;
+        left: 5vw;
     }
     #username {
         left: 87vw;
@@ -36,7 +36,7 @@
         left: 50vw;
     }
     a {
-        color: cyan;
+        color: #2386cd;
     }
 
     .centered {
@@ -61,7 +61,7 @@
 
 <div id="header">
     <div id="home"><a href="{{ url_for('index') }}">Home</a></div>
-    <div id="logo">PCaGS</div>
+    <div id="logo">Personal Companion</div>
     {% if username is defined %}
         <div id="username"> {{username}} </div>
         <div id="logout"><a href="{{ url_for('logout') }}">Log Out</a></div>

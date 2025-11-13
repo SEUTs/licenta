@@ -250,7 +250,7 @@ def getChampionsKDAsBuilds(matchFile = "singleMatch.json"):
                                 # print(event["itemId"])
                                 if event["itemId"] in bootsEvolutionsToRoot and event["itemId"] not in builds[event["participantId"] - 1]:
                                     builds[event["participantId"] - 1].remove(bootsEvolutionsToRoot[event["itemId"]])
-                                else:
+                                elif event["itemId"] in builds[event["participantId"] - 1]:
                                     builds[event["participantId"] - 1].remove(event["itemId"])
 
                                 destroyedFor.append([event["itemId"], event["timestamp"], event['participantId']])

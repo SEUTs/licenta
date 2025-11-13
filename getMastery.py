@@ -153,10 +153,39 @@ def getTop5Champs(credentials, region):
     result = []
     i = 0
     for champ in masteries:
+        if champ == "Yunara":
+            continue
         result.append([champ, masteries[champ]])
         i += 1
         if i == 5:
             return result
+        
+def getTopNChamps(credentials, region, N):
+    masteries = getMasteries(credentials, region)
+    result = []
+    i = 0
+    for champ in masteries:
+        if champ == "Yunara":
+            continue
+        result.append([champ, masteries[champ]])
+        i += 1
+        if i == N:
+            return result
+    return result
+
+def getTop5ChampsAndTotalMasteries(credentials, region):
+    masteries = getMasteries(credentials, region)
+    champs = []
+    i = 0
+    for champ in masteries:
+        if champ == "Yunara":
+            continue
+        champs.append([champ, masteries[champ]])
+        i += 1
+        if i == 5:
+            break
+    result = [champs, sum(masteries.values())]
+    return result
 
 def getSkills(credentials, region):
     masteries = getMasteries(credentials, region)
